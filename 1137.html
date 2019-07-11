@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1137 (Clear/Clear Outside misbehaving)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1136" title="Ticket #1136" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1137?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1137?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1137?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1138" title="Ticket #1138" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="6d266ed956707d8dee6f1036";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1137, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1136" title="Ticket #1136">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1138" title="Ticket #1138">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1137">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1137">Ticket #1137</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2012-04-24T09%3A22%3A14-05%3A00&amp;precision=second" title="2012-04-24T09:22:14-05:00 in Timeline">7 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2012-08-01T11%3A23%3A09-05%3A00&amp;precision=second" title="2012-08-01T11:23:09-05:00 in Timeline">7 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Clear/Clear Outside misbehaving</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b4-plugins">imagej2-b4-plugins</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Legacy+Compatibility">Legacy Compatibility</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/1345" title="Fix obviously failing commands [plugins]">#1345</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+open clown<br />
+draw overlay<br />
+run edit Clear<br />
+</p>
+<blockquote>
+<p>
+pixels changed inside roi<br />
+(drawn in last color set in IJ2 rather than curr fg/bg values color)<br />
+(see OptionsChannels to see that two different values exist)<br />
+</p>
+</blockquote>
+<p>
+run edit Clear Outside\<br />
+</p>
+<blockquote>
+<p>
+interior roi pixels revert<br />
+exterior drawn in last color again<br />
+exception thrown:<br />
+</p>
+</blockquote>
+<p>
+[ERROR] ImageJ 1.x plugin threw exception<br />
+java.lang.IndexOutOfBoundsException: Index: 0, Size: 3<br />
+</p>
+<blockquote>
+<p>
+at java.util.ArrayList.rangeCheck(ArrayList.java:571)<br />
+at java.util.ArrayList.get(ArrayList.java:349)<br />
+at imagej.data.display.AbstractDatasetView.updateLUTs(AbstractDatasetView.java:324)<br />
+at imagej.data.display.AbstractDatasetView.rebuild(AbstractDatasetView.java:225)<br />
+at imagej.data.display.AbstractImageDisplay.rebuild(AbstractImageDisplay.java:137)<br />
+at imagej.ext.display.AbstractDisplay.update(AbstractDisplay.java:113)<br />
+at imagej.data.display.AbstractImageDisplay.update(AbstractImageDisplay.java:233)<br />
+at imagej.data.display.DefaultOverlayService.removeOverlay(DefaultOverlayService.java:160)<br />
+at imagej.legacy.translate.OverlayHarmonizer.updateDisplay(OverlayHarmonizer.java:140)<br />
+at imagej.legacy.translate.Harmonizer.updateDisplay(Harmonizer.java:178)<br />
+at imagej.legacy.plugin.LegacyPlugin.updateDisplaysFromImagePluses(LegacyPlugin.java:307)<br />
+at imagej.legacy.plugin.LegacyPlugin.run(LegacyPlugin.java:161)<br />
+at imagej.ext.plugin.PluginModule.run(PluginModule.java:151)<br />
+at imagej.ext.module.ModuleRunner.run(ModuleRunner.java:149)<br />
+at imagej.ext.module.ModuleRunner.call(ModuleRunner.java:119)<br />
+at imagej.ext.module.ModuleRunner.call(ModuleRunner.java:1)<br />
+at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)<br />
+at java.util.concurrent.FutureTask.run(FutureTask.java:166)<br />
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)<br />
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)<br />
+at java.lang.Thread.run(Thread.java:679)<br />
+</p>
+</blockquote>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-24T10%3A49%3A48-05%3A00&amp;precision=second" title="2012-04-24T10:49:48-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>bdezonia</em> to <em>curtis</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>assigned</em>
+    </li><li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta2</em> to <em>imagej-2.0.0-beta3</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Lets not worry about the fill value in this ticket. I'll address that elsewhere.<br />
+</p>
+<p>
+You can get a number of exceptions from this sequence. Clear Outside or Clear work by themselves fine. Its when you do one after the other that exceptions pop up. The following is common. Note its in code recently modified by Tobias and worked on by Grant and Curtis in the past,<br />
+</p>
+<p>
+[ERROR] Exception during event handling:<br />
+</p>
+<blockquote>
+<p>
+[Event] imagej.data.event.DatasetUpdatedEvent<br />
+context = imagej.ImageJ@20dccfab<br />
+consumed = false<br />
+object = clown.jpg<br />
+[Subscriber] imagej.ui.swing.sdi.display.SwingSdiImageDisplay@7fb2380e<br />
+[Method] protected void imagej.data.display.AbstractImageDisplay.onEvent(imagej.data.event.DataUpdatedEvent)<br />
+</p>
+</blockquote>
+<p>
+java.lang.IllegalArgumentException: Expected 3 converters but got 6<br />
+</p>
+<blockquote>
+<p>
+at net.imglib2.display.CompositeXYProjector.&lt;init&gt;(CompositeXYProjector.java:92)<br />
+at imagej.data.display.AbstractDatasetView.setupProjector(AbstractDatasetView.java:286)<br />
+at imagej.data.display.AbstractDatasetView.rebuild(AbstractDatasetView.java:222)<br />
+at imagej.data.display.AbstractImageDisplay.rebuild(AbstractImageDisplay.java:137)<br />
+at imagej.ext.display.AbstractDisplay.update(AbstractDisplay.java:113)<br />
+at imagej.data.display.AbstractImageDisplay.update(AbstractImageDisplay.java:233)<br />
+at imagej.data.display.AbstractImageDisplay.onEvent(AbstractImageDisplay.java:564)<br />
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)<br />
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)<br />
+at java.lang.reflect.Method.invoke(Method.java:616)<br />
+at imagej.event.DefaultEventService$ProxySubscriber.onEvent(DefaultEventService.java:225)<br />
+at imagej.event.DefaultEventService$ProxySubscriber.onEvent(DefaultEventService.java:1)<br />
+at org.bushe.swing.event.ThreadSafeEventService.publish(ThreadSafeEventService.java:971)<br />
+at org.bushe.swing.event.SwingEventService.access$001(SwingEventService.java:31)<br />
+at org.bushe.swing.event.SwingEventService$1.run(SwingEventService.java:88)<br />
+at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:226)<br />
+at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:647)<br />
+at java.awt.EventQueue.access$000(EventQueue.java:96)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:608)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:606)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:105)<br />
+at java.awt.EventQueue.dispatchEvent(EventQueue.java:617)<br />
+at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:275)<br />
+at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:200)<br />
+at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:190)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:185)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:177)<br />
+at java.awt.EventDispatchThread.run(EventDispatchThread.java:138)<br />
+</p>
+</blockquote>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-07-12T17%3A01%3A14-05%3A00&amp;precision=second" title="2012-07-12T17:01:14-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta3</em> to <em>imagej-2.0.0-beta4</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-07-19T21%3A43%3A02-05%3A00&amp;precision=second" title="2012-07-19T21:43:02-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1345</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-07-26T13%3A43%3A42-05%3A00&amp;precision=second" title="2012-07-26T13:43:42-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Testing post beta 3: The exception error is gone.<br />
+</p>
+<p>
+Remaining issue: Open clown and draw rect. Run Clear and interior is filled with background (correct). Follow it with Clear Outside. The outer region is filled with background (correct). The interior region is restored to a view of the original clown data (incorrect). In IJ1 the central region stays as the background color from the previous clear.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-07-26T15%3A43%3A44-05%3A00&amp;precision=second" title="2012-07-26T15:43:44-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>assigned</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Fixed pixel munging error with commit 1e54c82e0cb643dcd1230aec3f24603ba6a66e36<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-01T11%3A22%3A55-05%3A00&amp;precision=second" title="2012-08-01T11:22:55-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>closed</em> to <em>reopened</em>
+    </li><li>
+      <strong>Resolution</strong>
+        <em>fixed</em> deleted
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-01T11%3A23%3A03-05%3A00&amp;precision=second" title="2012-08-01T11:23:03-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>curtis</em> to <em>bdezonia</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>reopened</em> to <em>assigned</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-01T11%3A23%3A09-05%3A00&amp;precision=second" title="2012-08-01T11:23:09-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>assigned</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1137?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1137?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1137?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

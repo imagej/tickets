@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1381 (Support ColorTable16 images)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1380" title="Ticket #1380" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1381?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1381?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1381?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1382" title="Ticket #1382" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="f094a609b08f86c4dade4303";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1381, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1380" title="Ticket #1380">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1382" title="Ticket #1382">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1381">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1381">Ticket #1381</a>
+          <span class="status">(closed task: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2012-08-10T18%3A28%3A07-05%3A00&amp;precision=second" title="2012-08-10T18:28:07-05:00 in Timeline">7 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2012-09-08T08%3A43%3A12-05%3A00&amp;precision=second" title="2012-09-08T08:43:12-05:00 in Timeline">7 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Support ColorTable16 images</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=aivar">aivar</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=aivar">aivar</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=minor">minor</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b4-plugins">imagej2-b4-plugins</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Display+API">Display API</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=minor">minor</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+              <a class="closed" href="/ticket/1382" title="Refactor ColorTables">#1382</a>
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/1333" title="Add new functionality to showcase IJ2 [plugins]">#1333</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+Certain image formats that BioFormats supports allow for 16-bit color tables.<br />
+</p>
+<p>
+ColorTable16 exists in IJ2 but can't actually be used to display.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+    <div id="attachments">
+        <h2 class="foldable">Attachments</h2>
+        <div>
+          <dl class="attachments">
+              <dt>
+    <a href="/attachment/ticket/1381/20x%20deconvol%20demo%20lif%20in%20LAS%20AF%20viewer.png" title="View attachment">20x deconvol demo lif in LAS AF viewer.png</a>
+      <a href="/raw-attachment/ticket/1381/20x%20deconvol%20demo%20lif%20in%20LAS%20AF%20viewer.png" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="160399 bytes">156.6 KB</span>) -
+      added by <em>aivar</em> <a class="timeline" href="/timeline?from=2012-09-05T17%3A09%3A20-05%3A00&amp;precision=second" title="2012-09-05T17:09:20-05:00 in Timeline">7 years</a> ago.
+  </dt>
+              <dd>
+                This is our sample lif file "20x devol demo" viewed with Leica's LAS AF Lite viewer.
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/1381/20x%20deconvol%20demo%20lif%20in%20IJ2.png" title="View attachment">20x deconvol demo lif in IJ2.png</a>
+      <a href="/raw-attachment/ticket/1381/20x%20deconvol%20demo%20lif%20in%20IJ2.png" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="106893 bytes">104.4 KB</span>) -
+      added by <em>aivar</em> <a class="timeline" href="/timeline?from=2012-09-05T17%3A14%3A52-05%3A00&amp;precision=second" title="2012-09-05T17:14:52-05:00 in Timeline">7 years</a> ago.
+  </dt>
+              <dd>
+                Here is "20x deconvol demo.lif" as displayed in IJ2.
+              </dd>
+          </dl>
+          
+        </div>
+    </div>
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-10T18%3A30%3A40-05%3A00&amp;precision=second" title="2012-08-10T18:30:40-05:00 in Timeline">7 years</a> ago by aivar
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1382</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-10T18%3A46%3A50-05%3A00&amp;precision=second" title="2012-08-10T18:46:50-05:00 in Timeline">7 years</a> ago by aivar
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Component</strong>
+        changed from <em>other</em> to <em>ij-display</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-14T10%3A44%3A19-05%3A00&amp;precision=second" title="2012-08-14T10:44:19-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1333</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-31T18%3A22%3A01-05%3A00&amp;precision=second" title="2012-08-31T18:22:01-05:00 in Timeline">7 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Searching for 16-bit palettes I found:<br />
+</p>
+<p>
+"TIFF also supports palette images, but baseline TIFF allows only 4- and 8-bit pixel depths. Perhaps a more useful comparison is with the superset of baseline TIFF that is supported by Sam Leffler's free libtiff, which has become the software industry's unofficial standard for TIFF decoding. libtiff supports palette bit depths of 1, 2, 4, 8, and 16 bits." <a class="ext-link" href="http://www.libpng.org/pub/png/book/chapter08.html"><span class="icon"> </span>http://www.libpng.org/pub/png/book/chapter08.html</a><br />
+</p>
+<p>
+I found a sample image on the LOCI server at data/tiff/samples/imagemagick/flower-palette-strip-16.tif.  This is just an indexed color RGB image that uses about 3000 colors out of the possible 64K palette.<br />
+</p>
+<p>
+Unfortunately IJ1 maps the entire palette (3000 colors and the rest black) to the min/max of the image's histogram.  So only ~3/64 of the pixels are colorized, the rest are black.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-05T17%3A04%3A14-05%3A00&amp;precision=second" title="2012-09-05T17:04:14-05:00 in Timeline">7 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Mapping the entire palette to the min/max of the images histogram occurs when the 'isFalseColor' flag is true, that is the indices are the actual data, not the palette values.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2012-09-05T17%3A09%3A20-05%3A00&amp;precision=second" title="2012-09-05T17:09:20-05:00 in Timeline">7 years</a> ago by aivar
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/1381/20x%20deconvol%20demo%20lif%20in%20LAS%20AF%20viewer.png"><em>20x deconvol demo lif in LAS AF viewer.png</em></a>
+          <a href="/raw-attachment/ticket/1381/20x%20deconvol%20demo%20lif%20in%20LAS%20AF%20viewer.png" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+This is our sample lif file "20x devol demo" viewed with Leica's LAS AF Lite viewer.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2012-09-05T17%3A14%3A52-05%3A00&amp;precision=second" title="2012-09-05T17:14:52-05:00 in Timeline">7 years</a> ago by aivar
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/1381/20x%20deconvol%20demo%20lif%20in%20IJ2.png"><em>20x deconvol demo lif in IJ2.png</em></a>
+          <a href="/raw-attachment/ticket/1381/20x%20deconvol%20demo%20lif%20in%20IJ2.png" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Here is "20x deconvol demo.lif" as displayed in IJ2.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-06T15%3A20%3A13-05%3A00&amp;precision=second" title="2012-09-06T15:20:13-05:00 in Timeline">7 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+The LIF file associated with the attachments has a 16-bit ramped palette.  Combinations of RGB channels yield colors.<br />
+</p>
+<p>
+The OIF files I've examined have a palette of 256 X 0, 256 X 0x101, 256 X 0x202,... 256 X 0xffff.  Increments of 0x101 create an even ramp that goes from 0x0000...0xffff.  (Truncating lower bits gives you an even 8-bit ramp.)  So they don't make use of 64K entries (might as well use 256 entries) but do use the full 16-bit pixel depth.<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2012-09-06T15%3A21%3A03-05%3A00&amp;precision=second" title="2012-09-06T15:21:03-05:00 in Timeline">7 years</a> ago
+                      by aivar
+                    (<a href="/ticket/1381?cversion=0&amp;cnum_hist=6#comment:6">previous</a>)
+                    (<a href="/ticket/1381?action=comment-diff&amp;cnum=6&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-07T11%3A26%3A16-05%3A00&amp;precision=second" title="2012-09-07T11:26:16-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1460</em> added; <em>1333</em> removed
+    </li><li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta4</em> to <em>imagej-2.0.0-beta5</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-07T16%3A49%3A51-05%3A00&amp;precision=second" title="2012-09-07T16:49:51-05:00 in Timeline">7 years</a> ago by aivar
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li><li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta5</em> to <em>imagej-2.0.0-beta4</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+This is working now, in time for imagej-2.0.0-beta4 milestone.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-08T08%3A43%3A12-05%3A00&amp;precision=second" title="2012-09-08T08:43:12-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1333</em> added; <em>1460</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1381?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1381?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1381?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

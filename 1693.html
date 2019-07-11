@@ -1,0 +1,439 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1693 (Integrate well with CellProfiler)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1692" title="Ticket #1692" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1693?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1693?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1693?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1694" title="Ticket #1694" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="e5c924c31d9d4abd3c9af6d9";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1693, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1692" title="Ticket #1692">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/1694" title="Ticket #1694">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1693">Ticket #1693</a>
+          <span class="status">(closed feature: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2013-03-15T13%3A05%3A32-05%3A00&amp;precision=second" title="2013-03-15T13:05:32-05:00 in Timeline">6 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-06-07T17%3A12%3A55-05%3A00&amp;precision=second" title="2013-06-07T17:12:55-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Integrate well with CellProfiler</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=leek">leek</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b7-ndim-data">imagej2-b7-ndim-data</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=CellProfiler">CellProfiler</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+              eliceiri@…, <a href="/query?status=!closed&amp;cc=~dscho">dscho</a>
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+For mid-May beta we want to make sure that the ImageJ2/CellProfiler integration works well. Identify issues and eliminate them.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-15T13%3A06%3A49-05%3A00&amp;precision=second" title="2013-03-15T13:06:49-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Lee, can you enhance this ticket description or file tickets underneath it (as its a feature ticket). Perhaps you could email Kevin to see if he has any input.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-15T15%3A52%3A26-05%3A00&amp;precision=second" title="2013-03-15T15:52:26-05:00 in Timeline">6 years</a> ago by leek
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+CellProfiler has a basic level of functionality and compatibility with ImageJ2:<br />
+</p>
+<ul><li>Currently building against 2.0.0-beta6
+</li><li>Maven integration
+<ul><li>CellProfiler has a POM for its Java dependencies
+</li><li>Jars are found using mvn dependency:build-classpath
+</li><li>CellProfiler developer version uses mvn to fetch remote dependencies
+</li></ul></li><li>ImageJ scripting
+<ul><li>CP lets user select the script engine
+</li><li>Scripts are loaded and stored with the pipeline
+</li></ul></li><li>ImageJ plugins
+<ul><li>CP uses the module discovery system to find modules
+<ul><li>Constructs menu for plugin selection from the module's menu path
+</li><li>Constructs CellProfiler settings to mirror a module's widgets
+</li><li>Detects input and output images in the module and constructs appropriate image settings to transfer images back and forth
+</li></ul></li></ul></li></ul><p>
+From my perspective, there are a couple rough patches:<br />
+</p>
+<ul><li>We create a bitmap ROI for input images that have, in CellProfiler terminology, "masks" and we try and coalesce the ROIs in a display into a mask for output images. I haven't tested this in a while.
+</li><li>If I recall right, in the early phase of ImageJ 2.0 development, modules would have Datasets or DatasetViews as input and output parameters and I believe now they have Displays. I do support all three as input or output parameters, but I should check to make sure I'm properly handling all of the parameter types that IJ2 supports.
+</li><li>I would like to run IJ2 truly headless (with awt.headless=true). Ideally, I'd like to have a headless profile for IJ2 in a POM so that I can fetch the classpath from that POM when starting the JVM with awt.headless=true.
+</li><li>Support for IJ1 - Users can reference IJ1 plugins through scripts, but they will probably not appear on the command menu. I think our users want ImageJ mostly to run specific plugins and these are still mostly IJ1 plugins.
+</li><li>Support for images in scripts. It would be useful if users could bind CellProfiler input images to variables in their scripts and if they could have CellProfiler collect output images from the script context after it was run. As a fallback, users can import a CellProfiler image into ImageJ, find it using their script and then import the currently active image from ImageJ to CellProfiler.
+</li><li>Measurements / Segmentation - CellProfiler produces per-image and per-particle measurements and a segmentation of an image into particles/objects is a first-class entity in CellProfiler. We should determine how to map measurements and segmentations to their ImageJ 2 analogs and determine a timeline for carrying out the work.
+</li></ul>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-18T23%3A15%3A40-05%3A00&amp;precision=second" title="2013-03-18T23:15:40-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Cc</strong>
+        <em>eliceiri@…</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-03T13%3A57%3A56-05%3A00&amp;precision=second" title="2013-04-03T13:57:56-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Cc</strong>
+        <em>dscho</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-07T17%3A12%3A55-05%3A00&amp;precision=second" title="2013-06-07T17:12:55-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Thanks for the summary, Lee.<br />
+ <br />
+</p>
+<blockquote class="citation">
+<p>
+We create a bitmap ROI for input images that have, in CellProfiler terminology, "masks" and we try and coalesce the ROIs in a display into a mask for output images.<br />
+</p>
+</blockquote>
+<p>
+Unfortunately, ROI integration will remain tricky for a while longer, until we really stabilize how ROIs work in ImgLib2 and ImageJ2. This was the topic of intense discussion at the recent ImgLib2 hackathon but there is still much design work to be done.<br />
+ <br />
+</p>
+<blockquote class="citation">
+<p>
+If I recall right, in the early phase of ImageJ 2.0 development, modules would have Datasets or DatasetViews as input and output parameters and I believe now they have Displays. I do support all three as input or output parameters, but I should check to make sure I'm properly handling all of the parameter types that IJ2 supports.<br />
+</p>
+</blockquote>
+<p>
+Yes, all three (<tt>Dataset</tt>, <tt>DatasetView</tt> and <tt>ImageDisplay</tt>) will probably need to be supported for the foreseeable future. There are various commands that use each, and third-party commands could certainly output any of those. If there are convenience methods we could add at the Java level to make this easier for you, let me know.<br />
+</p>
+<p>
+I would also add that the class hierarchy may be changing a bit before <tt>2.0.0</tt> final, but there will still probably be three layers that map conceptually to those above. So whatever logic you have to handle them is very likely to remain relevant.<br />
+ <br />
+</p>
+<blockquote class="citation">
+<p>
+I would like to run IJ2 truly headless (with awt.headless=true).<br />
+</p>
+</blockquote>
+<p>
+Hopefully, using <tt>-Dawt.headless=true</tt> works now. If not, let us know so we can investigate.<br />
+ <br />
+</p>
+<blockquote class="citation">
+<p>
+Ideally, I'd like to have a headless profile for IJ2 in a POM so that I can fetch the classpath from that POM when starting the JVM with awt.headless=true.<br />
+</p>
+</blockquote>
+<p>
+Good idea! This is done in <a class="missing changeset" title="No default repository defined">1df9630f</a>. You can now run:<br />
+</p>
+<pre class="wiki">cd app &amp;&amp; mvn -Djava.awt.headless=true dependency:list
+</pre><p>
+To resolve the list of dependencies sans Swing or any other UI.<br />
+</p>
+<p>
+Relatedly: note that for each discovered plugin, you can query <tt>myPluginInfo.getAnnotation().headless()</tt> to find out whether it explicitly condones being executed in a headless environment. (Unfortunately, we have not propagated this attribute into <tt>ModuleInfo.isHeadless()</tt> yet.) All the Swing-specific commands, for example, do not.<br />
+ <br />
+</p>
+<blockquote class="citation">
+<p>
+Support for IJ1 - Users can reference IJ1 plugins through scripts, but they will probably not appear on the command menu. I think our users want ImageJ mostly to run specific plugins and these are still mostly IJ1 plugins.<br />
+</p>
+</blockquote>
+<p>
+Yes, that's a tricky thing. Porting the plugins to IJ2 commands is the robust way to go, like you did for Tubeness. But it's a lot of work and is a long road. Still, some IJ1 plugins may very well work headless, especially if we expand our usage of Javassist when running headless to do things like override how <tt>GenericDialog</tt> works so it's not a <tt>java.awt.Dialog</tt>.<br />
+ <br />
+</p>
+<blockquote class="citation">
+<p>
+Support for images in scripts. It would be useful if users could bind CellProfiler input images to variables in their scripts and if they could have CellProfiler collect output images from the script context after it was run. As a fallback, users can import a CellProfiler image into ImageJ, find it using their script and then import the currently active image from ImageJ to CellProfiler.<br />
+</p>
+</blockquote>
+<p>
+I don't know enough about how the CP-IJ integration currently works to comment much on this issue...<br />
+ <br />
+</p>
+<blockquote class="citation">
+<p>
+Measurements / Segmentation - CellProfiler produces per-image and per-particle measurements and a segmentation of an image into particles/objects is a first-class entity in CellProfiler. We should determine how to map measurements and segmentations to their ImageJ 2 analogs and determine a timeline for carrying out the work.<br />
+</p>
+</blockquote>
+<p>
+Yep. That is very relevant to the long-standing and dreaded ticket <a class="closed ticket" href="/ticket/660" title="defect: Improve Display-DisplayView-DataObject hierarchy (closed: moved)">#660</a>. As for a timeline, I fear that ImageJ2 development will be a bit slower over the summer, due to various project commitments that we have. But that ticket is one of my top priorities as far as ImageJ2 is concerned.<br />
+</p>
+<p>
+In conclusion, it is not clear to me that there are any concrete action items to come out of this discussion beyond those of which we are already aware. Lee, if there is anything specific you need for the CP-IJ integration, file a new ticket for it, or just let me know and we can discuss. But for now, I am closing this ticket. Thanks again!<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1693?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1693?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1693?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

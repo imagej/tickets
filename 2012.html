@@ -1,0 +1,468 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #2012 (Support general text specified axis class)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/2011" title="Ticket #2011" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/2012?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/2012?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/2012?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/2013" title="Ticket #2013" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="0cf93070baea4cc66ef4155a";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 2012, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/2011" title="Ticket #2011">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/2013" title="Ticket #2013">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/2012">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/2012">Ticket #2012</a>
+          <span class="status">(closed defect: moved)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2013-10-15T16%3A01%3A51-05%3A00&amp;precision=second" title="2013-10-15T16:01:51-05:00 in Timeline">6 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-10-16T09%3A44%3A38-05%3A00&amp;precision=second" title="2013-10-16T09:44:38-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Support general text specified axis class</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="milestone" href="/milestone/imagej-2.0.0">imagej-2.0.0</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=ImgLib2">ImgLib2</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="new" href="/ticket/1400" title="Recommended architecture changes (2.0.0-final)">#1400</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+      <span class="lastmod" title="2013-10-15 21:03:30.080579+00:00">
+        (last modified by bdezonia)
+        (<a href="/ticket/2012?action=diff&amp;version=1">diff</a>)
+      </span>
+    </h3>
+    <div class="searchable">
+      <p>
+There are good reasons to support one kind of axis that has it's equation defined by a string. I have mocked up a class below. This is not a simple endeavor but would eliminate a lot of (sometimes redundant) concrete CalibratedAxis implementations. See notes in code below for pointers.<br />
+</p>
+<pre class="wiki">
+package net.imglib2.meta.axis;
+
+import net.imglib2.meta.AxisType;
+
+/**
+ * A very general text driven axis class.
+ * 
+ * @author Barry DeZonia
+ */
+public class UberAsciiAxis extends VariableAxis {
+
+	// I might be getting carried away but think it would be nice to define axes
+	// by equation alone. IJ1 has lots of one off definitions in CurveFitter that
+	// have offsets or not or powers or not. I've generalized some of this by
+	// always having an offset that can be 0. But really we'd like the flexibility
+	// of not needing a new concrete axis class every time someone comes up with a
+	// new formula. This class would parse the equation and build an appropriate
+	// function that can scale coords as needed. The nice thing here is that the
+	// parsed axis can be queried for variables and then a curve fitting algo can
+	// determine appropriate variable values. Curtis' idea of the EditAxes plugin
+	// directly tweaking the variables of a displayed equation is correct. There
+	// remains the trick of determining when an axis is linear. This can be done
+	// by testing that an axis.equals(some general linear axis string) as noted
+	// below.
+
+	// TODO - bad name: Equation is more general than our 1d case
+
+	private interface Equation {
+
+		// This might be involved to determine but it would be fun to write!
+		Equation inverse(); // if doesn't exist we will return a NullEquation
+
+		double eval(double input);
+
+		// TODO - maybe one String method rather than two.
+
+		String generalEquation();
+
+		String particularEquation(); // likely in an abstract class
+	}
+
+	// equation string can be things like:
+	// y = m*x + b
+	// y = 74*x + b
+	// y = q*sin(slope*x+19.4)^(33*power)+fred (here only x &amp; y are predefined)
+	// constants and vars automatically detected
+
+	private final String equationString;
+	private final Equation eqn;
+	private final Equation eqnInverse;
+	
+	public UberAsciiAxis(AxisType type, String unit, String equationString) {
+		super(type, unit);
+		this.eqn = parse(equationString);
+		this.eqnInverse = eqn.inverse();
+		this.equationString = equationString;
+	}
+
+	public UberAsciiAxis(AxisType type, String unit, Equation equation) {
+		super(type, unit);
+		this.eqn = equation;
+		this.eqnInverse = eqn.inverse();
+		this.equationString = equation.generalEquation(); // or particular?
+	}
+
+	@Override
+	public double calibratedValue(double rawValue) {
+		return eqn.eval(rawValue);
+	}
+
+	@Override
+	public double rawValue(double calibratedValue) {
+		return eqnInverse.eval(calibratedValue);
+	}
+
+	@Override
+	public String generalEquation() {
+		return equationString;
+	}
+
+	@Override
+	public UberAsciiAxis copy() {
+		return new UberAsciiAxis(type(), unit(), equationString);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof UberAsciiAxis)) return false;
+		UberAsciiAxis other = (UberAsciiAxis) o;
+
+		// TODO: do something really cool. compare syntax trees and variables of the
+		// two UberAxes. Even trickier: detect when vars of two eqns are the same
+		// due to coeffs being 1 or 0. For example y = 1*x + 0 is same as y = x
+		// though they would have different syntax trees.
+
+		// TEMP: only equal to self
+		return other == this;
+	}
+
+	// For generality and reuse elsewhere maybe make parser return multidim
+	// equation. We'd need to test that it has a single dim of input to qualify as
+	// a valid axis equation
+
+	private Equation parse(String equationString) {
+		// TODO
+		return new NullEquation();
+	}
+
+	// return one of these as an Equation::inverse() when it is not invertible
+
+	private class NullEquation implements Equation {
+
+		@Override
+		public double eval(double input) {
+			return Double.NaN;
+		}
+
+		@Override
+		public Equation inverse() {
+			return this;
+		}
+
+		@Override
+		public String generalEquation() {
+			return "y = NaN";
+		}
+
+		@Override
+		public String particularEquation() {
+			return "y = NaN";
+		}
+
+	}
+}
+
+</pre>
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-15T16%3A03%3A30-05%3A00&amp;precision=second" title="2013-10-15T16:03:30-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/2012?action=diff&amp;version=1">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-15T16%3A05%3A03-05%3A00&amp;precision=second" title="2013-10-15T16:05:03-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1400</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-16T09%3A44%3A38-05%3A00&amp;precision=second" title="2013-10-16T09:44:38-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+AFter discussing with Mark we determined this has some other benefits. Currently CalibratedAxis has no means of setting values. But this implementation as a base could have the equivalent of axis.setEquation("y=1.3*x + 43"). So it would be easier to calibrate things at runtime.<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2013-10-16T09%3A45%3A18-05%3A00&amp;precision=second" title="2013-10-16T09:45:18-05:00 in Timeline">6 years</a> ago
+                      by bdezonia
+                    (<a href="/ticket/2012?cversion=0&amp;cnum_hist=3#comment:3">previous</a>)
+                    (<a href="/ticket/2012?action=comment-diff&amp;cnum=3&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2014-12-11T14%3A30%3A17-06%3A00&amp;precision=second" title="2014-12-11T14:30:17-06:00 in Timeline">5 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>moved</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Migrated to <a class="ext-link" href="https://github.com/imagej/imagej-common/issues/39"><span class="icon"> </span>https://github.com/imagej/imagej-common/issues/39</a><br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/2012?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/2012?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/2012?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

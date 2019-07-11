@@ -1,0 +1,632 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1114 (ImageJ2: null pointer exception upon shift-click on a rectangular ROI)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1113" title="Ticket #1113" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1114?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1114?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1114?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1115" title="Ticket #1115" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="663754e29b82ec08f814abc4";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1114, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1113" title="Ticket #1113">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1115" title="Ticket #1115">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1114">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1114">Ticket #1114</a>
+          <span class="status">(assigned defect)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2012-04-13T12%3A54%3A00-05%3A00&amp;precision=second" title="2012-04-13T12:54:00-05:00 in Timeline">7 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2012-08-14T10%3A33%3A45-05%3A00&amp;precision=second" title="2012-08-14T10:33:45-05:00 in Timeline">7 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">ImageJ2: null pointer exception upon shift-click on a rectangular ROI</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=dscho">dscho</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="milestone" href="/milestone/imagej2-b9-rois">imagej2-b9-rois</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Tools">Tools</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+              sapristi@…
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="assigned" href="/ticket/285" title="Improve support for ROIs, segmentation and labeling [rois]">#285</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+      <span class="lastmod" title="2012-04-25 17:32:27.753412+00:00">
+        (last modified by bdezonia)
+        (<a href="/ticket/1114?action=diff&amp;version=2">diff</a>)
+      </span>
+    </h3>
+    <div class="searchable">
+      <p>
+In the fiji bugzilla database (<a class="closed ticket" href="/ticket/419" title="defect: The XY flipping plugins do not seem to work (closed: fixed)">#419</a>) Albert Cardona reported:<br />
+</p>
+<ol><li>Open an image
+</li><li>Draw a rectangular ROI
+</li><li>Shift-click on the center of the ROI
+</li><li>The terminal reports:
+</li></ol><p>
+[ERROR] Uncaught exception in thread Thread[AWT-EventQueue-0,6,main]<br />
+java.lang.NullPointerException<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+org.jhotdraw.draw.tool.DefaultDragTracker.mouseReleased(DefaultDragTracker.java:172)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+org.jhotdraw.draw.tool.SelectionTool.mouseReleased(SelectionTool.java:215)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+org.jhotdraw.draw.tool.DelegationSelectionTool.mouseReleased(DelegationSelectionTool.java:138)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+imagej.ui.swing.overlay.ToolDelegator.mouseReleased(ToolDelegator.java:119)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:273)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:272)<br />
+</p>
+<blockquote>
+<p>
+at java.awt.Component.processMouseEvent(Component.java:6290)<br />
+at javax.swing.JComponent.processMouseEvent(JComponent.java:3267)<br />
+at java.awt.Component.processEvent(Component.java:6055)<br />
+at java.awt.Container.processEvent(Container.java:2039)<br />
+at java.awt.Component.dispatchEventImpl(Component.java:4653)<br />
+at java.awt.Container.dispatchEventImpl(Container.java:2097)<br />
+at java.awt.Component.dispatchEvent(Component.java:4481)<br />
+at<br />
+</p>
+</blockquote>
+<p>
+java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4575)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+java.awt.LightweightDispatcher.processMouseEvent(Container.java:4236)<br />
+</p>
+<blockquote>
+<p>
+at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4166)<br />
+at java.awt.Container.dispatchEventImpl(Container.java:2083)<br />
+at java.awt.Window.dispatchEventImpl(Window.java:2482)<br />
+at java.awt.Component.dispatchEvent(Component.java:4481)<br />
+at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:648)<br />
+at java.awt.EventQueue.access$000(EventQueue.java:84)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:607)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:605)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at<br />
+</p>
+</blockquote>
+<p>
+java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:87)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:98)<br />
+</p>
+<blockquote>
+<p>
+at java.awt.EventQueue$2.run(EventQueue.java:621)<br />
+at java.awt.EventQueue$2.run(EventQueue.java:619)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at<br />
+</p>
+</blockquote>
+<p>
+java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:87)<br />
+</p>
+<blockquote>
+<p>
+at java.awt.EventQueue.dispatchEvent(EventQueue.java:618)<br />
+at<br />
+</p>
+</blockquote>
+<p>
+java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:269)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:184)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:174)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:169)<br />
+</p>
+<blockquote>
+<p>
+at<br />
+</p>
+</blockquote>
+<p>
+java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:161)<br />
+</p>
+<blockquote>
+<p>
+at java.awt.EventDispatchThread.run(EventDispatchThread.java:122)<br />
+</p>
+</blockquote>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-24T14%3A59%3A50-05%3A00&amp;precision=second" title="2012-04-24T14:59:50-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Verified that we are handing JHotDraw a nonnull mouse event. This looks like a JHotDraw bug.<br />
+</p>
+<p>
+More compact listing of exception follows.<br />
+</p>
+<p>
+java.lang.NullPointerException<br />
+</p>
+<blockquote>
+<p>
+at org.jhotdraw.draw.tool.DefaultDragTracker.mouseReleased(DefaultDragTracker.java:172)<br />
+at org.jhotdraw.draw.tool.SelectionTool.mouseReleased(SelectionTool.java:215)<br />
+at org.jhotdraw.draw.tool.DelegationSelectionTool.mouseReleased(DelegationSelectionTool.java:138)<br />
+at imagej.ui.swing.overlay.ToolDelegator.mouseReleased(ToolDelegator.java:125)<br />
+at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:290)<br />
+at java.awt.AWTEventMulticaster.mouseReleased(AWTEventMulticaster.java:289)<br />
+at java.awt.Component.processMouseEvent(Component.java:6268)<br />
+at javax.swing.JComponent.processMouseEvent(JComponent.java:3267)<br />
+at java.awt.Component.processEvent(Component.java:6033)<br />
+at java.awt.Container.processEvent(Container.java:2045)<br />
+at java.awt.Component.dispatchEventImpl(Component.java:4629)<br />
+at java.awt.Container.dispatchEventImpl(Container.java:2103)<br />
+at java.awt.Component.dispatchEvent(Component.java:4455)<br />
+at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4633)<br />
+at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4297)<br />
+at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4227)<br />
+at java.awt.Container.dispatchEventImpl(Container.java:2089)<br />
+at java.awt.Window.dispatchEventImpl(Window.java:2517)<br />
+at java.awt.Component.dispatchEvent(Component.java:4455)<br />
+at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:649)<br />
+at java.awt.EventQueue.access$000(EventQueue.java:96)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:608)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:606)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:105)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:116)<br />
+at java.awt.EventQueue$2.run(EventQueue.java:622)<br />
+at java.awt.EventQueue$2.run(EventQueue.java:620)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:105)<br />
+at java.awt.EventQueue.dispatchEvent(EventQueue.java:619)<br />
+at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:275)<br />
+at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:200)<br />
+at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:190)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:185)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:177)<br />
+at java.awt.EventDispatchThread.run(EventDispatchThread.java:138)<br />
+</p>
+</blockquote>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2012-04-24T15%3A05%3A09-05%3A00&amp;precision=second" title="2012-04-24T15:05:09-05:00 in Timeline">7 years</a> ago
+                      by bdezonia
+                    (<a href="/ticket/1114?cversion=0&amp;cnum_hist=1#comment:1">previous</a>)
+                    (<a href="/ticket/1114?action=comment-diff&amp;cnum=1&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-25T12%3A32%3A27-05%3A00&amp;precision=second" title="2012-04-25T12:32:27-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/1114?action=diff&amp;version=2">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-25T12%3A46%3A02-05%3A00&amp;precision=second" title="2012-04-25T12:46:02-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>bdezonia</em> to <em>dscho</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>assigned</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Dscho, maybe you have some insight?<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-06-08T16%3A53%3A03-05%3A00&amp;precision=second" title="2012-06-08T16:53:03-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1143</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-07-03T13%3A26%3A11-05%3A00&amp;precision=second" title="2012-07-03T13:26:11-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>285</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-07-03T13%3A28%3A24-05%3A00&amp;precision=second" title="2012-07-03T13:28:24-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1143</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-24">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:24" class="cnum">
+      <a href="#comment:24">comment:24</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-07-12T14%3A18%3A41-05%3A00&amp;precision=second" title="2012-07-12T14:18:41-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta3</em> to <em>imagej-2.0.0-beta4</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-25">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:25" class="cnum">
+      <a href="#comment:25">comment:25</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-14T10%3A33%3A45-05%3A00&amp;precision=second" title="2012-08-14T10:33:45-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta4</em> to <em>imagej-2.0.0-beta6</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+ROIs will be the focus of beta6.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1114?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1114?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1114?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

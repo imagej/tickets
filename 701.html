@@ -1,0 +1,475 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #701 (LUTs getting out of sync)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/700" title="Ticket #700" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/701?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/701?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/701?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/702" title="Ticket #702" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="d0ba762fa8a0b0a219a3271e";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 701, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/700" title="Ticket #700">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/702" title="Ticket #702">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/701">Ticket #701</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2011-07-29T13%3A26%3A03-05%3A00&amp;precision=second" title="2011-07-29T13:26:03-05:00 in Timeline">8 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2011-08-10T16%3A31%3A27-05%3A00&amp;precision=second" title="2011-08-10T16:31:27-05:00 in Timeline">8 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">LUTs getting out of sync</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej-2.0-alpha5">imagej-2.0-alpha5</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Display+API">Display API</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+Open multi-channel-4d-series.ome.tiff (or new Hyperstack 4 channels)<br />
+</p>
+<p>
+Run Enhance Contrast<br />
+</p>
+<p>
+1st channel LUT goes from Red to Gray<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-07-29T14%3A00%3A00-05%3A00&amp;precision=second" title="2011-07-29T14:00:00-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Maybe related to <a class="closed ticket" href="/ticket/665" title="defect: A Display can go from Composite to Color unexpectedly (closed: fixed)">#665</a><br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-03T15%3A18%3A07-05%3A00&amp;precision=second" title="2011-08-03T15:18:07-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Open Clown. CHange Type to RGB Stack. Looks correct. Use slider to change channel. Channel 0 goes from Red to Gray.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-03T16%3A40%3A57-05%3A00&amp;precision=second" title="2011-08-03T16:40:57-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+With e963ae758899c84e05ac6676bb5a68c6f0b75293 some of the Clown issue is fixed. Like IJ1 the LUTs are now all gray. However the display is not redrawn and thus the first channel appears red until you move the channel slider.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-04T13%3A06%3A59-05%3A00&amp;precision=second" title="2011-08-04T13:06:59-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+In New Hyperstack case the HS must be created as Composite (not Color or Gray).<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-04T13%3A55%3A24-05%3A00&amp;precision=second" title="2011-08-04T13:55:24-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Simple way to see a problem:<br />
+</p>
+<p>
+Create new 4 channel composite hyperstack. Notice that the display has a blue tinge. This is wrong. It should be gray except for the dislayed slice numbers (I think). Moving the sliders shows that it displays in gray. Like the Clown to RGB Stack case the 1st channel is displayed with the wrong color.<br />
+</p>
+<p>
+Not sure if the enhance contrast issue is a separate one.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-08T15%3A40%3A09-05%3A00&amp;precision=second" title="2011-08-08T15:40:09-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Fixing bug <a class="closed ticket" href="/ticket/668" title="defect: Image :: Stack :: Stack to Images results in wrong colors and other issues (closed: fixed)">#668</a> makes Clown issue a little different. The first channel now appears grey (correct). The other channels are blue and green which is incorrect.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-10T15%3A11%3A27-05%3A00&amp;precision=second" title="2011-08-10T15:11:27-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+With 810c4d331ab916da162f68939acdbd02eda6f6c3 I can no longer duplicate Clown issues.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-10T15%3A18%3A20-05%3A00&amp;precision=second" title="2011-08-10T15:18:20-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Arg. I meant I can't duplicate the Hyperstack issue anymore.<br />
+</p>
+<p>
+The clown issue (convert type via Image :: Type :: RGB Stack) still shows gray for chan 1 (correct) and blue and green for other channels (wrong).<br />
+</p>
+<p>
+The original issue (ome 4d &amp; enhance contrast) gives grey chan 1 (wrong) and blue and green for other channels (correct).<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-10T15%3A29%3A33-05%3A00&amp;precision=second" title="2011-08-10T15:29:33-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+IJ1 Baseline behavior:<br />
+</p>
+<p>
+OME 4d: comes in as an all grey set of data (both IJ Open and Bioformats Open)<br />
+</p>
+<p>
+Clown: once a RGB Stack it is 3 gray slices<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-10T16%3A24%3A29-05%3A00&amp;precision=second" title="2011-08-10T16:24:29-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+As of ea47b4064b3cb9fae4a1cd1e67536b820a9a6cec Clown no becomes 3 gray slices correctly. And OME 4d becomes all gray after enhance contrast.<br />
+</p>
+<p>
+The only issue is that OME 4d loads with some color luts which is different from IJ1.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-10T16%3A31%3A27-05%3A00&amp;precision=second" title="2011-08-10T16:31:27-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+This last issue with OME 4d has nothing to do with legacy layer as you need to use IJ2 Open command to load file. I will close this bug and open another for that case.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/701?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/701?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/701?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

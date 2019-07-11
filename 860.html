@@ -1,0 +1,1064 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #860 (Make a UI agnostic drag and drop facility)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/859" title="Ticket #859" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/860?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/860?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/860?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/861" title="Ticket #861" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="8d46a999ab08b13a75a4050c";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 860, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/859" title="Ticket #859">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/861" title="Ticket #861">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/860">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/860">Ticket #860</a>
+          <span class="status">(closed feature: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2011-11-02T10%3A38%3A03-05%3A00&amp;precision=second" title="2011-11-02T10:38:03-05:00 in Timeline">8 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-06-07T15%3A37%3A54-05%3A00&amp;precision=second" title="2013-06-07T15:37:54-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Make a UI agnostic drag and drop facility</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=curtis">curtis</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b7-ndim-data">imagej2-b7-ndim-data</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Core">Core</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+              <a class="closed" href="/ticket/439" title="Support Image File Drag &amp; Drop like IJ1">#439</a>, <a class="closed" href="/ticket/846" title="Exception displayed when dropping unsupported file on application window">#846</a>, <a class="closed" href="/ticket/1675" title="IOService enhancement needed for drag and drop">#1675</a>, <a class="closed" href="/ticket/1677" title="ImageDisplays should be DND targets">#1677</a>
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/9" title="Redesign core I/O infrastructure">#9</a>, <a class="assigned" href="/ticket/10" title="Maintain strict separation of concerns (i.e., UI independence)">#10</a>, <a class="closed" href="/ticket/1398" title="Recommended architecture changes [ndim-data]">#1398</a>, <a class="closed" href="/ticket/1912" title="Redesign core I/O infrastructure [ndim-data]">#1912</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+Drag and drop is currently implemented in the ij-ui-swing-base project. The code is adapted from IJ1 and does not have a very clean design. It also drags in lots of dependencies it shouldn't. We should have a ui-agnostic DropHandler facility that can be used in each ui implementation as needed. Barry, Curtis, and Johannes discussed this a bit in the imagejdev chat room and that log is included below.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-11-02T10%3A41%3A24-05%3A00&amp;precision=second" title="2011-11-02T10:41:24-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+10:02<br />
+bdezonia<br />
+ctrueden: I'm trying to hatch a UI agnostic drag and drop class. it needs to do things like run IJ2 plugins, hatch BF readers, etc. So it has a number of dependencies. Originally I was going to put into imagej.ui.dnd but you probably don't want a ton of dependencies in there. Can you think of a home? Or should we make a new subproject: ij-dnd?<br />
+</p>
+<p>
+10:04<br />
+ctrueden<br />
+Why does it need to depend on BF at all?<br />
+That is supposed to be completely abstracted away in imglib2-io<br />
+</p>
+<p>
+10:05<br />
+dscho<br />
+If I may chime in: I could imagine that we'd need yet another sezpoz'able interface for DnD handlers.<br />
+So that you can, say, handle plugins being dropped on the main window, but not when the user uses File&gt;Open.<br />
+</p>
+<p>
+10:07<br />
+ctrueden<br />
+That makes sense.<br />
+</p>
+<p>
+10:07<br />
+bdezonia<br />
+I determine if a dropped file is an image file by trying to create a reader. If the creation fails I try to open it as a known file type (such as .lut) and failing everything I open it in a text window.<br />
+</p>
+<p>
+10:08<br />
+ctrueden<br />
+I agree with dscho. Let's make it use dynamic discovery instead. That way your DnD handler can have "canHandle(String)" or "isRelevant(String)" or whatever type of object the DnD provides. And the first available DnD handler that says "yes I support this" takes care of it.<br />
+Otherwise we'll end up with another "HandleExtraFileTypes" implementation in core.<br />
+</p>
+<p>
+10:09<br />
+dscho<br />
+Probably you need to pass the MIME type, too...<br />
+</p>
+<p>
+10:10<br />
+bdezonia<br />
+Okay. So it's own subproject? ij-dnd?<br />
+</p>
+<p>
+10:10<br />
+dscho<br />
+(Java's DnD delivers that, and it is quite handy)<br />
+If you make a new interface, I don't think that a new subproject is necessary.<br />
+That interface can live quite centrally.<br />
+(Probably accompanied by a Service...)<br />
+</p>
+<p>
+10:12<br />
+bdezonia<br />
+yes, the interface can live in ij-ui. but the implementation(s) need to live somewhere that can have other dependencies.<br />
+</p>
+<p>
+10:13<br />
+ctrueden<br />
+I am not convinced that the core DnD implementation(s) needs to live outside. Like you said, it depends on the dependencies.<br />
+We should *not* depend on BF.<br />
+We need a way to ask ImageJ "is this an image?" without invoking BF.<br />
+This is part of the "redesign I/O infrastructure" ticket.<br />
+For now, to determine if it's an image, can't you just call OpenImage on it, and catch exceptions?<br />
+And if that fails, then move on.<br />
+</p>
+<p>
+10:14<br />
+bdezonia<br />
+The plugin don't throw exceptions (!??!)<br />
+I could be calling it wrongly<br />
+</p>
+<p>
+10:15<br />
+dscho<br />
+is wondering whether ij-io can get a class that implements DnDHandler (sezpoz-annotated)...<br />
+</p>
+<p>
+10:15<br />
+ctrueden<br />
+Looking at the OpenImage code, it is not modular enough.<br />
+In run it does a few things, all wrapped in try/catch.<br />
+Instead, we could have a method that does those things and throws exceptions. Then in run just call that method.<br />
+Then you would have a hook to call it with exception handling.<br />
+dscho: We could make ij-io work that way… but I think the other way 'round makes more sense.<br />
+Eventually we will have an IOPlugin, and perhaps an IOService.<br />
+</p>
+<p>
+10:16<br />
+dscho<br />
+Ah.<br />
+</p>
+<p>
+10:17<br />
+ctrueden<br />
+Then the DnD handler that tries to determine if the dropped thing is an image can just ask the IOService.<br />
+</p>
+<p>
+10:17<br />
+dscho<br />
+Reusable by others, too. Makes sense.<br />
+</p>
+<p>
+10:18<br />
+ctrueden<br />
+So, Barry, then the image DnD handler can live in ij-io.<br />
+</p>
+<p>
+10:18<br />
+bdezonia<br />
+sure<br />
+</p>
+<p>
+10:19<br />
+ctrueden<br />
+If you want to get started on this architecture, that's great. We can keep discussing details as needed. But it's probably not the most urgent for beta1. So maybe file a ticket instead, and link it to ticket <a class="closed ticket" href="/ticket/9" title="feature: Redesign core I/O infrastructure (closed: fixed)">#9</a>, with milestone beta2.<br />
+</p>
+<p>
+10:20<br />
+ctrueden<br />
+And any DnD-related tickets can be pushed to beta2 and linked to the new ticket as a blocker.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-11-02T11%3A48%3A27-05%3A00&amp;precision=second" title="2011-11-02T11:48:27-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+TODO reminder: remove dependency on ij-io from ui-swing pom.xml when this code refactoring is done<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A48%3A47-06%3A00&amp;precision=second" title="2012-02-26T21:48:47-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>853</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A49%3A51-06%3A00&amp;precision=second" title="2012-02-26T21:49:51-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Type</strong>
+        changed from <em>defect</em> to <em>feature</em>
+    </li><li>
+      <strong>Blocking</strong>
+        <em>9, 11</em> added
+    </li><li>
+      <strong>Blocked By</strong>
+        <em>853</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A50%3A18-06%3A00&amp;precision=second" title="2012-02-26T21:50:18-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>853</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A50%3A37-06%3A00&amp;precision=second" title="2012-02-26T21:50:37-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>846</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A53%3A30-06%3A00&amp;precision=second" title="2012-02-26T21:53:30-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>439</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A55%3A30-06%3A00&amp;precision=second" title="2012-02-26T21:55:30-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>10</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-05T14%3A43%3A25-06%3A00&amp;precision=second" title="2012-03-05T14:43:25-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1051</em> added; <em>11</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-13T12%3A10%3A45-05%3A00&amp;precision=second" title="2012-04-13T12:10:45-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+The IOService mentioned above was added in 680ff07bc60364174d34fbefa081603ed4b530a9, which will help facilitate the drag-n-drop infrastructure in the future.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-05-14T11%3A00%3A21-05%3A00&amp;precision=second" title="2012-05-14T11:00:21-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta3</em> to <em>imagej-2.0.0-beta4</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-05-15T09%3A41%3A19-05%3A00&amp;precision=second" title="2012-05-15T09:41:19-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1052</em> added; <em>1051</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-03T10%3A03%3A18-05%3A00&amp;precision=second" title="2012-08-03T10:03:18-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1340</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-06T14%3A10%3A03-05%3A00&amp;precision=second" title="2012-09-06T14:10:03-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1357</em> added; <em>1052</em> removed
+    </li><li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta4</em> to <em>imagej-2.0.0-beta5</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-07T11%3A11%3A52-05%3A00&amp;precision=second" title="2012-09-07T11:11:52-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1398</em> added; <em>1340</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-03T17%3A21%3A52-06%3A00&amp;precision=second" title="2013-03-03T17:21:52-06:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Lots of progress on the <a class="ext-link" href="https://github.com/imagej/imagej/tree/drag-and-drop"><span class="icon"> </span>drag-and-drop branch</a>. Just need to finish implementing the various <tt>DragAndDropHandler</tt> plugins! Comments welcome.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-13">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:13" class="cnum">
+      <a href="#comment:13">comment:13</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-07T16%3A00%3A30-06%3A00&amp;precision=second" title="2013-03-07T16:00:30-06:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>reviewing</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-14">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:14" class="cnum">
+      <a href="#comment:14">comment:14</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-13T15%3A01%3A27-05%3A00&amp;precision=second" title="2013-03-13T15:01:27-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1673</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-15">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:15" class="cnum">
+      <a href="#comment:15">comment:15</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-14T10%3A00%3A22-05%3A00&amp;precision=second" title="2013-03-14T10:00:22-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1674</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-16">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:16" class="cnum">
+      <a href="#comment:16">comment:16</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-14T10%3A21%3A28-05%3A00&amp;precision=second" title="2013-03-14T10:21:28-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1674</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-17">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:17" class="cnum">
+      <a href="#comment:17">comment:17</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-14T10%3A21%3A49-05%3A00&amp;precision=second" title="2013-03-14T10:21:49-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1673</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-18">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:18" class="cnum">
+      <a href="#comment:18">comment:18</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-14T10%3A27%3A28-05%3A00&amp;precision=second" title="2013-03-14T10:27:28-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1677</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-19">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:19" class="cnum">
+      <a href="#comment:19">comment:19</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-14T14%3A29%3A54-05%3A00&amp;precision=second" title="2013-03-14T14:29:54-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>bdezonia</em> to <em>curtis</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Code reviewed and extended by bdezonia and ctrueden. ctrueden has the ball in his court at the moment.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-20">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:20" class="cnum">
+      <a href="#comment:20">comment:20</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-14T14%3A35%3A00-05%3A00&amp;precision=second" title="2013-03-14T14:35:00-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Note that TODO reminder above about ij-io taken care of on drag-and-drop branch. Just waiting to be merged.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-21">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:21" class="cnum">
+      <a href="#comment:21">comment:21</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-19T10%3A59%3A18-05%3A00&amp;precision=second" title="2013-03-19T10:59:18-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1357</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-22">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:22" class="cnum">
+      <a href="#comment:22">comment:22</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-15T10%3A01%3A40-05%3A00&amp;precision=second" title="2013-04-15T10:01:40-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1675</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-23">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:23" class="cnum">
+      <a href="#comment:23">comment:23</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-15T10%3A33%3A54-05%3A00&amp;precision=second" title="2013-04-15T10:33:54-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Lots more progress on the <a class="ext-link" href="https://github.com/imagej/imagej/tree/drag-and-drop"><span class="icon"> </span>drag-and-drop branch</a>. All compiles, but there are still bugs. Once those are solved and merged, this feature will be much closer to completion.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-24">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:24" class="cnum">
+      <a href="#comment:24">comment:24</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-15T10%3A34%3A21-05%3A00&amp;precision=second" title="2013-04-15T10:34:21-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>reviewing</em> to <em>accepted</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-25">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:25" class="cnum">
+      <a href="#comment:25">comment:25</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-16T17%3A01%3A18-05%3A00&amp;precision=second" title="2013-04-16T17:01:18-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>853</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+(In <a class="closed ticket" href="/ticket/853" title="defect: Drag and Drop should support all types IJ1 does (closed: duplicate)">#853</a>) I am migrating this ticket to the b10-compatibility milestone (feature ticket <a class="new ticket" href="/ticket/1821" title="feature: Improve drag-and-drop [compatibility] (new)">#1821</a>). However, it would still be good to split the list above into separate tickets, and then close this one as a duplicate.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-26">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:26" class="cnum">
+      <a href="#comment:26">comment:26</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-16T17%3A02%3A42-05%3A00&amp;precision=second" title="2013-04-16T17:02:42-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>accepted</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+With the <a class="missing changeset" title="No default repository defined">merger of the drag-and-drop branch</a> and related improvements, this feature is complete.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-27">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:27" class="cnum">
+      <a href="#comment:27">comment:27</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-05T15%3A12%3A09-05%3A00&amp;precision=second" title="2013-06-05T15:12:09-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1912</em> added; <em>9</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-28">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:28" class="cnum">
+      <a href="#comment:28">comment:28</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-07T15%3A37%3A54-05%3A00&amp;precision=second" title="2013-06-07T15:37:54-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>9</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+(In <a class="closed ticket" href="/ticket/9" title="feature: Redesign core I/O infrastructure (closed: fixed)">#9</a>) This ticket is really about improving the <em>infrastructure</em> if I/O for ImageJ2. With SCIFIO, we have now done that. The 2.0.0-beta-7 release is using SCIFIO 0.1.0—File Open and File Save are now extensible—so this ticket is complete.<br />
+</p>
+<p>
+Remaining tickets about improving the existing I/O mechanism have been migrated to ticket <a class="closed ticket" href="/ticket/1920" title="feature: Improve I/O support [analysis] (closed: moved)">#1920</a>.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/860?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/860?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/860?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

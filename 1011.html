@@ -1,0 +1,1118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1011 (Robust ImageJ1 legacy layer)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1010" title="Ticket #1010" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1011?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1011?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1011?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1012" title="Ticket #1012" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="87ae8cad134f000c8b20c166";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1011, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1010" title="Ticket #1010">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1012" title="Ticket #1012">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1011">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1011">Ticket #1011</a>
+          <span class="status">(closed feature: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2012-02-24T13%3A15%3A18-06%3A00&amp;precision=second" title="2012-02-24T13:15:18-06:00 in Timeline">7 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2014-08-20T12%3A09%3A34-05%3A00&amp;precision=second" title="2014-08-20T12:09:34-05:00 in Timeline">5 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Robust ImageJ1 legacy layer</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=curtis">curtis</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=blocker">blocker</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="milestone" href="/milestone/imagej-2.0.0">imagej-2.0.0</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Legacy+Compatibility">Legacy Compatibility</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=critical">critical</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+              <a class="closed" href="/ticket/301" title="Use of ImageOpener and ij1-bridge to create ImagePlus">#301</a>, <a class="closed" href="/ticket/509" title="Determine how to approach legacy Image::Type menu plugins">#509</a>, <a class="closed" href="/ticket/528" title="Have LegacyImageMap track Dataset events">#528</a>, <a class="closed" href="/ticket/530" title="Make legacy harmonization bidirectional">#530</a>, <a class="closed" href="/ticket/531" title="Legacy layer has limitations in regard to plugins that change data types">#531</a>, <a class="closed" href="/ticket/532" title="Make legacy layer smarter about handling new IJ2 data types">#532</a>, <a class="closed" href="/ticket/537" title="Update ROIs correctly in DatasetHarmonizer">#537</a>, <a class="closed" href="/ticket/546" title="Minimize time spent harmonizing Datasets/ImagePluses">#546</a>, <a class="closed" href="/ticket/549" title="Improve legacy support of bit typed data">#549</a>, <a class="closed" href="/ticket/552" title="Make it possible to pass a ImgFactory to ImageTranslator::createDataset()">#552</a>, <a class="closed" href="/ticket/559" title="The legacy layer only supports 8-bit ColorTables">#559</a>, <a class="closed" href="/ticket/573" title="Composite image info lost sometimes">#573</a>, <a class="closed" href="/ticket/578" title="IJ1 Channels Tool does not work">#578</a>, <a class="closed" href="/ticket/647" title="IJ1 Shadows Demo does nothing">#647</a>, <a class="closed" href="/ticket/652" title="Thoroughly test legacy layer">#652</a>, <a class="closed" href="/ticket/693" title="ij.gui.Overlay not tracked in legacy layer">#693</a>, <a class="closed" href="/ticket/740" title="Stack to Images slow">#740</a>, <a class="closed" href="/ticket/751" title="Legacy translation test cases">#751</a>, <a class="closed" href="/ticket/756" title="Threshold broken">#756</a>, <a class="closed" href="/ticket/757" title="Discrepancies in &#34;Measure&#34; values">#757</a>, <a class="closed" href="/ticket/758" title="Analyze Particles reports different values than in IJ1">#758</a>, <a class="closed" href="/ticket/761" title="Selection &gt; Make Inverse throws exception">#761</a>, <a class="closed" href="/ticket/766" title="Hyperstack to Stack bug">#766</a>, <a class="closed" href="/ticket/773" title="Reshaping via &#34;Properties&#34; sometimes crashes IJ display">#773</a>, <a class="closed" href="/ticket/833" title="Write tests for legacy layer">#833</a>, <a class="closed" href="/ticket/842" title="Verify overlay translation code happening everywhere it needs to">#842</a>, <a class="closed" href="/ticket/843" title="legacy zoom in/out plugins don't work">#843</a>, <a class="closed" href="/ticket/868" title="Verify waitForThreads() code in LegacyPlugin is safe">#868</a>, <a class="closed" href="/ticket/870" title="Improve the thread whitelist in LegacyPlugin">#870</a>, <a class="closed" href="/ticket/905" title="Overlays can disappear">#905</a>, <a class="closed" href="/ticket/906" title="Loaded image changes shade after a few seconds">#906</a>, <a class="closed" href="/ticket/908" title="Enable ability to flush legacy mapped images">#908</a>, <a class="closed" href="/ticket/909" title="IJ1 &amp; IJ2 Stack To Images results differ">#909</a>, <a class="closed" href="/ticket/964" title="Make Binary broken">#964</a>, <a class="closed" href="/ticket/1259" title="Overlay differences with IJ1">#1259</a>, <a class="closed" href="/ticket/1354" title="Implement Help&gt;Start Legacy ImageJ">#1354</a>, <a class="closed" href="/ticket/1471" title="Concurrent legacy plugin execution can cause problems">#1471</a>
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/1010" title="Full backwards compatibility with ImageJ1">#1010</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+Our primary strategy for interoperability between ImageJ1 and ImageJ2 is a "legacy layer" that translates data structures between IJ1 and IJ2 on the fly. In this way, we can execute IJ1 plugins, macros and scripts on IJ2 data by first translating it into IJ1 format, executing the code, then translating the results back to IJ2. All of this happens transparently, with an ImageJ1 instance running "under the hood" of ImageJ2.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-24T13%3A32%3A52-06%3A00&amp;precision=second" title="2012-02-24T13:32:52-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>964</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-24T15%3A45%3A36-06%3A00&amp;precision=second" title="2012-02-24T15:45:36-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>301</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-24T16%3A23%3A15-06%3A00&amp;precision=second" title="2012-02-24T16:23:15-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>833</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-24T16%3A50%3A44-06%3A00&amp;precision=second" title="2012-02-24T16:50:44-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>531</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-24T16%3A51%3A10-06%3A00&amp;precision=second" title="2012-02-24T16:51:10-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>528</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-24T16%3A51%3A25-06%3A00&amp;precision=second" title="2012-02-24T16:51:25-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>530</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-24T16%3A51%3A36-06%3A00&amp;precision=second" title="2012-02-24T16:51:36-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>532</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A23%3A16-06%3A00&amp;precision=second" title="2012-02-26T20:23:16-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>843</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A27%3A12-06%3A00&amp;precision=second" title="2012-02-26T20:27:12-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>773</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A36%3A14-06%3A00&amp;precision=second" title="2012-02-26T20:36:14-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>573</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A44%3A51-06%3A00&amp;precision=second" title="2012-02-26T20:44:51-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>652</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A46%3A09-06%3A00&amp;precision=second" title="2012-02-26T20:46:09-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>546</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-13">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:13" class="cnum">
+      <a href="#comment:13">comment:13</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A46%3A25-06%3A00&amp;precision=second" title="2012-02-26T20:46:25-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>537</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-14">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:14" class="cnum">
+      <a href="#comment:14">comment:14</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A48%3A32-06%3A00&amp;precision=second" title="2012-02-26T20:48:32-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>509</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-15">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:15" class="cnum">
+      <a href="#comment:15">comment:15</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A49%3A09-06%3A00&amp;precision=second" title="2012-02-26T20:49:09-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>391</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-16">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:16" class="cnum">
+      <a href="#comment:16">comment:16</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A49%3A53-06%3A00&amp;precision=second" title="2012-02-26T20:49:53-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>391</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-17">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:17" class="cnum">
+      <a href="#comment:17">comment:17</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A52%3A52-06%3A00&amp;precision=second" title="2012-02-26T20:52:52-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>868</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-18">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:18" class="cnum">
+      <a href="#comment:18">comment:18</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A53%3A19-06%3A00&amp;precision=second" title="2012-02-26T20:53:19-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>549</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-19">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:19" class="cnum">
+      <a href="#comment:19">comment:19</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A54%3A16-06%3A00&amp;precision=second" title="2012-02-26T20:54:16-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>552</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-20">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:20" class="cnum">
+      <a href="#comment:20">comment:20</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A54%3A27-06%3A00&amp;precision=second" title="2012-02-26T20:54:27-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>559</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-21">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:21" class="cnum">
+      <a href="#comment:21">comment:21</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A55%3A10-06%3A00&amp;precision=second" title="2012-02-26T20:55:10-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>740</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-22">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:22" class="cnum">
+      <a href="#comment:22">comment:22</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T20%3A55%3A32-06%3A00&amp;precision=second" title="2012-02-26T20:55:32-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>751</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-23">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:23" class="cnum">
+      <a href="#comment:23">comment:23</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A08%3A16-06%3A00&amp;precision=second" title="2012-02-26T21:08:16-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>756</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-24">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:24" class="cnum">
+      <a href="#comment:24">comment:24</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A08%3A34-06%3A00&amp;precision=second" title="2012-02-26T21:08:34-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>757</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-25">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:25" class="cnum">
+      <a href="#comment:25">comment:25</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A08%3A58-06%3A00&amp;precision=second" title="2012-02-26T21:08:58-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>758</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-26">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:26" class="cnum">
+      <a href="#comment:26">comment:26</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A12%3A18-06%3A00&amp;precision=second" title="2012-02-26T21:12:18-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>761</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-27">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:27" class="cnum">
+      <a href="#comment:27">comment:27</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A12%3A33-06%3A00&amp;precision=second" title="2012-02-26T21:12:33-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>766</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-28">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:28" class="cnum">
+      <a href="#comment:28">comment:28</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A26%3A03-06%3A00&amp;precision=second" title="2012-02-26T21:26:03-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>647</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-29">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:29" class="cnum">
+      <a href="#comment:29">comment:29</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A26%3A18-06%3A00&amp;precision=second" title="2012-02-26T21:26:18-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>693</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-30">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:30" class="cnum">
+      <a href="#comment:30">comment:30</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T21%3A56%3A21-06%3A00&amp;precision=second" title="2012-02-26T21:56:21-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>870</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-31">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:31" class="cnum">
+      <a href="#comment:31">comment:31</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T22%3A26%3A50-06%3A00&amp;precision=second" title="2012-02-26T22:26:50-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>908</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-32">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:32" class="cnum">
+      <a href="#comment:32">comment:32</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T22%3A30%3A02-06%3A00&amp;precision=second" title="2012-02-26T22:30:02-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>905</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-33">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:33" class="cnum">
+      <a href="#comment:33">comment:33</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T22%3A32%3A20-06%3A00&amp;precision=second" title="2012-02-26T22:32:20-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>906</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-34">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:34" class="cnum">
+      <a href="#comment:34">comment:34</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T22%3A34%3A52-06%3A00&amp;precision=second" title="2012-02-26T22:34:52-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>578</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-35">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:35" class="cnum">
+      <a href="#comment:35">comment:35</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T22%3A46%3A07-06%3A00&amp;precision=second" title="2012-02-26T22:46:07-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>909</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-36">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:36" class="cnum">
+      <a href="#comment:36">comment:36</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T22%3A58%3A38-06%3A00&amp;precision=second" title="2012-02-26T22:58:38-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>842</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-37">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:37" class="cnum">
+      <a href="#comment:37">comment:37</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-07-13T22%3A42%3A48-05%3A00&amp;precision=second" title="2012-07-13T22:42:48-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1259</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-38">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:38" class="cnum">
+      <a href="#comment:38">comment:38</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-07-30T10%3A44%3A02-05%3A00&amp;precision=second" title="2012-07-30T10:44:02-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1354</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-39">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:39" class="cnum">
+      <a href="#comment:39">comment:39</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-11T15%3A59%3A05-05%3A00&amp;precision=second" title="2012-09-11T15:59:05-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1471</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-40">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:40" class="cnum">
+      <a href="#comment:40">comment:40</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2014-08-20T12%3A09%3A34-05%3A00&amp;precision=second" title="2014-08-20T12:09:34-05:00 in Timeline">5 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+All constituent tickets resolved or moved.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1011?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1011?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1011?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

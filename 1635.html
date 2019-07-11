@@ -1,0 +1,633 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1635 (UpdaterTest unit tests fail, Windows)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1634" title="Ticket #1634" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1635?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1635?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1635?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1636" title="Ticket #1636" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="e9bf7f591a1c8996a9ae8f0d";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1635, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1634" title="Ticket #1634">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1636" title="Ticket #1636">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1635">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1635">Ticket #1635</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2013-01-23T16%3A07%3A33-06%3A00&amp;precision=second" title="2013-01-23T16:07:33-06:00 in Timeline">6 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-05-31T16%3A05%3A13-05%3A00&amp;precision=second" title="2013-05-31T16:05:13-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">UpdaterTest unit tests fail, Windows</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=aivar">aivar</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=dscho">dscho</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b7-ndim-data">imagej2-b7-ndim-data</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Updater">Updater</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/1901" title="Improve the Updater [ndim-data]">#1901</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+I'm trying to build ImageJ2 in NetBeans, Windows 8 64-bit.  I patched some errors in ClassUtilsTest, AppUtilsTest, and FileUtilsTest (see 'windows' branch.)  However now I'm getting 15 failures 1 error from 30 tests in UpdaterTest.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+    <div id="attachments">
+        <h2 class="foldable">Attachments</h2>
+        <div>
+          <dl class="attachments">
+              <dt>
+    <a href="/attachment/ticket/1635/UpdaterTest.txt" title="View attachment">UpdaterTest.txt</a>
+      <a href="/raw-attachment/ticket/1635/UpdaterTest.txt" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="44887 bytes">43.8 KB</span>) -
+      added by <em>aivar</em> <a class="timeline" href="/timeline?from=2013-01-23T16%3A08%3A10-06%3A00&amp;precision=second" title="2013-01-23T16:08:10-06:00 in Timeline">6 years</a> ago.
+  </dt>
+              <dd>
+                Test results
+              </dd>
+          </dl>
+          
+        </div>
+    </div>
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2013-01-23T16%3A08%3A10-06%3A00&amp;precision=second" title="2013-01-23T16:08:10-06:00 in Timeline">6 years</a> ago by aivar
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/1635/UpdaterTest.txt"><em>UpdaterTest.txt</em></a>
+          <a href="/raw-attachment/ticket/1635/UpdaterTest.txt" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Test results<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-23T16%3A13%3A48-06%3A00&amp;precision=second" title="2013-01-23T16:13:48-06:00 in Timeline">6 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+The most worrisome thing I am seeing is that things like "assertTrue(new File(ijRoot, "jars/egads-0.1.jar").delete());" are failing.  For some reason files are not being deleted immediately.  A poor workaround would be to use "deleteOnExit()".<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-23T18%3A22%3A55-06%3A00&amp;precision=second" title="2013-01-23T18:22:55-06:00 in Timeline">6 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Possibly related:<br />
+</p>
+<p>
+<a class="ext-link" href="http://stackoverflow.com/questions/8097067/java-6-file-deletion"><span class="icon"> </span>http://stackoverflow.com/questions/8097067/java-6-file-deletion</a><br />
+<a class="ext-link" href="http://stackoverflow.com/questions/991489/i-cant-delete-a-file-in-java"><span class="icon"> </span>http://stackoverflow.com/questions/991489/i-cant-delete-a-file-in-java</a><br />
+</p>
+<p>
+A much-simplified version succeeds in the assertion:<br />
+</p>
+<p>
+"<br />
+</p>
+<blockquote>
+<p>
+final File tmp = File.createTempFile("tmp", ".txt");<br />
+final FileOutputStream out = new FileOutputStream(tmp);<br />
+out.close();<br />
+assertTrue(tmp.delete);<br />
+</p>
+</blockquote>
+<p>
+"<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2013-01-23T18%3A36%3A13-06%3A00&amp;precision=second" title="2013-01-23T18:36:13-06:00 in Timeline">6 years</a> ago
+                      by aivar
+                    (<a href="/ticket/1635?cversion=0&amp;cnum_hist=2#comment:2">previous</a>)
+                    (<a href="/ticket/1635?action=comment-diff&amp;cnum=2&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-28T16%3A00%3A35-06%3A00&amp;precision=second" title="2013-01-28T16:00:35-06:00 in Timeline">6 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Same issues happen in a Windows 7 VM.  Generally related to the discussion at:<br />
+</p>
+<p>
+<a class="ext-link" href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4722539"><span class="icon"> </span>http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4722539</a> "File.delete() doesn't work the same between Windows &amp; Unix"<br />
+</p>
+<p>
+"We cannot fix this, for the same reasons that we cannot fix 4045014: There's no<br />
+efficient way to force Windows-style semantics on Unix, and vice-versa.  This<br />
+difference is annoying, but it's not a violation of WORA because the<br />
+specification doesn't make any guarantees about what happens when you delete an<br />
+open file."<br />
+</p>
+<p>
+Windows won't delete files with an open handle and it won't delete a file that doesn't exist.<br />
+</p>
+<p>
+Some say the Java 7 NIO.2 classes offer improved file deletion.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-28T16%3A09%3A20-06%3A00&amp;precision=second" title="2013-01-28T16:09:20-06:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+So is the file still in use? Then this is the bug.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-28T16%3A35%3A37-06%3A00&amp;precision=second" title="2013-01-28T16:35:37-06:00 in Timeline">6 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Yes.  The platform-specific issue is that Windows is more rigorous about locking files.<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2013-01-28T16%3A36%3A13-06%3A00&amp;precision=second" title="2013-01-28T16:36:13-06:00 in Timeline">6 years</a> ago
+                      by aivar
+                    (<a href="/ticket/1635?cversion=0&amp;cnum_hist=5#comment:5">previous</a>)
+                    (<a href="/ticket/1635?action=comment-diff&amp;cnum=5&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-28T16%3A35%3A56-06%3A00&amp;precision=second" title="2013-01-28T16:35:56-06:00 in Timeline">6 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Another platform-specific issue:<br />
+</p>
+<p>
+Under Windows 'assertTrue(new File(ijRoot, "blah").delete());', where "blah" is a new file name, fails; under OS X this succeeds.<br />
+</p>
+<p>
+Workaround for Windows is:<br />
+</p>
+<p>
+File blah = new File(ijRoot, "blah");<br />
+if (blah.exists) {<br />
+</p>
+<blockquote>
+<p>
+assertTrue(blah.delete());<br />
+</p>
+</blockquote>
+<p>
+}<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-28T16%3A42%3A58-06%3A00&amp;precision=second" title="2013-01-28T16:42:58-06:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+As to the locking: have you identified which files are still locked? We should get them unlocked before deleting them.<br />
+</p>
+<p>
+As to the deleting non-existent files: have you identified which files those are? We should not try to delete them.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-29T13%3A25%3A03-06%3A00&amp;precision=second" title="2013-01-29T13:25:03-06:00 in Timeline">6 years</a> ago by aivar
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Summary</strong>
+        changed from <em>UpdaterTest unit tests fail, Windows 8</em> to <em>UpdaterTest unit tests fail, Windows</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-29T13%3A27%3A20-06%3A00&amp;precision=second" title="2013-01-29T13:27:20-06:00 in Timeline">6 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Locking was due to not explicitly closing JarFiles.  They would get closed in the finalizer.<br />
+</p>
+<p>
+The "deleting non-existent files" issue doesn't actually happen in the build; it's just something else I came upon while debugging and thought I'd preserve a note here.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-19T11%3A25%3A07-05%3A00&amp;precision=second" title="2013-03-19T11:25:07-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>reviewing</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+dscho, please associated with some feature ticket<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-19T14%3A28%3A55-05%3A00&amp;precision=second" title="2013-03-19T14:28:55-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1347</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-22T15%3A41%3A16-05%3A00&amp;precision=second" title="2013-03-22T15:41:16-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+aivar, can you make your changes available as a pull request that merges cleanly with 'master', please? Otherwise I'll be forced to redo the fixes and retroactively waste the work hours you spent on this issue.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-13">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:13" class="cnum">
+      <a href="#comment:13">comment:13</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-09T18%3A08%3A20-05%3A00&amp;precision=second" title="2013-04-09T18:08:20-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>reviewing</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Fixed it myself in aad7221b38a588da809325adebff15f39f399412.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-14">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:14" class="cnum">
+      <a href="#comment:14">comment:14</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-05-31T16%3A05%3A13-05%3A00&amp;precision=second" title="2013-05-31T16:05:13-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1901</em> added; <em>1347</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1635?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1635?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1635?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1134 (Copy To System broken)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1133" title="Ticket #1133" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1134?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1134?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1134?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1135" title="Ticket #1135" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="77342ba39ff8f4dc73c94fce";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1134, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1133" title="Ticket #1133">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/1135" title="Ticket #1135">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1134">Ticket #1134</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2012-04-23T15%3A26%3A52-05%3A00&amp;precision=second" title="2012-04-23T15:26:52-05:00 in Timeline">7 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2012-05-18T12%3A21%3A49-05%3A00&amp;precision=second" title="2012-05-18T12:21:49-05:00 in Timeline">7 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Copy To System broken</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b2-bugfixes">imagej2-b2-bugfixes</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Legacy+Compatibility">Legacy Compatibility</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+Open clows, Edit Colors - set to grayscale, Move channel slider to blue component. Run Copy To System. Exception thrown.<br />
+</p>
+<p>
+java.lang.IllegalArgumentException: DirectColorModel required<br />
+</p>
+<blockquote>
+<p>
+at ij.process.ColorProcessor.setColorModel(ColorProcessor.java:100)<br />
+at imagej.legacy.translate.ColorTableHarmonizer.setImagePlusLutToFirstInView(ColorTableHarmonizer.java:205)<br />
+at imagej.legacy.translate.ColorTableHarmonizer.updateLegacyImage(ColorTableHarmonizer.java:125)<br />
+at imagej.legacy.translate.Harmonizer.updateLegacyImage(Harmonizer.java:126)<br />
+at imagej.legacy.plugin.LegacyPlugin.updateImagePlusesFromDisplays(LegacyPlugin.java:281)<br />
+at imagej.legacy.plugin.LegacyPlugin.run(LegacyPlugin.java:134)<br />
+at imagej.ext.plugin.PluginModule.run(PluginModule.java:151)<br />
+at imagej.ext.module.ModuleRunner.run(ModuleRunner.java:149)<br />
+at imagej.ext.module.ModuleRunner.call(ModuleRunner.java:119)<br />
+at imagej.ext.module.ModuleRunner.call(ModuleRunner.java:1)<br />
+at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:334)<br />
+at java.util.concurrent.FutureTask.run(FutureTask.java:166)<br />
+at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1110)<br />
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:603)<br />
+at java.lang.Thread.run(Thread.java:679)<br />
+</p>
+</blockquote>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-23T15%3A28%3A31-05%3A00&amp;precision=second" title="2012-04-23T15:28:31-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I found this when testing whether afraser's comment in IJ-Commands-All google document still held. His comments were:<br />
+</p>
+<p>
+Open [IJ2] an RGB image. and copy the green channel via copy to system. Paste into photoshop and it turns out that the red channel was copied. -- I have a gripe with this feature anyway since what you see isn't necessarily what you get, and since it should probably be automatically done when "copy" is done.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-23T15%3A34%3A37-05%3A00&amp;precision=second" title="2012-04-23T15:34:37-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+This exception also happens if you run the Clear or Clear outside legacy plugins on clown<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-24T11%3A17%3A52-05%3A00&amp;precision=second" title="2012-04-24T11:17:52-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Exception fixed, Clear, Clear Outside, and Copy to System now all run.<br />
+</p>
+<p>
+Cannot determine if copy to system works. I have yet to be able to find an app on Linux that will paste anything any data (or else its pasting an all white image).<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-26T10%3A38%3A13-05%3A00&amp;precision=second" title="2012-04-26T10:38:13-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+open clown and then copy to system. Exception thrown (listed below). Note that the exception line is the same as the show lut exception. Both of them do stuff like this:<br />
+</p>
+<p>
+Image img = IJ.getInstance().createImage(w, h);<br />
+Graphics g = img.getGraphics();<br />
+</p>
+<p>
+And the returned img is null thus causing the exception on the getGraphics() call.<br />
+</p>
+<p>
+See also ticket <a class="closed ticket" href="/ticket/966" title="defect: Image &gt; Color &gt; Show LUT exceptions out (closed: fixed)">#966</a>.<br />
+</p>
+<p>
+java.lang.NullPointerException<br />
+</p>
+<blockquote>
+<p>
+at ij.plugin.Clipboard.getTransferData(Clipboard.java:139)<br />
+at sun.awt.datatransfer.DataTransferer.translateTransferable(DataTransferer.java:1161)<br />
+at sun.awt.datatransfer.DataTransferer$6.run(DataTransferer.java:2208)<br />
+at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:226)<br />
+at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:647)<br />
+at java.awt.EventQueue.access$000(EventQueue.java:96)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:608)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:606)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:105)<br />
+at java.awt.EventQueue.dispatchEvent(EventQueue.java:617)<br />
+at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:275)<br />
+at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:200)<br />
+at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:190)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:185)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:177)<br />
+at java.awt.EventDispatchThread.run(EventDispatchThread.java:138)<br />
+</p>
+</blockquote>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2012-04-26T10%3A39%3A17-05%3A00&amp;precision=second" title="2012-04-26T10:39:17-05:00 in Timeline">7 years</a> ago
+                      by bdezonia
+                    (<a href="/ticket/1134?cversion=0&amp;cnum_hist=4#comment:4">previous</a>)
+                    (<a href="/ticket/1134?action=comment-diff&amp;cnum=4&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-26T10%3A53%3A33-05%3A00&amp;precision=second" title="2012-04-26T10:53:33-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I've verified that code that gives rise to <a class="closed ticket" href="/ticket/966" title="defect: Image &gt; Color &gt; Show LUT exceptions out (closed: fixed)">#966</a> and <a class="closed ticket" href="/ticket/1134" title="defect: Copy To System broken (closed: fixed)">#1134</a> are the only two places in IJ1 where this is the case.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-26T16%3A14%3A20-05%3A00&amp;precision=second" title="2012-04-26T16:14:20-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta2</em> to <em>imagej-2.0.0-beta3</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-27T11%3A11%3A59-05%3A00&amp;precision=second" title="2012-04-27T11:11:59-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+With 3db7276d884c87dba281274097094fecc3f79951 Copy To System functionality replaced by pure IJ2 plugin.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-05-18T12%3A21%3A49-05%3A00&amp;precision=second" title="2012-05-18T12:21:49-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta3</em> to <em>imagej-2.0.0-beta2</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1134?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1134?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1134?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

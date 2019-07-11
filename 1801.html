@@ -1,0 +1,520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1801 (Brightness/Contrast uses fractions)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1800" title="Ticket #1800" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1801?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1801?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1801?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1802" title="Ticket #1802" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="4738efa09abb7501969b31db";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1801, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1800" title="Ticket #1800">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1802" title="Ticket #1802">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1801">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1801">Ticket #1801</a>
+          <span class="status">(closed defect: moved)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2013-04-12T14%3A09%3A42-05%3A00&amp;precision=second" title="2013-04-12T14:09:42-05:00 in Timeline">6 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-07-31T11%3A34%3A25-05%3A00&amp;precision=second" title="2013-07-31T11:34:25-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Brightness/Contrast uses fractions</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=curtis">curtis</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="milestone" href="/milestone/imagej2-b8-analysis">imagej2-b8-analysis</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Analysis+Plugins">Analysis Plugins</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+              G.Landini@…, Michael.Cammer@…, <a href="/query?status=!closed&amp;cc=~curtis">curtis</a>
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="assigned" href="/ticket/1100" title="Improve Brightness and Contrast functionality [analysis]">#1100</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+      <span class="lastmod" title="2013-04-12 19:18:03.337393+00:00">
+        (last modified by bdezonia)
+        (<a href="/ticket/1801?action=diff&amp;version=2">diff</a>)
+      </span>
+    </h3>
+    <div class="searchable">
+      <p>
+In the imagej devel maling list Gabriel Landini noted the following issues with the Brightness/Contrast plugin:<br />
+</p>
+<p>
+Minimum and maximum return fractional values for an 8 bit LUT. Is that right?<br />
+</p>
+<p>
+Are the Brightness and Contrast values (0-100?) the best scale resolution to use?. I think that having 100 units controlling LUTs with 256 values at least for 8 bit images will create unnecessary hassle (like the fractional values mentioned above). I can't see any advantage on 0-100 vs 0-255 (but maybe there is some reason?).<br />
+</p>
+<p>
+Also Michael Cammer mentioned elsewhere:<br />
+</p>
+<p>
+the values displayed in the min/max bars have decimal values but the images we have are 16 bit integer.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-12T14%3A15%3A16-05%3A00&amp;precision=second" title="2013-04-12T14:15:16-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Cc</strong>
+        <em>Michael.Cammer@…</em>, <em>curtis</em> added
+    </li><li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/1801?action=diff&amp;version=1">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+After discussion between bdezonia and ctrueden we think the fractional display is okay. IJ1 is doing the same thing but does not have numeric fields that communicate this is the case. We could always display numbers without trailing fractions but that would be a problem for floating point datasets. If people object with leaving it as it is please chime in.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-12T14%3A18%3A03-05%3A00&amp;precision=second" title="2013-04-12T14:18:03-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/1801?action=diff&amp;version=2">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-12T14%3A19%3A27-05%3A00&amp;precision=second" title="2013-04-12T14:19:27-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Also note that 0-100 scale supports all data types. If we didn't have a displayable field for min/max this would be a nonissue (and scale could go to 1000 for finner granularity).<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-13T03%3A27%3A19-05%3A00&amp;precision=second" title="2013-04-13T03:27:19-05:00 in Timeline">6 years</a> ago by landinig
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Hm... I appreciate that this would make it the same for all image types and that it might not matter when you adjust a picture where intensity units are not particular important (a family photo or similar). <br />
+But I do not think that an arbitrary (0-100 or 0-1000) range for contrast and brightness would be useful or intuitive for images with "data".<br />
+</p>
+<p>
+Let's suppose I have an image coded with values between 306 and 799 and I want to make a false colour image within that range, or any other range where I want the LUT 0 and 255 values coincide to particular pixel values. Currently you cannot do that, but you can (within the resolution of the LUT values) in the IJ1 approach. It is important to know the values (not the %) of the LUT being mapped.<br />
+</p>
+<p>
+Can I humbly suggest to just replicate the B&amp;C dialog as in IJ1?  <br />
+</p>
+<p>
+It would be useful to have a "Reset" button to return to the original image state.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-15T09%3A52%3A57-05%3A00&amp;precision=second" title="2013-04-15T09:52:57-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>bdezonia</em> to <em>curtis</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>reviewing</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-04T12%3A43%3A26-05%3A00&amp;precision=second" title="2013-06-04T12:43:26-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej2-b7-ndim-data</em> to <em>imagej2-b8-analysis</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-24T15%3A20%3A55-05%3A00&amp;precision=second" title="2013-06-24T15:20:55-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I am reviewing IJ2's brightness/contrast logic, and I am afraid I do not understand what landinig is saying in comment 4 above. Currently, you can explictly assign the min/max display range to whatever values you want (not a percentage). The percentage only comes in to play with the Brightness and Contrast values -- not the Minimum or Maximum.<br />
+</p>
+<p>
+My question is: why does it matter what the granularity of the B&amp;C parameters are? Having them range from 0-255 for 8-bit still seems completely arbitrary to me. All they do is adjust the slope and offset of a line function; to my knowledge, there is no useful 1-to-1 mapping between B&amp;C values versus data range. Or do I misunderstand?<br />
+</p>
+<p>
+Thanks for any insight!<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2013-06-24T15%3A21%3A22-05%3A00&amp;precision=second" title="2013-06-24T15:21:22-05:00 in Timeline">6 years</a> ago
+                      by curtis
+                    (<a href="/ticket/1801?cversion=0&amp;cnum_hist=7#comment:7">previous</a>)
+                    (<a href="/ticket/1801?action=comment-diff&amp;cnum=7&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-24T16%3A46%3A33-05%3A00&amp;precision=second" title="2013-06-24T16:46:33-05:00 in Timeline">6 years</a> ago by landinig
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Hi Curtis,<br />
+I can't remember exactly why I made that comment! I think it was that if the granularity of min and max was not integer on integer images, then the LUT might not be easily guaranteed to be in the right place? i.e. are the boundaries of the LUT falling where I think they are? With integer images in IJ1 I think we do (although not in 32 bit images).<br />
+I had a look at beta-7 and now I see that the min and max *could* be made integer if input by hand, but it is not handy to do all by typing and pressing the increment buttons AND without an histogram to return a visual cue. In IJ1 you could set the B/C and min/max with sliders interacting with the histogram. You can't in IJ2.<br />
+</p>
+<p>
+I suspect that other users will miss the sliders too. I do not feel the increment buttons are practical compared to sliders to make interactive adjustments with the mouse (you have to go through every number between 0 and 70 to set he min to 70!). Having a slider AND a editable box (and the increment buttons if needed) would be the best of both worlds.<br />
+</p>
+<p>
+For example since there is no histogram shown either, it makes it difficult to know how much data we leave out of the window defined by min and max so currently in IJ2 I can't tell what I am really adjusting. Having a "normal" histogram open does not help either because it does not show the LUT line/range like IJ1 does. That is why I suggested to replicate the behaviour of IJ1 (really I can't think of a reason to do it differently).<br />
+</p>
+<p>
+Hope my comments are useful and thanks for all the effort being put in IJ2.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-07-03T16%3A24%3A30-05%3A00&amp;precision=second" title="2013-07-03T16:24:30-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I'm not clear on what this ticket is really about anymore. Today I added a histogram to the dialog that displays the slope line and updates interactively. We have a ticket elsewhere for replacing the incrementers with sliders (<a class="closed ticket" href="/ticket/1803" title="defect: Brightness/Contrast min/max adjusters should be sliders (closed: fixed)">#1803</a>). There is some question as to whether the fractions are a problem or not. Anyone care to propose what to do with this ticket?<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-07-31T11%3A34%3A25-05%3A00&amp;precision=second" title="2013-07-31T11:34:25-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+It should be doable to make the B&amp;C command round min and max values to integers *iff* the dataset is of integer type. Let's close this ticket once we have done that.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2015-02-23T10%3A57%3A47-06%3A00&amp;precision=second" title="2015-02-23T10:57:47-06:00 in Timeline">4 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>reviewing</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>moved</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Migrated to <a class="ext-link" href="https://github.com/imagej/imagej-plugins-commands/issues/13"><span class="icon"> </span>https://github.com/imagej/imagej-plugins-commands/issues/13</a><br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1801?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1801?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1801?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

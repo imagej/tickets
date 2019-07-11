@@ -1,0 +1,1027 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #832 (Integrate the Fiji launcher as new ImageJ2 launcher)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/831" title="Ticket #831" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/832?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/832?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/832?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/833" title="Ticket #833" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="4e467c7cafb4722d52650f1c";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 832, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/831" title="Ticket #831">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/833" title="Ticket #833">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/832">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/832">Ticket #832</a>
+          <span class="status">(closed enhancement: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2011-10-18T15%3A27%3A08-05%3A00&amp;precision=second" title="2011-10-18T15:27:08-05:00 in Timeline">8 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-05-13T13%3A08%3A37-05%3A00&amp;precision=second" title="2013-05-13T13:08:37-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Integrate the Fiji launcher as new ImageJ2 launcher</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=dscho">dscho</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=dscho">dscho</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b1-initial">imagej2-b1-initial</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Core">Core</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+              <a class="closed" href="/ticket/488" title="Launcher - Memory Limit">#488</a>
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/1008" title="Migrate infrastructure from Fiji to ImageJ2">#1008</a>, <a class="closed" href="/ticket/1031" title="Move the sources of the ImageJ launcher from Fiji's repository to ...">#1031</a>, <a class="closed" href="/ticket/1085" title="Build &amp; deploy the ImageJ Launcher only when the relevant source code ...">#1085</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+The Fiji launcher is needed for the updating mechanism to work properly, as you must not overwrite .jar files while they are in use (since at least earlier Windows versions were severely limited in file descriptors, the .jar files are not kept open, but are re-opened when needed, i.e. when bytecode was evicted from the cache, leading to weird exceptions due to changed bytes).<br />
+</p>
+<p>
+But the Fiji launcher provides options for much more than just launching Fiji. Let's make these things configurable through external files so that the Launcher is really minimal, and then integrate it into the build process in ImageJ2.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-18T15%3A36%3A27-05%3A00&amp;precision=second" title="2011-10-18T15:36:27-05:00 in Timeline">8 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I think tickets <a class="closed ticket" href="/ticket/487" title="enhancement: Launcher - Splash Screen (closed: fixed)">#487</a> and <a class="closed ticket" href="/ticket/488" title="enhancement: Launcher - Memory Limit (closed: fixed)">#488</a> will be largely solved by such integration.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-20T18%3A24%3A14-05%3A00&amp;precision=second" title="2011-10-20T18:24:14-05:00 in Timeline">8 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Work has begun in fiji.git on that; it's all in the 'ij2-launcher' branch: <a class="ext-link" href="http://fiji.sc/cgi-bin/gitweb.cgi?p=fiji.git;a=shortlog;h=refs/heads/ij2-launcher"><span class="icon"> </span>http://fiji.sc/cgi-bin/gitweb.cgi?p=fiji.git;a=shortlog;h=refs/heads/ij2-launcher</a><br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-01-19T12%3A41%3A54-06%3A00&amp;precision=second" title="2012-01-19T12:41:54-06:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Very close now: the Fiji launcher was renamed to ImageJ and is able to run ImageJ2 already. I'm not quite clear yet how to integrate the thing into the imagej source tree, being native and all, but it is basically working and ready for a beta.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-01-19T13%3A58%3A53-06%3A00&amp;precision=second" title="2012-01-19T13:58:53-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+For an example of native C code structured for compilation by Maven and/or CMake, see <a class="ext-link" href="http://dev.loci.wisc.edu/trac/software/browser/trunk/projects/slim-curve"><span class="icon"> </span>the slim-curve project</a>. This project uses the maven-nar-plugin to bundle the resultant artifact as something consumable by other Maven Java projects. The CMakeLists.txt provides an alternative cross-platform compilation mechanism as well.<br />
+</p>
+<p>
+Would something like this work for the ImageJ launcher code?<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-24T12%3A39%3A38-06%3A00&amp;precision=second" title="2012-02-24T12:39:38-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1008</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-24T12%3A51%3A05-06%3A00&amp;precision=second" title="2012-02-24T12:51:05-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>488</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-27T14%3A56%3A46-06%3A00&amp;precision=second" title="2012-02-27T14:56:46-06:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>accepted</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-27T23%3A09%3A22-06%3A00&amp;precision=second" title="2012-02-27T23:09:22-06:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+The last obstacle to adding this to ImageJ2's repository is that I need to figure out how the Maven native plugin works. For starters, I will probably punt and use the Maven executer plugin instead (calling make, and uploading artifacts manually for all supported platforms, using Maven profiles to prevent compilation on non-matching platforms). When this happens, I will add another ticket to make sure that the native plugin is used eventually, and will figure out how we can still build things using the cross-compile scripts provided by Fiji.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-27T23%3A11%3A30-06%3A00&amp;precision=second" title="2012-02-27T23:11:30-06:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1031</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-23T17%3A16%3A51-05%3A00&amp;precision=second" title="2012-03-23T17:16:51-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Progress: the 'ij-launcher' branch has an initial version of the ImageJ launcher.<br />
+</p>
+<p>
+Notes:<br />
+</p>
+<ul><li>it uses the NAR plugin (<a class="ext-link" href="http://duns.github.com/maven-nar-plugin/"><span class="icon"> </span>http://duns.github.com/maven-nar-plugin/</a>) to compile
+</li><li>maven-nar-plugin was preferred over maven-native-plugin because the latter is apparently not able to compile executables, and more importantly, it seems to not have been developed since an alpha state in 2006
+</li><li>it was only compiled on Linux x86_64 so far (which the NAR plugin calls amd64)
+</li><li>for now, JNI_ENOMEM was hard-coded; this is wrong, I have no idea yet why including jni.h is not enough on my system to have that symbol defined
+</li><li>the future plan is to add support for the other platforms' flags by adding properties for each option and using Maven profiles (yay for profiles! Profiles for president!)
+</li><li>the NAR plugin is nice enough to bundle the platform-dependent components (in this case, the executable) in individual .nar files (which are just .jar files, but do not contain .class files). That will allow us to deploy the artifacts from several different machines, using trusty Jenna Jenkins
+</li><li>in theory, it would be possible to put the ij-launcher.jar sources into the same project, I think, but I'd like to keep the C sources and the Java sources separate for cleanness sake
+</li><li>the launcher is not yet included into the packaging of the imagej2-*.zip
+</li><li>the executable should probably be named ImageJ instead of 'launcher-program' (I still need to discuss with Curtis whether it is okay to name the project/subdirectory 'ImageJ' instead of 'launcher-program')
+</li><li>Since I override the default compiler options, the many compile warnings regarding casts between signed and unsigned variables are hidden for now
+</li><li>I changed ImageJ.c originally in fiji.git, changes are in fiji.git's 'ij-launcher' branch for now but will be merged to 'master' soon (basically, the requirement to define JAVA_HOME and JAVA_LIBRARY_PATH was dropped)
+</li><li>I haven't made up my mind yet whether the launcher should be changed so it can run from target/nar/
+</li></ul><p>
+As always with my work in topic branches, this is very much work in progress and all of the commit might change before being merged into the mainline branch.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-30T19%3A20%3A25-05%3A00&amp;precision=second" title="2012-03-30T19:20:25-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Much progress was made, in particular with non-Linux and non-64-bit builds.<br />
+</p>
+<p>
+In particular, ImageJ.c was adjusted so it can compile without platform-specific #defines. It also learnt how to behave correctly on MacOSX when jars/ is not inside the .app/ directory but alongside.<br />
+</p>
+<p>
+Then came the hardest part: setting up Jenkins to compile all the platforms.<br />
+</p>
+<p>
+1) Windows<br />
+</p>
+<ul><li>A virtual machine was set up with Windows 7 64-bit to run in VirtualBox.
+</li><li>msysGit (the Git for Windows development environment) was installed via the net installer from <a class="ext-link" href="http://msysgit.github.com/"><span class="icon"> </span>http://msysgit.github.com/</a> (*not* Git for Windows which is a barebones Git and lacks in particular the gcc compiler which we need)
+</li><li>Fiji was cloned to <em>/c/fiji/</em>
+</li><li>Fiji was built to get a JDK for Windows 64-bit
+</li><li>In <em>/c/fiji/</em>, <em>java/win32/</em> was cloned to get a JDK for Windows 32-bit
+</li><li>Apache Maven was installed into <em>/c/apache-maven-3.0.4/</em>
+</li><li>Two nodes were added to Jenkins (Jenkins&gt;Manage Jenkins&gt;Manage Nodes&gt;New Node), Win32 and Win64, both with one processor and only taking jobs bound to that node
+</li><li>The slave.jar was downloaded into the Windows machine's <em>/c/fiji/</em> directory using
+<pre class="wiki">curl -O http://jenkins.imagej.net/jnlpJars/slave.jar
+</pre></li><li>The following shell script was installed into <em>/c/fiji/start-jenkins-slave.sh</em>
+<pre class="wiki">#!/bin/sh
+
+MODE=64
+test "win32" = "$1" &amp;&amp; MODE=32
+
+if test 64 = "$MODE"
+then
+        SYSROOT=/src/mingw-w64/sysroot/bin
+        test -x $SYSROOT/gcc.exe ||
+        cp $SYSROOT/x86_64-w64-mingw32-gcc.exe $SYSROOT/gcc.exe
+        export PATH=$SYSROOT:$PATH
+fi
+
+export FIJI_HOME=/c/fiji
+export JAVA_HOME=$FIJI_HOME/java/win$MODE/jdk1.6.0_24
+export MAVEN_HOME=/c/apache-maven-3.0.4
+export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
+JENKINS_URL=http://jenkins.imagej.net/computer/Win$MODE/slave-agent.jnlp
+
+java -Xdebug \
+        -jar "${0%/*}"/slave.jar \
+        -cp $FIJI/jars/jna.jar \
+        -jnlpUrl $JENKINS_URL
+</pre></li><li>To auto-start the nodes upon login, two Shortcuts were created in <em>Start&gt;All Programs&gt;Startup</em> (right mouse click lets you open an Explorer there), with the Target
+<pre class="wiki">c:\msysgit\bin\sh.exe -c "/c/fiji/start-jenkins-slave.sh win32"
+</pre>and
+<pre class="wiki">c:\msysgit\bin\sh.exe -c "/c/fiji/start-jenkins-slave.sh win64"
+</pre>respectively
+</li><li>Auto-Login was enabled via Windows+R, launching "control userpasswords2" and turning off the check box requiring passwords
+</li><li>Still missing:
+<pre class="wiki">VBoxHeadless -s "Win 7 64-bit" -n -m 5998
+</pre>should be started from upstart on the host machine whenever the machine is (re-)booted.
+</li></ul><p>
+2) MacOSX<br />
+</p>
+<ul><li>A virtual machine was set up to run MacOSX in VirtualBox
+</li><li>Maven was upgraded manually to 3.0.4 by unpacking the .zip into <em>/usr/share/java/</em> and relinking <em>/usr/share/maven</em> to it
+</li><li>The user account <em>jenkins</em> was created
+</li><li>The directory <em>/var/jenkins</em> was created and <em>jenkins</em> made owner of it
+</li><li>The file <em>slave.jar</em> was downloaded as for Windows and put into <em>/var/jenkins/</em>
+</li><li>JNA was copied over from a Fiji installation's <em>jars/jna.jar</em> into <em>/var/jenkins/</em> (this might not be strictly necessary, but makes for nicer logs in Finder's <em>Utilities&gt;Console.app</em>)
+</li><li>The following text was written to <em>/Library/LaunchDaemons/jenkins.plist</em>:
+<pre class="wiki">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC -//Apple Computer//DTD PLIST 1.0//EN
+        http://www.apple.com/DTDs/PropertyList-1.0.dtd &gt;
+&lt;plist version="1.0"&gt;
+        &lt;dict&gt;
+                &lt;key&gt;Label&lt;/key&gt;
+                &lt;string&gt;org.jenkins&lt;/string&gt;
+                &lt;key&gt;UserName&lt;/key&gt;
+                &lt;string&gt;jenkins&lt;/string&gt;
+                &lt;key&gt;WorkingDirectory&lt;/key&gt;
+                &lt;string&gt;/var/jenkins&lt;/string&gt;
+                &lt;key&gt;ProgramArguments&lt;/key&gt;
+                &lt;array&gt;
+                        &lt;string&gt;java&lt;/string&gt;
+                        &lt;string&gt;-jar&lt;/string&gt;
+                        &lt;string&gt;slave.jar&lt;/string&gt;
+                        &lt;string&gt;-cp&lt;/string&gt;
+                        &lt;string&gt;jna.jar&lt;/string&gt;
+                        &lt;string&gt;-jnlpUrl&lt;/string&gt;
+                        &lt;string&gt;http://jenkins.imagej.net/computer/MacOSX/slave-agent.jnlp&lt;/string&gt;
+                &lt;/array&gt;
+                &lt;key&gt;KeepAlive&lt;/key&gt;
+                &lt;true/&gt;
+                &lt;key&gt;RunAtLoad&lt;/key&gt;
+                &lt;true/&gt;
+        &lt;/dict&gt;
+&lt;/plist&gt;
+</pre></li><li>The permissions of the plist were set to executable via
+<pre class="wiki">sudo chmod 0755 /Library/LaunchDaemons/jenkins.plist
+</pre></li><li>Still missing:
+<pre class="wiki">VBoxHeadless -s "MacOSX" -n -m 5997
+</pre>should be started from upstart on the host machine whenever the machine is (re-)booted.
+</li></ul><p>
+After the successful setup of the Jenkins nodes:<br />
+</p>
+<ul><li>A Jenkins new job was created, and a <em>Slaves</em> axis was added to the <em>Configuration Matrix</em> checking all the individual nodes.
+</li><li>A Maven build step was added to the Jenkins job, specifying <em>core/launcher/pom.xml</em> as POM
+</li><li>A shell script build step was added to the Jenkins job to compile 32-bit Linux and pre-Leopard MacOSX launchers:
+<pre class="wiki"># also build the 32-bit stuff on MacOSX and Linux
+
+UNAME="$(uname -s)"
+case "$UNAME" in
+Darwin)
+    (cd core/launcher &amp;&amp;
+     mvn -Dos.arch=i386 -P "MacOSX Tiger" -P !"MacOSX Leopard")
+    ;;
+Linux)
+    (cd core/launcher &amp;&amp;
+     export JAVA_HOME=/home/dscho/fiji/java/linux/jdk1.6.0_24 &amp;&amp;
+     export PATH=$JAVA32_HOME/bin:$PATH &amp;&amp;
+     mvn -P "i386-Linux" -P !"amd64-Linux")
+    ;;
+esac
+</pre></li></ul><p>
+Next steps:<br />
+</p>
+<ul><li>make a hacky Jenkins job that deploys the different launchers in one go so that they get the same snapshot version
+</li><li>make sure that the Jenkins nodes are always started
+</li><li>possibly put those Jenkins nodes onto a MacMini rather than this developer's work machine
+</li><li>in the not-so-distant future, patch maven-nar-plugin to be able to allow for a multi-step deployment of the same snapshot version
+</li></ul>
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2012-03-30T19%3A22%3A44-05%3A00&amp;precision=second" title="2012-03-30T19:22:44-05:00 in Timeline">7 years</a> ago
+                      by dscho
+                    (<a href="/ticket/832?cversion=0&amp;cnum_hist=11#comment:11">previous</a>)
+                    (<a href="/ticket/832?action=comment-diff&amp;cnum=11&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-30T20%3A25%3A14-05%3A00&amp;precision=second" title="2012-03-30T20:25:14-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Actually, one rather crucial thing I forgot: On MacOSX, <em><a class="ext-link" href="git://github.com/scijava/cpptasks-parallel"><span class="icon"> </span>git://github.com/scijava/cpptasks-parallel</a></em> must be cloned and installed as <em>jenkins</em> user, otherwise the <em>-arch</em> option is not recognized correctly as a compiler option by the nar plugin.<br />
+</p>
+<p>
+And a not so crucial thing: there is an off-by-one in the nar plugin itself (when writing the <em>nar.properties</em>), so one might want to clone and install <em><a class="ext-link" href="git://github.com/scijava/maven-nar-plugin"><span class="icon"> </span>git://github.com/scijava/maven-nar-plugin</a></em>, too. It is not that critical, because the nar plugin never interprets the <em>nar.properties</em> file.<br />
+</p>
+<p>
+Next steps: deploy our own version of <em>cpptasks-parallel</em> and fix our version of the <em>maven-nar-plugin</em> in our Maven repository.<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2012-04-17T14%3A05%3A35-05%3A00&amp;precision=second" title="2012-04-17T14:05:35-05:00 in Timeline">7 years</a> ago
+                      by curtis
+                    (<a href="/ticket/832?cversion=1&amp;cnum_hist=12#comment:12">previous</a>)
+                    (<a href="/ticket/832?action=comment-diff&amp;cnum=12&amp;version=2">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-13">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:13" class="cnum">
+      <a href="#comment:13">comment:13</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-30T23%3A00%3A03-05%3A00&amp;precision=second" title="2012-03-30T23:00:03-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>accepted</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Oh, another thing I forgot: when launching the Windows slaves that way, the msysGit <em>bin/</em> directories need to be added to the PATH explicitly. In other words, at the beginning, there should be these two lines:<br />
+</p>
+<pre class="wiki">export MSYSGIT_HOME=/c/msysgit
+export PATH=$MSYSGIT_HOME/bin:$MSYSGIT_HOME/mingw/bin:$PATH
+</pre><p>
+In total, the script <em>start-jenkins-slave.sh</em> now reads therefore:<br />
+</p>
+<pre class="wiki">#!/bin/sh
+
+export MSYSGIT_HOME=/c/msysgit
+export PATH=$MSYSGIT_HOME/bin:$MSYSGIT_HOME/mingw/bin:$PATH
+
+MODE=64
+test "win32" = "$1" &amp;&amp; MODE=32
+
+if test 64 = "$MODE"
+then
+        SYSROOT=/src/mingw-w64/sysroot/bin
+        test -x $SYSROOT/gcc.exe ||
+        cp $SYSROOT/x86_64-w64-mingw32-gcc.exe $SYSROOT/gcc.exe
+        export PATH=$SYSROOT:$PATH
+fi
+
+export FIJI_HOME=/c/fiji
+export JAVA_HOME=$FIJI_HOME/java/win$MODE/jdk1.6.0_24
+export MAVEN_HOME=/c/apache-maven-3.0.4
+export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
+JENKINS_URL=http://jenkins.imagej.net/computer/Win$MODE/slave-agent.jnlp
+
+java -Xdebug \
+        -jar "${0%/*}"/slave.jar \
+        -cp $FIJI/jars/jna.jar \
+        -jnlpUrl $JENKINS_URL
+</pre><p>
+And then there are some good news!<br />
+</p>
+<p>
+The Jenkins job to collect all the ImageJ Launcher artifacts from the slaves is basically working (the ImageJ-Launcher job is configured to publish all files in core/launcher/target/ and the Deploy-ImageJ-Launcher job re-uses ImageJ-Launcher's workspace to wrap everything up and deploys all the platform-specific files nicely).<br />
+</p>
+<p>
+As even my concoction to assemble the files in the correct places for the application.zip using the maven-dependency-plugin seems to work, I dcommitted everything and deleted the topic branch.<br />
+</p>
+<p>
+Case closed (for the moment).<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-14">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:14" class="cnum">
+      <a href="#comment:14">comment:14</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-30T23%3A20%3A52-05%3A00&amp;precision=second" title="2012-03-30T23:20:52-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+One piece of information that would have saved me a lot of grief, and which I therefore reproduce here to avoid IJ2 developers from having to repeat my experience:<br />
+</p>
+<p>
+When binding jobs (which are sometimes also called "projects" in Jenkins speak) to nodes (which are sometimes also called "slaves" in Jenkins speak) by adding a <em>Slaves</em> axis in the configuration matrix of a job, the console output of the slave can never be seen in the Console Output of the job itself. Instead, one has to click on the date in the build history, then click on the links under the <em>Configuration</em> section on the right-hand side (the titles correspond to the node names *except* if the job is bound to a single node in which case the link title is confusingly changed to <em>default</em>), and then again on the date in the build history.<br />
+</p>
+<p>
+It does make sense once one realises that the set of bound nodes can vary over the build history, and once one keeps in mind that the build information is only copied into the subdirectory <em>configurations/</em> of the job workspace when there are multiple bound nodes.<br />
+</p>
+<p>
+Before one realises those two things, it does not make sense at all.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-15">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:15" class="cnum">
+      <a href="#comment:15">comment:15</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-02T12%3A26%3A50-05%3A00&amp;precision=second" title="2012-04-02T12:26:50-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1085</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-15">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:15" class="cnum">
+      <a href="#comment:15">comment:15</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-02T12%3A46%3A41-05%3A00&amp;precision=second" title="2012-04-02T12:46:41-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Another setting I had to make in the Windows VM is to choose "Never" in Control Panel's "Choose how to check for solutions". Otherwise a crash in, say, gcc.exe will just open an interactive dialog and hold any Jenkins job.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-16">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:16" class="cnum">
+      <a href="#comment:16">comment:16</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-02T15%3A16%3A14-05%3A00&amp;precision=second" title="2012-04-02T15:16:14-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+It would have been too easy if the setup worked, would it not?<br />
+</p>
+<p>
+Apparently Windows (or at least my small VM) has problems to run two nodes in parallel. It even blocked upon a gcc.exe crash in spite of choosing "Never" for "how to check for solutions".<br />
+</p>
+<p>
+So I had to make the Windows node build 64-bit and 32-bit consecutively. As a consequence, there is only one Shortcut left in <em>Start Menu&gt;Startup</em> which calls start-jenkins-slave.sh that now reads:<br />
+</p>
+<pre class="wiki">#!/bin/sh
+
+export MSYSGIT_HOME=/c/msysgit
+export PATH=$MSYSGIT_HOME/bin:$MSYSGIT_HOME/mingw/bin:$PATH
+
+SYSROOT=/src/mingw-w64/sysroot/bin
+test -x $SYSROOT/gcc.exe ||
+cp $SYSROOT/x86_64-w64-mingw32-gcc.exe $SYSROOT/gcc.exe
+export PATH=$SYSROOT:$PATH
+
+export FIJI_HOME=/c/fiji
+export JAVA_HOME=$FIJI_HOME/java/win64/jdk1.6.0_24
+export MAVEN_HOME=/c/apache-maven-3.0.4
+export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH
+
+java -Xdebug \
+	-jar "${0%/*}"/slave.jar \
+	-cp $FIJI/jars/jna.jar \
+	-jnlpUrl http://jenkins.imagej.net/computer/Windows/slave-agent.jnlp
+</pre><p>
+And the configuration in Jenkins changed: there is now only one node called <em>Windows</em> (instead of a <em>Win64</em> and a <em>Win32</em> one), and the shell script build step (executed after the Maven build step building the 64-bit Launchers) reads like this:<br />
+</p>
+<pre class="wiki"># also build the 32-bit stuff on MacOSX and Linux
+
+UNAME="$(uname -s)"
+case "$UNAME" in
+Darwin)
+    (cd core/launcher &amp;&amp;
+     mvn -Dos.arch=i386 -P "MacOSX Tiger" -P !"MacOSX Leopard")
+    ;;
+Linux)
+    (cd core/launcher &amp;&amp;
+     export JAVA_HOME=/home/dscho/fiji/java/linux/jdk1.6.0_24 &amp;&amp;
+     export PATH=$JAVA_HOME/bin:$PATH &amp;&amp;
+     mvn -P "i386-Linux" -P !"amd64-Linux")
+    ;;
+MINGW*)
+    (cd core/launcher &amp;&amp;
+     export JAVA_HOME=$(cd /c/fiji/java/win32/jdk1.6.0_24 &amp;&amp; pwd -W) &amp;&amp;
+     export PATH=/c/msysgit/mingw/bin:/c/msysgit/bin:$JAVA_HOME/bin:$PATH &amp;&amp;
+     mvn -Dos.arch=x86 -X -e)
+esac
+</pre>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-17">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:17" class="cnum">
+      <a href="#comment:17">comment:17</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-05-04T02%3A19%3A31-05%3A00&amp;precision=second" title="2012-05-04T02:19:31-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I finally added the startup configuration to the machine running the VMs: it is an Ubuntu machine, so it provides upstart (a SYSV-compatible init replacement). The configurations live in <em>/etc/init/jenkins-macosx.conf</em> and <em>/etc/init/jenkins-windows.conf</em>, respectively:<br />
+</p>
+<pre class="wiki"># The MacOSX VM that connects to jenkins.imagej.net as MacOSX node
+
+description "Jenkins MacOSX node"
+
+respawn
+start on filesystem
+stop on runlevel [!2345]
+
+exec sudo -u gene099 VBoxHeadless -n -m 5977 -o no-password -s MacOSX
+</pre><p>
+The Windows node configuration is a copy-edited version thereof.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-18">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:18" class="cnum">
+      <a href="#comment:18">comment:18</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-06-06T15%3A39%3A41-05%3A00&amp;precision=second" title="2012-06-06T15:39:41-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+After an OS upgrade, JAVA_HOME was no longer properly set on the master (and setting the environment variable globally would override the nodes' settings erroneously).<br />
+</p>
+<p>
+So now we build the 64-bit launchers also via a shell script that calls <em>mvn</em> explicitly (and that sets JAVA_HOME if <em>$(uname -s)</em> is equal to <em>Linux</em>).<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-19">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:19" class="cnum">
+      <a href="#comment:19">comment:19</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-06-21T20%3A48%3A17-05%3A00&amp;precision=second" title="2012-06-21T20:48:17-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Another thing: the MacOSX guest system uses outrageously many CPU cycles when run inside VirtualBox. The secret is to remove a kernel extension from the MacOSX guest: simply<br />
+</p>
+<pre class="wiki">rm -rf /System/Library/Extensions/AppleIntelCPUPowerManagement.kext
+</pre><p>
+brings down the CPU load from 100% (on the one core on which I allowed VirtualBox to run the MacOSX guest) to ~8%.<br />
+</p>
+<p>
+This tip came from <a class="ext-link" href="https://forums.virtualbox.org/viewtopic.php?f=22&amp;t=31176#p139617"><span class="icon"> </span>https://forums.virtualbox.org/viewtopic.php?f=22&amp;t=31176#p139617</a> which also warns that even a minor MacOSX update (i.e. not only from 10.6 to 10.7 but already from 10.6.8 to 10.6.9) might bring back the bad behavior.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-20">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:20" class="cnum">
+      <a href="#comment:20">comment:20</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-06-22T10%3A49%3A48-05%3A00&amp;precision=second" title="2012-06-22T10:49:48-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Yet another thing: when rebooting the machine, upstart tried to run the virtual machines too early. The trick is to change the <strong>start on</strong> line in <em>/etc/init/jenkins-{macosx,windows}.conf</em> to<br />
+</p>
+<pre class="wiki">start on net-device-up
+</pre><p>
+(I think, will test on next reboot ;-)<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-21">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:21" class="cnum">
+      <a href="#comment:21">comment:21</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-07-09T01%3A06%3A11-05%3A00&amp;precision=second" title="2012-07-09T01:06:11-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+You did not think that we were done with this ticket yet, did you?<br />
+</p>
+<p>
+No, we need the following in <em>/etc/init/jenkins-macosx.conf</em>:<br />
+</p>
+<pre class="wiki">pre-stop script
+        sudo -u gene099 VBoxManage controlvm "MacOSX" poweroff
+        sleep 35
+end script
+</pre><p>
+and the following in <em>/etc/init/jenkins-windows.conf</em>:<br />
+</p>
+<pre class="wiki">pre-stop script
+        sudo -u gene099 VBoxManage controlvm "Windows 7 64-bit" acpipowerbutton
+        sleep 35
+end script
+</pre><p>
+For good measure, I also put in a<br />
+</p>
+<pre class="wiki">respawn limit 5 10
+start on (local-filesystems and net-device-up IFACE=eth0)
+</pre>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-22">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:22" class="cnum">
+      <a href="#comment:22">comment:22</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-05-13T13%3A08%3A37-05%3A00&amp;precision=second" title="2013-05-13T13:08:37-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+So I moved the Jenkins Node VM from my machine to the new Mac Mini. It is started automatically upon reboot and allows access via RDP (xfreerdp is what I recommend on Linux), password are the five smallest natural numbers, in ascending order. Since it is on <tt>cyber.microscopy.wisc.edu</tt> (i.e. behind the firewall), only LOCI can access it.<br />
+</p>
+<p>
+The file responsible for making it be started automatically is in <em>/Library/LaunchDaemons/jenkins-vm.plist</em> and looks like this:<br />
+</p>
+<pre class="wiki">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC -//Apple Computer//DTD PLIST 1.0//EN
+	http://www.apple.com/DTDs/PropertyList-1.0.dtd &gt;
+&lt;plist version="1.0"&gt;
+	&lt;dict&gt;
+		&lt;key&gt;Label&lt;/key&gt;
+		&lt;string&gt;org.jenkins.vm&lt;/string&gt;
+		&lt;key&gt;UserName&lt;/key&gt;
+		&lt;string&gt;LOCI&lt;/string&gt;
+		&lt;key&gt;WorkingDirectory&lt;/key&gt;
+		&lt;string&gt;/Users/LOCI&lt;/string&gt;
+		&lt;key&gt;ProgramArguments&lt;/key&gt;
+		&lt;array&gt;
+			&lt;string&gt;VBoxHeadless&lt;/string&gt;
+			&lt;string&gt;-s&lt;/string&gt;
+			&lt;string&gt;MacOSX Jenkins Node&lt;/string&gt;
+		&lt;/array&gt;
+		&lt;key&gt;KeepAlive&lt;/key&gt;
+		&lt;true/&gt;
+		&lt;key&gt;RunAtLoad&lt;/key&gt;
+		&lt;true/&gt;
+	&lt;/dict&gt;
+&lt;/plist&gt;
+</pre>
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/832?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/832?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/832?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

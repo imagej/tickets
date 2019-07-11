@@ -1,0 +1,613 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #672 (Delete Axis can throw a concurrent modification exception)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/671" title="Ticket #671" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/672?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/672?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/672?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/673" title="Ticket #673" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="be2c69ab873cc29c2fb7e02a";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 672, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/671" title="Ticket #671">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/673" title="Ticket #673">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/672">Ticket #672</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2011-07-15T17%3A41%3A26-05%3A00&amp;precision=second" title="2011-07-15T17:41:26-05:00 in Timeline">8 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2011-09-06T14%3A40%3A28-05%3A00&amp;precision=second" title="2011-09-06T14:40:28-05:00 in Timeline">8 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Delete Axis can throw a concurrent modification exception</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej-2.0-alpha5">imagej-2.0-alpha5</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Core">Core</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+Open Organ of Corti<br />
+Use Image :: Stacks :: Delete Axis plugin and delete channel axis<br />
+An exception is thrown:<br />
+</p>
+<p>
+Caused by: java.util.ConcurrentModificationException<br />
+</p>
+<blockquote>
+<p>
+at java.util.HashMap$HashIterator.nextEntry(HashMap.java:793)<br />
+at java.util.HashMap$KeyIterator.next(HashMap.java:828)<br />
+at imagej.ui.swing.display.SwingDisplayWindow.createSliders(SwingDisplayWindow.java:325)<br />
+at imagej.ui.swing.display.SwingDisplayWindow.access$2(SwingDisplayWindow.java:280)<br />
+at imagej.ui.swing.display.SwingDisplayWindow$2.onEvent(SwingDisplayWindow.java:208)<br />
+at imagej.ui.swing.display.SwingDisplayWindow$2.onEvent(SwingDisplayWindow.java:1)<br />
+at org.bushe.swing.event.ThreadSafeEventService.publish(ThreadSafeEventService.java:971)<br />
+</p>
+</blockquote>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-07-29T14%3A03%3A37-05%3A00&amp;precision=second" title="2011-07-29T14:03:37-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>biweekly-2011: Jul-18 to Jul-29</em> to <em>biweekly-2011: Aug-01 to Aug-12</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-07-29T15%3A15%3A36-05%3A00&amp;precision=second" title="2011-07-29T15:15:36-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li><li>
+      <strong>Milestone</strong>
+        changed from <em>biweekly-2011: Aug-01 to Aug-12</em> to <em>biweekly-2011: Jul-18 to Jul-29</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Fixed in 9baf85e833863fbbf8573ead3ae91803d77c330c<br />
+</p>
+<p>
+Had to disable some event handling code<br />
+Left explanation and original code commented out for easy restoration if necessary<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-01T12%3A20%3A48-05%3A00&amp;precision=second" title="2011-08-01T12:20:48-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>closed</em> to <em>reopened</em>
+    </li><li>
+      <strong>Resolution</strong>
+        <em>fixed</em> deleted
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Still an issue:<br />
+</p>
+<p>
+Organ of Corti<br />
+Delete Data: Z axis, pos 4, num slice 6<br />
+Delete Axis: Channel axis, keep position 1<br />
+</p>
+<p>
+Exception below:<br />
+</p>
+<p>
+Note that because of exception channel slider does not go away. If you increment Z the sliders fix up.<br />
+</p>
+<p>
+This problem has to do with multiple people tracking DatasetRestructured and eventually calling redo layout() at the same time (where it dies in createSliders()). <br />
+</p>
+<p>
+Must find the minimal tracking of restructuring or redolayout()ing. Or make createSliders() synchronized.<br />
+</p>
+<p>
+Caused by: java.util.ConcurrentModificationException<br />
+</p>
+<blockquote>
+<p>
+at java.util.HashMap$HashIterator.nextEntry(HashMap.java:793)<br />
+at java.util.HashMap$KeyIterator.next(HashMap.java:828)<br />
+at imagej.ui.swing.display.SwingDisplayWindow.createSliders(SwingDisplayWindow.java:333)<br />
+at imagej.ui.swing.display.SwingDisplayWindow.redoLayout(SwingDisplayWindow.java:163)<br />
+at imagej.ui.swing.display.SwingImageDisplay.update(SwingImageDisplay.java:169)<br />
+at imagej.display.AbstractDisplayView$2.onEvent(AbstractDisplayView.java:176)<br />
+at imagej.display.AbstractDisplayView$2.onEvent(AbstractDisplayView.java:1)<br />
+at org.bushe.swing.event.ThreadSafeEventService.publish(ThreadSafeEventService.java:971)<br />
+</p>
+</blockquote>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-01T12%3A21%3A16-05%3A00&amp;precision=second" title="2011-08-01T12:21:16-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>biweekly-2011: Jul-18 to Jul-29</em> to <em>imagej-2.0-alpha5</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-01T13%3A51%3A26-05%3A00&amp;precision=second" title="2011-08-01T13:51:26-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Curtis is committing some code in the Swing dependent classes that utilizes SwingUtilities.invokeLater(). He will commit soon. It did not remove all errors though. The above scenario still failed 90% of the time. Wating for Curtis to commit after alpha 4 release and will retest then.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-02T11%3A39%3A56-05%3A00&amp;precision=second" title="2011-08-02T11:39:56-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Harder to recreate now. But am able to with this sequence:<br />
+</p>
+<p>
+Open Mitosis<br />
+Delete Axis, Channel, 1<br />
+</p>
+<p>
+Exception:<br />
+</p>
+<p>
+Exception in thread "AWT-EventQueue-0" java.util.ConcurrentModificationException<br />
+</p>
+<blockquote>
+<p>
+at java.util.HashMap$HashIterator.nextEntry(HashMap.java:793)<br />
+at java.util.HashMap$KeyIterator.next(HashMap.java:828)<br />
+at imagej.ui.swing.display.SwingDisplayWindow.createSliders(SwingDisplayWindow.java:340)<br />
+at imagej.ui.swing.display.SwingDisplayWindow.access$1(SwingDisplayWindow.java:294)<br />
+at imagej.ui.swing.display.SwingDisplayWindow$1.run(SwingDisplayWindow.java:168)<br />
+at java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:209)<br />
+at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:677)<br />
+at java.awt.EventQueue.access$000(EventQueue.java:85)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:638)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:636)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:87)<br />
+at java.awt.EventQueue.dispatchEvent(EventQueue.java:647)<br />
+at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:296)<br />
+at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:211)<br />
+at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:201)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:196)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:188)<br />
+at java.awt.EventDispatchThread.run(EventDispatchThread.java:122)<br />
+</p>
+</blockquote>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-02T13%3A24%3A50-05%3A00&amp;precision=second" title="2011-08-02T13:24:50-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Cannot find issue yet. It is failing trying to get the keySet() of the axisSliders Map. axisSliders is a private variable with no public accessors. There is an axis position event handler that can use axisSliders but by debugging I've determined it never gets called.<br />
+</p>
+<p>
+Otherwise the axisSliders Map is only accessed by createSliders(). By debugging and also using print statements I can determine that createSliders() is only getting called once (!!!??). So can't see how concurrency is an issue.<br />
+</p>
+<p>
+Making createSliders() synchronized no longer fixes the issue either.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-10T14%3A44%3A50-05%3A00&amp;precision=second" title="2011-08-10T14:44:50-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Summary</strong>
+        changed from <em>Delete Axis can throw a concurrent mofication exception</em> to <em>Delete Axis can throw a concurrent modification exception</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-18T15%3A03%3A16-05%3A00&amp;precision=second" title="2011-08-18T15:03:16-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>reopened</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Making the axisSliders instance variable a ConcurrentHashMap rather than a regular HashMap fixes the problem. This is a hack which I've documented in the file and referenced this bug number.<br />
+</p>
+<p>
+The sequence that fails if regular HashMap but works if ConcurrentHashMap:<br />
+</p>
+<p>
+Open Mitosis<br />
+Delete Axis (Channel axis, keep hyperplane 1)<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-08-18T15%3A23%3A46-05%3A00&amp;precision=second" title="2011-08-18T15:23:46-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Forgot to mention revision of fix: 7a361035fac48264c6ff37c75f44cfe282717f1f<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-06T12%3A02%3A53-05%3A00&amp;precision=second" title="2011-09-06T12:02:53-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>closed</em> to <em>reopened</em>
+    </li><li>
+      <strong>Resolution</strong>
+        <em>fixed</em> deleted
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+As a result of the recent display refactoring this bug has been resurrected. I have noted where the missing code is (axis sliders declaration needs to be ConcurrentHashMap) and have queried Grant as to whether any more code is missing.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-06T14%3A40%3A28-05%3A00&amp;precision=second" title="2011-09-06T14:40:28-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>reopened</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+refixed with cec28bc4630ec860ca5923887f975a5ccc0ce53d<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/672?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/672?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/672?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

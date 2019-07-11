@@ -1,0 +1,956 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #216 (New ImgLib container types for use with imglib-io)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/215" title="Ticket #215" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/216?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/216?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/216?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/217" title="Ticket #217" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="4f624121d4f3092205cad4fe";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 216, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/215" title="Ticket #215">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/217" title="Ticket #217">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/216">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/216">Ticket #216</a>
+          <span class="status">(closed task: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2010-09-20T14%3A34%3A51-05%3A00&amp;precision=second" title="2010-09-20T14:34:51-05:00 in Timeline">9 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-06-07T15%3A15%3A34-05%3A00&amp;precision=second" title="2013-06-07T15:15:34-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">New ImgLib container types for use with imglib-io</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=curtis">curtis</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=curtis">curtis</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=critical">critical</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b7-ndim-data">imagej2-b7-ndim-data</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=I%2FO">I/O</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=non-issue">non-issue</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/20" title="Efficient support for very large image data">#20</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+The bf-imglib adapter currently uses an ArrayContainerFactory to generate the container. We would like to have several new container types:<br />
+</p>
+<blockquote>
+<p>
+1) an array container type using one byte array per plane—useful for efficient Bio-Formats import, and useful for tools needing byte arrays (e.g., BufferedImage Java3D texturing by reference?)<br />
+2) an array container type using one matching primitive array per plane—useful for efficient access to pixels in ImageJ (e.g., getPixels)<br />
+3) as 1, but with an IFormatReader reference reading planes on demand—useful for efficient memory use for tools wanting matching primitive arrays (e.g., virtual stacks in ImageJ)<br />
+4) as 2, but with an IFormatReader reference reading planes on demand—useful for efficient memory use<br />
+</p>
+</blockquote>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-09-27T12%3A41%3A30-05%3A00&amp;precision=second" title="2010-09-27T12:41:30-05:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>biweekly-2010: Sep-20 to Oct-01</em> to <em>biweekly-2011: Feb-14 to Feb-25</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Type 2 now exists as Planar*Array in <a class="ext-link" href="http://code.imagej.net/trac/imglib/intertrac/source%3Aimglib/src/main/java/mpicbg/imglib/container/basictypecontainer/array%3Frev%3D849921c998f5deec9f7e8e4ea687cc55dcd3e509" title="source:imglib/src/main/java/mpicbg/imglib/container/basictypecontainer/array?rev=849921c998f5deec9f7e8e4ea687cc55dcd3e509 in Imglib"><span class="icon"> </span>mpicbg/imglib/container/basictypecontainer/array</a> of the imglib maven branch.<br />
+</p>
+<p>
+The other types are less urgent so I am pushing this ticket to a later milestone.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-02-15T10%3A21%3A56-06%3A00&amp;precision=second" title="2011-02-15T10:21:56-06:00 in Timeline">8 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>curtis</em> to <em>bdezonia</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>assigned</em>
+    </li><li>
+      <strong>Summary</strong>
+        changed from <em>New imglib container types for use with bf-imglib</em> to <em>New ImgLib container types for use with imglib-io</em>
+    </li><li>
+      <strong>Component</strong>
+        changed from <em>bio-formats</em> to <em>imagej-io</em>
+    </li><li>
+      <strong>Milestone</strong>
+        changed from <em>biweekly-2011: Feb-14 to Feb-25</em> to <em>biweekly-2011: Mar-14 to Mar-25</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+The imglib-io project (formerly bf-imglib) uses Bio-Formats to import image data using PlanarContainers (<a class="closed ticket" href="/ticket/2" title="task: Prioritize ImageJ core classes for unit testing (closed: fixed)">#2</a> above). We continue to need <a class="closed ticket" href="/ticket/3" title="feature: Write unit tests for ImageJ1 core classes (closed: fixed)">#3</a> or <a class="closed ticket" href="/ticket/4" title="task: Write tests for external dependent projects (closed: wontfix)">#4</a> in particular, so that Bio-Formats can deliver planes on demand from disk. This will allow us to replicate ImageJ1's "virtual stack" functionality, but more flexibly.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-02-15T10%3A37%3A09-06%3A00&amp;precision=second" title="2011-02-15T10:37:09-06:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>assigned</em> to <em>accepted</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-03-14T12%3A50%3A00-05%3A00&amp;precision=second" title="2011-03-14T12:50:00-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>biweekly-2011: Mar-14 to Mar-25</em> to <em>biweekly-2011: Mar-28 to Apr-08</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-04-25T11%3A35%3A40-05%3A00&amp;precision=second" title="2011-04-25T11:35:40-05:00 in Timeline">8 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>biweekly-2011: Apr-11 to Apr-22</em> to <em>biweekly-2011: Jun-06 to Jun-17</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+This type of work goes hand in hand with tickets <a class="closed ticket" href="/ticket/19" title="feature: Efficient support for very large image planes (closed: moved)">#19</a> and <a class="closed ticket" href="/ticket/20" title="feature: Efficient support for very large image data (closed: fixed)">#20</a>, and makes sense as part of 2.0-beta1 development in June.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-07-06T17%3A03%3A19-05%3A00&amp;precision=second" title="2011-07-06T17:03:19-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Am creating classes in imglib-io. Currently have an implementation of the VirtualRandomAccess class.<br />
+</p>
+<p>
+Note: IJ2's open as virtual stack plugin (or capability) will need to call ImgOpener with a correct factory or an initialized IFormatReader.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-07-29T12%3A45%3A57-05%3A00&amp;precision=second" title="2011-07-29T12:45:57-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>biweekly-2011: Jul-18 to Jul-29</em> to <em>imagej-2.0-beta1</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-02T13%3A26%3A57-05%3A00&amp;precision=second" title="2011-09-02T13:26:57-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I have committed some preliminary implementations in the imglib-io package. They are untested and have some annoying features.<br />
+</p>
+<p>
+Ideally I'd like to create a VirtualImg from an IFormatReader. But due to generics I am forced to create a VirtualImg of a specified type (i.e. VirtualImg&lt;ShortType&gt;). If the underlying file type does not match an exception will get thrown at construction time.<br />
+</p>
+<p>
+Dues to reuse of AbstractImg we need to be provided the array of dimensions. They need to match the IFormatReader's ideas of what the dimensions are.<br />
+</p>
+<p>
+Finally the design requires VirtualCursors and VirtualRandomAccesses to maintain the current plane of data. And each of these cursors and accessors shares a reference to the same IFormatReader. So if multiple cursors or accessors defined we'd have memory overhead and possible threading issues. Will think about this more.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-02T13%3A30%3A36-05%3A00&amp;precision=second" title="2011-09-02T13:30:36-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+It may not be clear above but I was stating that each cursor has its own plane of data. Thus more cursors == more memory.<br />
+</p>
+<p>
+Also reusing AbstractImg requires dimensions to be passed to the constructor along with the IFormatReader even though the dims can be computed from the reader. We could avoid inheritance but would need to reimplement some methods. Or maybe a VirtualImg could own an AbstractImg and delegate as needed.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-02T13%3A34%3A07-05%3A00&amp;precision=second" title="2011-09-02T13:34:07-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Final clarification: reusing the same IFormatReader for multiple cursors and accessors could be introducing a threading issues.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-02T14%3A36%3A14-05%3A00&amp;precision=second" title="2011-09-02T14:36:14-05:00 in Timeline">8 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Right, we can't use the same IFormatReader for multiple threads. However, with the planned SciFIO refactoring of BF, we will be able to easily initialize multiple IFormatReaders on the same data file and use one per thread, without incurring a high initialization cost each time. So the problem will be solved eventually.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-02T14%3A58%3A36-05%3A00&amp;precision=second" title="2011-09-02T14:58:36-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Commited code that removes the annoying construction issues related to generics, dimensions, etc. Now there is a static factory method called create(String fileName). Users get back VirtualImg&lt;?&gt; from this method.<br />
+</p>
+<p>
+Threading discussed above.<br />
+</p>
+<p>
+Will now write some tests.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-13">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:13" class="cnum">
+      <a href="#comment:13">comment:13</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-06T15%3A51%3A20-05%3A00&amp;precision=second" title="2011-09-06T15:51:20-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+TODO<br />
+</p>
+<ul><li>write and commit tests (I have small implementation uncommitted)
+</li><li>the virtualSwap() code of VirtualImg has to hatch new RandomAccessors when a plane is loaded. determine if this is a PlanarContainer bug or if it can be remedied by an updateContainer() kind of call.
+</li><li>refactor VirtualCursor and VirtualAccessor to share some code
+</li><li>support the swapping and retrieving of planes as either primitive type arrays or always byte arrays depending upon a flag passed to the create() call.
+</li><li>eventually support multiple cached planes
+</li><li>eventually support writable data and write out when dirty and swapping
+</li><li>I have hardcoded big vs. little endian as little I think. This works on Mac. Test if its broken on Windows. If so set little based upon running platform.
+</li><li>figure out how to get TestImage loaded into project so that it is found by test runner automatically
+</li><li>add TestImage to git and commit
+</li></ul>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-14">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:14" class="cnum">
+      <a href="#comment:14">comment:14</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-07T11%3A28%3A05-05%3A00&amp;precision=second" title="2011-09-07T11:28:05-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Done<br />
+</p>
+<ul><li>wrote small set of tests and committed along with TestImage.tif
+</li><li>test class runs and locates image correctly
+</li><li>decided not to refactor VirtualCursor and VirtualAccessor - little overlap
+</li><li>can swap and retrieve planes as byte[]'s only if desired
+</li></ul><p>
+Todo<br />
+</p>
+<ul><li>try to eliminate the repeated creation of RandomAccessors on PlaneImg when plane swapped in (bug in PlanarContainer or some such?)
+</li><li>eventually support the ability to have musltiple planes in ram and also writable data swapped out when plane is dirty
+</li><li>debug big vs. little endian issues in VirtualPlaneLoader.java
+</li></ul>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-15">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:15" class="cnum">
+      <a href="#comment:15">comment:15</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-07T16%3A50%3A01-05%3A00&amp;precision=second" title="2011-09-07T16:50:01-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>bdezonia</em> to <em>curtis</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>accepted</em> to <em>assigned</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Done<br />
+</p>
+<ul><li>eliminated need for new RandomAccessors on every plane swap
+</li><li>fixed endianness initialization
+</li><li>writable virtual images wil become a new ticket (or part of tiling ticket)
+</li></ul><p>
+Curtis, please review my implementation at some point to confirm that what you thought was needed (some new container type I think) can be handled with existing implementation or not. If not then add details to this ticket else close. Thanks.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-16">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:16" class="cnum">
+      <a href="#comment:16">comment:16</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-07T16%3A53%3A40-05%3A00&amp;precision=second" title="2011-09-07T16:53:40-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Implementation of VirtualImg and related classes is in the imglib-io project in the net.imglin.io.img.virtual package.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-17">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:17" class="cnum">
+      <a href="#comment:17">comment:17</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-18T15%3A17%3A43-05%3A00&amp;precision=second" title="2011-10-18T15:17:43-05:00 in Timeline">8 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Priority</strong>
+        changed from <em>major</em> to <em>critical</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-18">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:18" class="cnum">
+      <a href="#comment:18">comment:18</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-11-01T10%3A47%3A01-05%3A00&amp;precision=second" title="2011-11-01T10:47:01-05:00 in Timeline">8 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>assigned</em> to <em>accepted</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-19">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:19" class="cnum">
+      <a href="#comment:19">comment:19</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-23T11%3A24%3A21-06%3A00&amp;precision=second" title="2012-02-23T11:24:21-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>20</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+(In <a class="closed ticket" href="/ticket/20" title="feature: Efficient support for very large image data (closed: fixed)">#20</a>) This ticket is now a story describing the end goal of supporting large image data. Ticket <a class="closed ticket" href="/ticket/216" title="task: New ImgLib container types for use with imglib-io (closed: fixed)">#216</a> (and likely others to be added later) will indicate the actual approaches and tasks used to accomplish this goal.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-19">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:19" class="cnum">
+      <a href="#comment:19">comment:19</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-23T11%3A24%3A46-06%3A00&amp;precision=second" title="2012-02-23T11:24:46-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>20</em> removed
+    </li><li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0-beta1</em> to <em>imagej-2.0-beta2</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-20">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:20" class="cnum">
+      <a href="#comment:20">comment:20</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-23T11%3A25%3A01-06%3A00&amp;precision=second" title="2012-02-23T11:25:01-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>20</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-21">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:21" class="cnum">
+      <a href="#comment:21">comment:21</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-24T14%3A00%3A06-06%3A00&amp;precision=second" title="2012-02-24T14:00:06-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>9</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-22">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:22" class="cnum">
+      <a href="#comment:22">comment:22</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-05-15T15%3A50%3A48-05%3A00&amp;precision=second" title="2012-05-15T15:50:48-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta3</em> to <em>imagej-2.0.0-beta4</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-23">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:23" class="cnum">
+      <a href="#comment:23">comment:23</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-14T09%3A51%3A21-05%3A00&amp;precision=second" title="2012-08-14T09:51:21-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta4</em> to <em>imagej-2.0.0-beta5</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+The theme of beta5 will be more flexible data visualization and processing.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-24">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:24" class="cnum">
+      <a href="#comment:24">comment:24</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-14T13%3A02%3A03-05%3A00&amp;precision=second" title="2012-08-14T13:02:03-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta5</em> to <em>imagej-2.0.0-beta4</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+This ticket cannot yet be moved to beta 5 due to blockers<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-25">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:25" class="cnum">
+      <a href="#comment:25">comment:25</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-14T13%3A03%3A30-05%3A00&amp;precision=second" title="2012-08-14T13:03:30-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta4</em> to <em>imagej-2.0.0-beta5</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Undo last change<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-26">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:26" class="cnum">
+      <a href="#comment:26">comment:26</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-14T13%3A03%3A51-05%3A00&amp;precision=second" title="2012-08-14T13:03:51-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>9</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-27">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:27" class="cnum">
+      <a href="#comment:27">comment:27</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-05-31T15%3A53%3A44-05%3A00&amp;precision=second" title="2013-05-31T15:53:44-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>accepted</em> to <em>reviewing</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+This ticket needs to be revisited now that scifio-cells is supporting CellImgs and the virtual imglib io classes are being removed.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-28">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:28" class="cnum">
+      <a href="#comment:28">comment:28</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-07T15%3A15%3A34-05%3A00&amp;precision=second" title="2013-06-07T15:15:34-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>reviewing</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+As far as I'm concerned, this ticket is resolved now that we have <tt>SCIFIOCellImg</tt> in place. To elaborate on each of the four types mentioned in the description:<br />
+</p>
+<p>
+1) We do not have this, but do not really need it. If it proves necessary some day, we can implement it, but for now, that portion of this work is <tt>wontfix</tt>.<br />
+2) We have it; it's called <tt>PlanarImg</tt>. We've been using it. *thumbs up*<br />
+3) Same as 1 above. <tt>wontfix</tt><br />
+4) We have that and more; it's called <tt>SCIFIOCellImg</tt>. It is actually an extension of <tt>CellImg</tt> so it can read tiles (what ImgLib refers to as "cells") on demand from the original file(s). We are also in the process of adding disk caching support so you can even have a read-write capable <tt>SCIFIOCellImg</tt> whose total data size is far larger than available RAM!<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/216?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/216?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/216?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

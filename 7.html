@@ -1,0 +1,741 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #7 (Evaluate imglib for core ImageJ work)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/6" title="Ticket #6" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/7?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/7?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/7?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/8" title="Ticket #8" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="a69c6aa1cbe8c6ca1f16378b";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 7, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/6" title="Ticket #6">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/8" title="Ticket #8">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/7">Ticket #7</a>
+          <span class="status">(closed feature: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2010-02-15T13%3A51%3A24-06%3A00&amp;precision=second" title="2010-02-15T13:51:24-06:00 in Timeline">9 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2012-02-23T11%3A19%3A37-06%3A00&amp;precision=second" title="2012-02-23T11:19:37-06:00 in Timeline">7 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Evaluate imglib for core ImageJ work</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=curtis">curtis</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=aivar">aivar</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=blocker">blocker</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/progress-report">progress-report</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Core">Core</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=non-issue">non-issue</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+              wsr@…
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+      <span class="lastmod" title="2010-02-16 00:12:24+00:00">
+        (last modified by curtis)
+        (<a href="/ticket/7?action=diff&amp;version=1">diff</a>)
+      </span>
+    </h3>
+    <div class="searchable">
+      <p>
+We want to use the <a class="ext-link" href="http://pacific.mpi-cbg.de/wiki/index.php/Imglib"><span class="icon"> </span>Imglib</a> library as the basis for the ImageJ 2.0 data model, since it makes writing data-type-agnostic image processing routines easier. We need to explore the library and evaluate it to verify that it is capable of meeting all of ImageJ's requirements:<br />
+</p>
+<ul><li>is <a class="closed ticket" href="/ticket/17" title="feature: Support for N-dimensional image data (closed: fixed)">N-dimensional</a>
+</li><li>can represent <a class="closed ticket" href="/ticket/18" title="feature: Verify spectral-lifetime data can be modeled (closed: fixed)">combined spectral lifetime</a> and related data organizations
+</li><li>can efficiently work with <a class="closed ticket" href="/ticket/19" title="feature: Efficient support for very large image planes (closed: moved)">very large image planes</a>
+</li><li>can work with <a class="closed ticket" href="/ticket/20" title="feature: Efficient support for very large image data (closed: fixed)">massive quantities</a> of data in general
+</li><li><a class="closed ticket" href="/ticket/21" title="feature: Support for data source abstraction (closed: moved)">abstracts the source</a> of the data
+</li></ul><p>
+As an initial test, we will try to <a class="closed ticket" href="/ticket/16" title="task: Adapt ImageProcessor subclasses to use imglib (closed: wontfix)">adapt the ImageProcessor classes</a> to use imglib.<br />
+</p>
+<p>
+For a history of the discussion around the idea to use imglib, see the "<a class="ext-link" href="http://groups.google.com/group/imagejx/browse_thread/thread/943e2cdf63396a5b"><span class="icon"> </span>Image data types</a>" thread on the ImageJX discussion group.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-15T18%3A12%3A24-06%3A00&amp;precision=second" title="2010-02-15T18:12:24-06:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/7?action=diff&amp;version=1">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-17T00%3A14%3A11-06%3A00&amp;precision=second" title="2010-02-17T00:14:11-06:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+One potential problem with imglib may be performance. The imglib authors have observed performance at 90% of ImageJ's, whereas Wayne Rasband reports a 4x slowdown with a simple imglib-driven plugin compared to ImageJ's Image&gt;Math&gt;Add command:<br />
+</p>
+<pre class="wiki">import ij.ImagePlus;
+import ij.gui.GenericDialog;
+import ij.plugin.filter.PlugInFilter;
+import ij.process.ImageProcessor;
+import mpicbg.imglib.cursor.Cursor;
+import mpicbg.imglib.image.Image;
+import mpicbg.imglib.image.ImagePlusAdapter;
+import mpicbg.imglib.image.display.imagej.ImageJFunctions;
+import mpicbg.imglib.type.NumericType;
+
+public class Imglib_Plugin&lt;T extends NumericType&lt;T&gt;&gt; implements PlugInFilter {
+	ImagePlus image;
+
+	public int setup(String arg, ImagePlus imp) {
+		image = imp;
+		return DOES_ALL;
+	}
+
+	public void run(ImageProcessor ip) {
+		run(image);
+		image.updateAndDraw();
+	}
+
+	public void run(ImagePlus image) {
+		Image&lt;T&gt; img = ImagePlusAdapter.wrap(image);
+		add(img, 20);
+	}
+
+	public static&lt;T extends NumericType&lt;T&gt;&gt; void add(Image&lt;T&gt; img, float value) {
+		final Cursor&lt;T&gt; cursor = img.createCursor();
+		final T summand = cursor.getType().createVariable();
+
+		summand.setReal(value);
+
+		while (cursor.hasNext()) {
+			cursor.fwd();
+			cursor.getType().add(summand);
+		}
+	}
+}
+</pre>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-18T16%3A40%3A52-06%3A00&amp;precision=second" title="2010-02-18T16:40:52-06:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Rick has pointed out <a class="ext-link" href="http://www.vsipl.org/"><span class="icon"> </span>VSIPL</a> as alternative image processing library. It has been in development for a long time, and is mature and robust; however, it is written in C++, and is not open source.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-18T16%3A41%3A12-06%3A00&amp;precision=second" title="2010-02-18T16:41:12-06:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Type</strong>
+        changed from <em>defect</em> to <em>task</em>
+    </li><li>
+      <strong>Severity</strong>
+        changed from <em>serious</em> to <em>non-issue</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-19T16%3A15%3A28-06%3A00&amp;precision=second" title="2010-02-19T16:15:28-06:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+More detailed benchmarks from Wayne:<br />
+</p>
+<p>
+"Here are results in megapixels/sec using a 3000x3000 image:<br />
+</p>
+<table class="wiki">
+<tr><td><strong>type</strong></td><td><strong>ImageJ</strong></td><td><strong>imglib</strong></td><td><strong>factor</strong>
+</td></tr><tr><td>8-bit</td><td>473</td><td>62</td><td>7.6
+</td></tr><tr><td>16-bit</td><td>333</td><td>32</td><td>10.4
+</td></tr><tr><td>32-bit</td><td>272</td><td>20</td><td>13.6
+</td></tr><tr><td>RGB</td><td>158</td><td>66</td><td>2.4
+</td></tr></table>
+<p>
+"You need to be using ImageJ 1.43p or later to duplicate these results. The ShortProcessor and FloatProcessor constructors no longer calculate the image min and max, which greatly speeds up simple operations like adding a constant to an image. I am using an older version of imglib; the current version may be faster. I should also note that the version of imglib I have does not handle overflows correctly but this is probably fixed in the current version."<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                          <span>follow-up:</span>
+      <a href="#comment:8">↓ 8</a>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-25T16%3A04%3A32-06%3A00&amp;precision=second" title="2010-02-25T16:04:32-06:00 in Timeline">9 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I looked at performance, starting with the claim that Imglib is faster, with the following sample code, from  <a class="ext-link" href="http://pacific.mpi-cbg.de/wiki/index.php/Imglib#Example"><span class="icon"> </span>http://pacific.mpi-cbg.de/wiki/index.php/Imglib#Example</a><br />
+</p>
+<p>
+ImageJ version:<br />
+</p>
+<pre class="wiki">final static public void multiply( final ImagePlus input, final double factor )
+ {
+         final int nPixels = input.getWidth() * input.getHeight();
+ 
+         // iterate through all channels, frames and timepoints (might be just one)
+         for ( int c = 1; c &lt;= input.getNChannels(); ++c )
+                 for ( int z = 1; z &lt;= input.getNSlices(); ++z )
+                         for ( int t = 1; t &lt;= input.getNFrames(); ++t )
+                         {
+                                 input.setPosition( c, z, t );
+                                 final ImageProcessor ip = input.getChannelProcessor();
+ 
+                                 // RGB images are special
+                                 if ( input.getType() == ImagePlus.COLOR_RGB )
+                                 {
+                                         for ( int i = 0; i &lt; nPixels; ++i )
+                                         {
+                                                 final int rgb = ip.get( i );
+                                                 final int r = doubleTo8Bit( Math.round( ( (
+                                                         rgb &gt;&gt; 16 ) &amp; 0xff ) * factor ) );
+                                                 final int g = doubleTo8Bit( Math.round( ( (
+                                                         rgb &gt;&gt; 8 ) &amp; 0xff ) * factor ) );
+                                                 final int b = doubleTo8Bit( Math.round( (
+                                                         rgb &amp; 0xff ) * factor ) );
+                                                 ip.set( i, ( r &lt;&lt; 16 ) | ( g &lt;&lt; 8 ) | b );
+                                         }
+                                 }
+                                 else
+                                 {
+                                         for ( int i = 0; i &lt; nPixels; ++i )
+                                         {
+                                                 ip.setf( i, ip.getf( i ) * ( float )factor );
+                                         }
+                                 }
+                         }
+ }
+ 
+ final static int doubleTo8Bit( final double value ) {
+         return Math.max( 0, Math.min( 255, (int) value ) );
+ }
+</pre><p>
+Imglib version:<br />
+</p>
+<pre class="wiki">public &lt;T extends NumericType&lt;T&gt;&gt; void multiplyImageByValue( Image&lt;T&gt; input,  T factor )
+ {
+        final Cursor&lt;T&gt; cursor = input.createCursor();
+ 
+         while ( cursor.hasNext() )
+         {
+                 cursor.fwd();
+                 cursor.getType().mul( factor );
+         }
+ 
+        cursor.close();
+}
+</pre><p>
+This code loops through the image and multiplies by a factor.  I tried changing how that multiplication is done and found the Imglib performance varied greatly depending on the type of the factor, the ImageJ not so much.<br />
+</p>
+<p>
+Here are some sample results.  (These are milliseconds per 100 iterations using the 8-bit 439x167 image single-channel-ome.tif, on a 3GHz dual core iMac,  with very rough estimates of the averages.  Also, I had to add a new 'mul(int)' method to Imglib's ByteType.)<br />
+</p>
+<table class="wiki">
+<tr><td>  </td><td> float </td><td> T </td><td> int 
+</td></tr><tr><td> ImageJ </td><td> 50 </td><td> -- </td><td> 40 
+</td></tr><tr><td> Imglib </td><td> 150 </td><td> 38 </td><td> 18 
+</td></tr></table>
+<p>
+The premise of the sample code is that ImageJ has to use floats but Imglib can use T for the multiplying factor.  So in that case Imglib comes out slightly ahead.<br />
+</p>
+<p>
+Actually if the multiplier has a fractional component (consider 0.5) it doesn't make any sense to convert it to a ByteType in this example.  So it would be more practical for this example for both to use float multipliers, in which case ImageJ performs much better.  (If both use integers Imglib comes out ahead.)<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-25T16%3A14%3A11-06%3A00&amp;precision=second" title="2010-02-25T16:14:11-06:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Cc</strong>
+        <em>wsr@…</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                        in reply to:
+      <a href="#comment:6">↑ 6</a>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-25T16%3A20%3A22-06%3A00&amp;precision=second" title="2010-02-25T16:20:22-06:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Replying to <a href="/ticket/7#comment:6" title="Comment 6 for Ticket #7">aivar</a>:<br />
+</p>
+<blockquote class="citation">
+<p>
+Actually if the multiplier has a fractional component (consider 0.5) it doesn't make any sense to convert it to a ByteType in this example.  So it would be more practical for this example for both to use float multipliers, in which case ImageJ performs much better.  (If both use integers Imglib comes out ahead.)<br />
+</p>
+</blockquote>
+<p>
+My question is, why is Imglib so much slower with floats? If it were a general problem with method calls we shouldn't see such good performance with ints either. Is the speed issue with floats something we can improve?<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                          <span>follow-up:</span>
+      <a href="#comment:10">↓ 10</a>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-25T16%3A55%3A32-06%3A00&amp;precision=second" title="2010-02-25T16:55:32-06:00 in Timeline">9 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Wayne's benchmark is comparing the ImageJ built-in add function with one implemented as a plugin using Imglib.<br />
+</p>
+<p>
+I tried comparing ImageJ and Imglib both as plugins, with an ImageJ version similar to code above and got results like:<br />
+</p>
+<table class="wiki">
+<tr><td> </td><td> float </td><td> T </td><td> int 
+</td></tr><tr><td> ImageJ </td><td> 40 </td><td> -- </td><td> 43 
+</td></tr><tr><td> Imglib </td><td> 38 </td><td> 33 </td><td> 19 
+</td></tr></table>
+<p>
+So both plugins are comparable except adding integers in the Imglib version is faster.<br />
+</p>
+<p>
+ImageJ's built-in add method in ImageProcessor gains its performance by precomputing a look-up table for all possible pixel values.  Then the loop through the pixels just substitutes from the look-up table rather than doing arithmetic for each pixel.<br />
+</p>
+<p>
+The optimization is made for arithmetic operations on single pixels in 8-bit, 16-bit, and RGB images.  32-bit (float) images just do the arithmetic.  This should just carry over in ImageProcessor if we do move to using Imglib.  I can't think of any reason Imglib would prohibit its use.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                        in reply to:
+      <a href="#comment:9">↑ 9</a>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-25T17%3A03%3A02-06%3A00&amp;precision=second" title="2010-02-25T17:03:02-06:00 in Timeline">9 years</a> ago by aivar
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Replying to <a href="/ticket/7#comment:9" title="Comment 9 for Ticket #7">aivar</a>:<br />
+</p>
+<blockquote class="citation">
+<p>
+ <br />
+This should just carry over in ImageProcessor if we do move to using Imglib.  I can't think of any reason Imglib would prohibit its use.<br />
+ <br />
+</p>
+</blockquote>
+<p>
+Just to clarify.  This won't happen for free but I believe it wouldn't be a big problem to implement.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-02-16T13%3A07%3A01-06%3A00&amp;precision=second" title="2011-02-16T13:07:01-06:00 in Timeline">8 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+At the Madison hackathon, ImgLib underwent a major design iteration ("ImgLib2"), and should now capable of expressing everything needed for the ImageJ2 data model. We are working to fix remaining build issues with ImgLib2, then begin integrating with the ImageJDev codebase.<br />
+</p>
+<p>
+Combined with Barry DeZonia's <a class="ext-link" href="http://dev.imagejdev.org/trac/imglib/browser/imglib-ops/src/main/java/imglib/ops?rev=HEAD"><span class="icon"> </span>imglib-ops</a> work, translation of existing ImageProcessor methods to ImgLib will be straightforward (and Barry has initial translations of many methods already).<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-23T11%3A18%3A53-06%3A00&amp;precision=second" title="2012-02-23T11:18:53-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>6</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-23T11%3A19%3A18-06%3A00&amp;precision=second" title="2012-02-23T11:19:18-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Type</strong>
+        changed from <em>task</em> to <em>story</em>
+    </li><li>
+      <strong>Blocking</strong>
+        <em>6</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-13">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:13" class="cnum">
+      <a href="#comment:13">comment:13</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-23T11%3A19%3A37-06%3A00&amp;precision=second" title="2012-02-23T11:19:37-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>6</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-14">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:14" class="cnum">
+      <a href="#comment:14">comment:14</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-05T14%3A33%3A36-06%3A00&amp;precision=second" title="2012-03-05T14:33:36-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>6</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/7?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/7?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/7?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

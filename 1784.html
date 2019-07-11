@@ -1,0 +1,524 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1784 (Add a Jenkins job that can release a new pom-scijava and update our Maven projects accordingly)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1783" title="Ticket #1783" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1784?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1784?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1784?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1785" title="Ticket #1785" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="4ee18aa6e87fd43546cada10";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1784, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1783" title="Ticket #1783">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1785" title="Ticket #1785">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1784">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1784">Ticket #1784</a>
+          <span class="status">(closed enhancement: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2013-04-08T13%3A52%3A53-05%3A00&amp;precision=second" title="2013-04-08T13:52:53-05:00 in Timeline">6 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-05-14T13%3A27%3A35-05%3A00&amp;precision=second" title="2013-05-14T13:27:35-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Add a Jenkins job that can release a new pom-scijava and update our Maven projects accordingly</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=dscho">dscho</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=dscho">dscho</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="milestone" href="/milestone/imagej-2.0.0">imagej-2.0.0</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Build+System">Build System</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=major">major</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+              <a href="/query?status=!closed&amp;cc=~curtis">curtis</a>
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/1783" title="Make version binding tighter for reproducible builds">#1783</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+      <span class="lastmod" title="2013-04-08 19:14:02.578625+00:00">
+        (last modified by dscho)
+        (<a href="/ticket/1784?action=diff&amp;version=2">diff</a>)
+      </span>
+    </h3>
+    <div class="searchable">
+      <p>
+Just like  <a class="ext-link" href="http://jenkins.imagej.net/job/Synchronize-and-deploy-IJ1/"><span class="icon"> </span>http://jenkins.imagej.net/job/Synchronize-and-deploy-IJ1/</a> synchronizes ImageJ 1.x fully automatically, commits, pushes and deploys, we need Jenkins jobs (most likely manually triggered, however) to help bumping up the version in one of our projects (pom-scijava, scijava-common, imglib2, imagej2, scifio, fiji).<br />
+</p>
+<p>
+The job needs to be parametrized (the Git project to bump).<br />
+</p>
+<p>
+It would be nice if this job could trigger all projects to be bumped to new pom-scijava versions.<br />
+</p>
+<p>
+This Jenkins job should avoid pushing updated <em>master</em> branches when builds fail, but simply mark the builds as failed.<br />
+</p>
+<p>
+For maximal transparency, the job should be implemented as a shell script in scijava-common's <em>bin/</em> directory.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-08T14%3A09%3A05-05%3A00&amp;precision=second" title="2013-04-08T14:09:05-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/1784?action=diff&amp;version=1">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-08T14%3A14%3A02-05%3A00&amp;precision=second" title="2013-04-08T14:14:02-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/1784?action=diff&amp;version=2">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-09T13%3A35%3A30-05%3A00&amp;precision=second" title="2013-04-09T13:35:30-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+There is now something in place: <a class="ext-link" href="https://github.com/scijava/scijava-common/blob/master/bin/bump-pom-scijava.sh"><span class="icon"> </span>https://github.com/scijava/scijava-common/blob/master/bin/bump-pom-scijava.sh</a> and <a class="ext-link" href="http://jenkins.imagej.net/job/Bump-POM-SciJava/"><span class="icon"> </span>http://jenkins.imagej.net/job/Bump-POM-SciJava/</a>.<br />
+</p>
+<p>
+A little work is left to do:<br />
+</p>
+<ul><li>should we use &lt;pluginManagement&gt; instead of properties to manage versions? That would allow us to use the maven-versions-plugin to bump the pom-scijava versions.
+</li><li>The Jenkins job currently only updates pom-scijava, but it needs to update scijava-common, imglib2, imagej2, scifio, fiji and any other repository we want to stay on the edge, too. Happily, this is easily accomplised with bump-pom-scijava.sh's <em>--bump-parent</em> option, but it needs thorough testing.
+</li></ul>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-09T13%3A45%3A43-05%3A00&amp;precision=second" title="2013-04-09T13:45:43-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+One thing we have to be careful about: ImageJA. As it is never at a -SNAPSHOT version, we probably need to use <tt>bump-pom-scijava.sh --skip-commit --bump-parent</tt> in <a class="ext-link" href="http://jenkins.imagej.net/job/Synchronize-and-deploy-IJ1/"><span class="icon"> </span>http://jenkins.imagej.net/job/Synchronize-and-deploy-IJ1/</a>.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-10T12%3A00%3A05-05%3A00&amp;precision=second" title="2013-04-10T12:00:05-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Curtis reported that the sed call does not work properly on MacOSX: the pom-scijava version is not incremented properly, most likely due to the great and incredibly powerful BSD sed.<br />
+</p>
+<p>
+To side-step that issue, and also to update all dependent major projects (IJ2, SCIFIO, etc), let's finalize the <a class="ext-link" href="http://jenkins.imagej.net/job/Bump-POM-SciJava/"><span class="icon"> </span>http://jenkins.imagej.net/job/Bump-POM-SciJava/</a> job.<br />
+</p>
+<p>
+However, this requires a substantial change first: bump-pom-scijava.sh should learn to figure out the latest release versions itself and update the <em>pom.xml</em> accordingly, exiting silently if nothing needs to be changed.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-11T13%3A52%3A25-05%3A00&amp;precision=second" title="2013-04-11T13:52:25-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+It appears that the &lt;versioning&gt; tag of maven-metadata.xml is not automatically correct when deploying with Maven 2 (which our Jenkins does).<br />
+</p>
+<p>
+So before bump-pom-scijava.sh could acquire a new, intelligent mode to update pom-scijava to upgrade to our latest release versions, I needed to<br />
+</p>
+<ul><li>run <em>Rebuild Metadata</em> on our Nexus, and
+</li><li>change a couple of <em>deploy</em> calls used directly or indirectly by Jenkins to include <em>-DupdateReleaseInfo=true</em>
+</li></ul><p>
+Sadly, it seems that the deploy plugin is not clever enough to skip interpreting the <em>updateReleaseInfo</em> property for <em>-SNAPSHOT</em> versions, so we cannot do it wholesale.<br />
+</p>
+<p>
+So far, I updated scijava-common's <em>release-version.sh</em>, <em>bump-pom-scijava.sh</em>, ImageJ's <em>doc/release-steps.txt</em>, ImageJA's <em>jenkins-job.sh</em> (on the <em>tools</em> branch) and the <em>ImageJ-release-deploy</em> Jenkins job to use said property.<br />
+</p>
+<p>
+It seems that the following Jenkins jobs have shell calls to <em>mvn deploy</em> (but want to deploy <em>-SNAPSHOT</em> versions most of the time):<br />
+</p>
+<ul><li><em>Imagej-launcher-deploy</em>
+</li><li><em>Saalfeld-MPICBG-Maven</em>, and
+</li><li><em>TrakEM2-Maven</em>.
+</li></ul><p>
+The following Jenkins jobs have <em>Maven</em> build steps calling <em>deploy</em> (but also typically deploy <em>-SNAPSHOT</em> versions):<br />
+</p>
+<ul><li><em>Bio-Formats-maven</em>,
+</li><li><em>ImgLib</em>,
+</li><li><em>LOCI</em>,
+</li><li><em>LOCI-daily</em>,
+</li><li><em>native-lib-loader</em>, and
+</li><li><em>SLIM-curve</em>.
+</li></ul><p>
+So I left all of those jobs untouched. (FWIW I called <tt>grep 'mvn.*deploy' jobs/*/config.xml</tt> and <tt>grep 'targets.*deploy' jobs/*/config.xml</tt> in Jenkins' home directory.)<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-11T14%3A34%3A11-05%3A00&amp;precision=second" title="2013-04-11T14:34:11-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I tested <a class="ext-link" href="http://jenkins.imagej.net/view/SciJava/job/Bump-POM-SciJava/"><span class="icon"> </span>http://jenkins.imagej.net/view/SciJava/job/Bump-POM-SciJava/</a> as well as I can without actually bumping the pom-scijava version. So far, it is only set up to take care of ImageJ2's and Fiji's <em>master</em> branch.<br />
+</p>
+<p>
+For ImageJA, I enhanced the <em>sync-with-imagej.sh</em> script (again, tested as well as possible without actually releasing a new ImageJ 1.x version).<br />
+</p>
+<p>
+I'll leave this ticket open until we get a chance to test it.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-11T17%3A18%3A31-05%3A00&amp;precision=second" title="2013-04-11T17:18:31-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+The first test failed: a couple of issues prevented the dependencees to be updated correctly. But the issues have been resolved, the next time we need to bump the pom-scijava project should be just a "Build now" away...<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-11T17%3A19%3A21-05%3A00&amp;precision=second" title="2013-04-11T17:19:21-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Summary</strong>
+        changed from <em>Add a Jenkins job that can release new versions of our Maven projects</em> to <em>Add a Jenkins job that can release a new pom-scijava and update our Maven projects accordingly</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-13T14%3A38%3A50-05%3A00&amp;precision=second" title="2013-04-13T14:38:50-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Since IJ2 now depends on release versions of scijava-common, I changed Jenkins to stop triggering ImageJ builds after SciJava-common was built successfully.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-05-14T13%3A27%3A35-05%3A00&amp;precision=second" title="2013-05-14T13:27:35-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I changed the Jenkins job to be parameterized so you can switch on/off what gets bumped.<br />
+</p>
+<p>
+For example, in the use case that came up today (and for which we did not have parameters), a new scijava-common version was released that required some changes in imagej.git to go in before bumping the required pom-scijava version. In that case, we would want to uncheck <em>BUILD_IMAGEJ</em> and bump imagej.git's parent version later, when merging the branch with the required changes.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1784?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1784?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1784?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

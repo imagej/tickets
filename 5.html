@@ -1,0 +1,674 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #5 (Find tools for UML generation)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/4" title="Ticket #4" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/5?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/5?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/5?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/6" title="Ticket #6" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="380177b04cb9e7a953860558";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 5, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/4" title="Ticket #4">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/6" title="Ticket #6">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/5">Ticket #5</a>
+          <span class="status">(closed task: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2010-02-15T13%3A26%3A56-06%3A00&amp;precision=second" title="2010-02-15T13:26:56-06:00 in Timeline">9 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2010-03-01T12%3A46%3A06-06%3A00&amp;precision=second" title="2010-03-01T12:46:06-06:00 in Timeline">9 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Find tools for UML generation</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=curtis">curtis</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=rlentz">rlentz</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/progress-report">progress-report</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Core">Core</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=non-issue">non-issue</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+We want to generate UML diagrams and other visualizations of the ImageJ class hierarchy, to aid in understanding and <a class="closed ticket" href="/ticket/2" title="task: Prioritize ImageJ core classes for unit testing (closed: fixed)">prioritizing</a> work.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+    <div id="attachments">
+        <h2 class="foldable">Attachments</h2>
+        <div>
+          <dl class="attachments">
+              <dt>
+    <a href="/attachment/ticket/5/util.svg" title="View attachment">util.svg</a>
+      <a href="/raw-attachment/ticket/5/util.svg" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="59557 bytes">58.2 KB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-03-01T12%3A23%3A43-06%3A00&amp;precision=second" title="2010-03-01T12:23:43-06:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                Util Package
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/5/text.svg" title="View attachment">text.svg</a>
+      <a href="/raw-attachment/ticket/5/text.svg" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="212971 bytes">208.0 KB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-03-01T12%3A23%3A59-06%3A00&amp;precision=second" title="2010-03-01T12:23:59-06:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                Text Package
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/5/process.svg" title="View attachment">process.svg</a>
+      <a href="/raw-attachment/ticket/5/process.svg" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="1762369 bytes">1.7 MB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A10-06%3A00&amp;precision=second" title="2010-03-01T12:24:10-06:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                Process Package
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/5/plugin.svg" title="View attachment">plugin.svg</a>
+      <a href="/raw-attachment/ticket/5/plugin.svg" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="2688934 bytes">2.6 MB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A19-06%3A00&amp;precision=second" title="2010-03-01T12:24:19-06:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                Plugin Package
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/5/measure.svg" title="View attachment">measure.svg</a>
+      <a href="/raw-attachment/ticket/5/measure.svg" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="412745 bytes">403.1 KB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A29-06%3A00&amp;precision=second" title="2010-03-01T12:24:29-06:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                Measure Package
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/5/macro.svg" title="View attachment">macro.svg</a>
+      <a href="/raw-attachment/ticket/5/macro.svg" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="1184610 bytes">1.1 MB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A38-06%3A00&amp;precision=second" title="2010-03-01T12:24:38-06:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                Macro Package
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/5/io.svg" title="View attachment">io.svg</a>
+      <a href="/raw-attachment/ticket/5/io.svg" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="933003 bytes">911.1 KB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A47-06%3A00&amp;precision=second" title="2010-03-01T12:24:47-06:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                IO Package
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/5/ij.svg" title="View attachment">ij.svg</a>
+      <a href="/raw-attachment/ticket/5/ij.svg" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="1457845 bytes">1.4 MB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A56-06%3A00&amp;precision=second" title="2010-03-01T12:24:56-06:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                IJ Package
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/5/gui.svg" title="View attachment">gui.svg</a>
+      <a href="/raw-attachment/ticket/5/gui.svg" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="2153740 bytes">2.1 MB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-03-01T12%3A25%3A06-06%3A00&amp;precision=second" title="2010-03-01T12:25:06-06:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                GUI Package
+              </dd>
+          </dl>
+          
+        </div>
+    </div>
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-15T13%3A27%3A04-06%3A00&amp;precision=second" title="2010-02-15T13:27:04-06:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+One useful tool is <a class="ext-link" href="http://www.umlgraph.org/"><span class="icon"> </span>UMLGraph</a>, which generates UML diagrams from Java class hierarchies using javadoc (as a doclet) and <a class="ext-link" href="http://www.graphviz.org/"><span class="icon"> </span>Graphviz</a>:<br />
+</p>
+<pre class="wiki">java -cp $CP:/Users/curtis/apps/UMLGraph-5.2/lib/UmlGraph.jar \
+  org.umlgraph.doclet.UmlGraph -public \
+  -sourcepath /Users/curtis/code/LOCI/imagej/src \
+  ij ij.gui ij.io ij.macro ij.plugin ij.plugin.filter \
+  ij.plugin.frame ij.process ij.text ij.util \
+  -output - | dot -Tpng -oImageJ.png -Gratio=0.7
+</pre><p>
+In practice, though, we may need to limit this to 1-2 packages at a time.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-19T14%3A55%3A39-06%3A00&amp;precision=second" title="2010-02-19T14:55:39-06:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>curtis</em> to <em>rlentz</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>assigned</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-25T11%3A47%3A20-06%3A00&amp;precision=second" title="2010-02-25T11:47:20-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>assigned</em> to <em>accepted</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-02-25T12%3A52%3A38-06%3A00&amp;precision=second" title="2010-02-25T12:52:38-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+In addition to the tools already mentioned, IBM's Rational Software Architect Standard Edition has several tools that can automate some of the modeling and analysis processes we are likely to take on.  Specifically, the use of <em>Java to UML</em> through the specification of a transformation and <em>Software Analysis</em> features.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A22%3A43-06%3A00&amp;precision=second" title="2010-03-01T12:22:43-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+9 UML Diagrams were created covering the current ImageJ code base.  Files are respective of package and thus vary in size.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A23%3A43-06%3A00&amp;precision=second" title="2010-03-01T12:23:43-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/5/util.svg"><em>util.svg</em></a>
+          <a href="/raw-attachment/ticket/5/util.svg" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Util Package<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A23%3A59-06%3A00&amp;precision=second" title="2010-03-01T12:23:59-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/5/text.svg"><em>text.svg</em></a>
+          <a href="/raw-attachment/ticket/5/text.svg" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Text Package<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A10-06%3A00&amp;precision=second" title="2010-03-01T12:24:10-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/5/process.svg"><em>process.svg</em></a>
+          <a href="/raw-attachment/ticket/5/process.svg" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Process Package<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A19-06%3A00&amp;precision=second" title="2010-03-01T12:24:19-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/5/plugin.svg"><em>plugin.svg</em></a>
+          <a href="/raw-attachment/ticket/5/plugin.svg" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Plugin Package<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A29-06%3A00&amp;precision=second" title="2010-03-01T12:24:29-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/5/measure.svg"><em>measure.svg</em></a>
+          <a href="/raw-attachment/ticket/5/measure.svg" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Measure Package<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A38-06%3A00&amp;precision=second" title="2010-03-01T12:24:38-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/5/macro.svg"><em>macro.svg</em></a>
+          <a href="/raw-attachment/ticket/5/macro.svg" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Macro Package<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A47-06%3A00&amp;precision=second" title="2010-03-01T12:24:47-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/5/io.svg"><em>io.svg</em></a>
+          <a href="/raw-attachment/ticket/5/io.svg" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+IO Package<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A24%3A56-06%3A00&amp;precision=second" title="2010-03-01T12:24:56-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/5/ij.svg"><em>ij.svg</em></a>
+          <a href="/raw-attachment/ticket/5/ij.svg" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+IJ Package<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A25%3A06-06%3A00&amp;precision=second" title="2010-03-01T12:25:06-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/5/gui.svg"><em>gui.svg</em></a>
+          <a href="/raw-attachment/ticket/5/gui.svg" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+GUI Package<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A26%3A39-06%3A00&amp;precision=second" title="2010-03-01T12:26:39-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>accepted</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-03-01T12%3A46%3A06-06%3A00&amp;precision=second" title="2010-03-01T12:46:06-06:00 in Timeline">9 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Which tool did you use to generate these diagrams?<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/5?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/5?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/5?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

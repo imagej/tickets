@@ -1,0 +1,476 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1413 (Make LegacyService a statically available singleton)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1412" title="Ticket #1412" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1413?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1413?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1413?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1414" title="Ticket #1414" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="317b52df6e7665e766e61721";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1413, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1412" title="Ticket #1412">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1414" title="Ticket #1414">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1413">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1413">Ticket #1413</a>
+          <span class="status">(assigned defect)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2012-08-15T13%3A04%3A00-05%3A00&amp;precision=second" title="2012-08-15T13:04:00-05:00 in Timeline">7 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-06-18T15%3A31%3A24-05%3A00&amp;precision=second" title="2013-06-18T15:31:24-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Make LegacyService a statically available singleton</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=dscho">dscho</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="milestone" href="/milestone/imagej-2.0.0">imagej-2.0.0</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Legacy+Compatibility">Legacy Compatibility</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="new" href="/ticket/1400" title="Recommended architecture changes (2.0.0-final)">#1400</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+Given that the legacy service relies on the static IJ1 IJ class we should make the LegacyService a static singleton. In doing so we can then eliminate deprecated calls in places like ImagePlusMethods and ImageWindowMethods.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-08-20T13%3A57%3A02-05%3A00&amp;precision=second" title="2012-08-20T13:57:02-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+As Curtis pointed out, we should not do this. The problem is that making the LegacyService a singleton, we slam the door shut for having multiple independent ImageJ contexts including legacy services side by side.<br />
+</p>
+<p>
+Instead, we should try to figure out a way how we can have multiple legacy services despite the fact that ImageJ 1.* will always need to be a singleton (due to its over-use of singletons in ij.Menus, ij.WindowManager, etc).<br />
+</p>
+<p>
+One thing we could do as far as the ImagePlus instances are concerned is to exploit the fact that <a class="ext-link" href="http://fiji.sc/javadoc/ij/ImagePlus.html#setProperty%28java.lang.String,%20java.lang.Object%29"><span class="icon"> </span>http://fiji.sc/javadoc/ij/ImagePlus.html#setProperty%28java.lang.String,%20java.lang.Object%29</a> takes an object as second parameter, so we could attach the legacy service as a special property.<br />
+</p>
+<p>
+However, when new images are created in the ImageJ 1.* instance, we will still need a way to figure out which LegacyService to add the mapping to; it will most likely need to be something like a map of threads and thread groups to their corresponding LegacyService, and that map needs to be a singleton.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-18T12%3A46%3A57-05%3A00&amp;precision=second" title="2012-09-18T12:46:57-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+We chatted about this issue further today. When I suggested allowing multiple LegacyService instances, what I had in mind was either:<br />
+</p>
+<ol class="upperalpha"><li>using the same ImageJ1 singleton if possible (and I acknowledge there could be severe problems with that; we would need to do some exploration and testing); or
+</li><li>make subsequent LegacyService instances realize they can't really work properly since another legacy service already exists which owns the ImageJ1 singleton.
+</li></ol><p>
+In the case of (B), the "nonsingletonness" of services is preserved, with the legacy service failing gracefully when multiple IJ2 contexts exist. It's messy, but supporting multiple simultaneous ImageJ1 instances, when ImageJ1 was never designed to be run in that way, seems like a challenge best avoided here. Our main requirement is to keep existing IJ1-only workflows working, rather than to enable new mixed IJ1/IJ2 workflows.<br />
+</p>
+<p>
+That said, if it is possible to maintain multiple ImageJ1 instances using separate class loaders, I am not against it, as long as it does not become a maintenance nightmare. Hard to say before we try it!<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-18T12%3A56%3A04-05%3A00&amp;precision=second" title="2012-09-18T12:56:04-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+After further chatting, the following strategy emerged:<br />
+</p>
+<ul><li>move the implementation of the <em>DefaultLegacyService</em> into a different class.
+</li><li>make a new <em>DefaultLegacyService</em> that
+<ul><li>creates a greedy class loader (i.e. it prevents any parent class loader from defining new classes, so that, say, <em>ij.IJ</em> is never loaded into the system class loader)
+</li><li>instantiates the implementation in said class loader using <em>ServiceHelper#createExactService(classLoader.loadClass("...Impl"))</em>
+</li><li>stores that instance in a field of type LegacyService
+</li><li>proxies all <em>LegacyService</em> methods to said instance
+</li></ul></li><li>add a check to <em>...Impl#initialize()</em> to verify that it was loaded using that greedy class loader.
+</li></ul><p>
+The advantages are:<br />
+</p>
+<ul><li>We can effectively have multiple IJ1 instances, together with the corresponding <em>LegacyServices</em>, opening the gate to have multiple ImageJ contexts including their own <em>LegacyService</em>.
+</li><li>As far as IJ1 is concerned, it is still a singleton (within the class loader and its children)
+</li><li>We do not need to change much code in the legacy service.
+</li></ul><p>
+The disadvantage is that we do not clean up the code that imitates too much of IJ1's "single computer, single user, single desktop, interactive workflow" paradigm.<br />
+</p>
+<p>
+Of course, the devil lies in the details, as so often when one tries so hard to avoid resolving technical debt. For example, there might be problems with instantiating two classes instantiating the <em>LegacyService</em> interface in the same ImageJ context.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-19T16%3A32%3A31-05%3A00&amp;precision=second" title="2012-09-19T16:32:31-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+The good news is that I got this to work, basically. It is an ugly hack involving hard-coded class names in the LegacyClassLoader.<br />
+</p>
+<p>
+Now the bad news: it is not straight-forward to fix the JUnit tests to pass. The problem is that the class ij.ImagePlus is loaded both into the class loader running the tests as well as the class loader owned by the LegacyService. And instances created in one class loader cannot be passed to the other one; the class definitions are incompatible. This example would therefore not work:<br />
+</p>
+<pre class="wiki">ImagePlus image = IJ.openImage(path);
+ImageDisplay display = legacyService.getImageMap().lookupDisplay(image);
+</pre><p>
+Since it would violate the law of the least surprise if such a simple and straight-forward code would not work, we decided to actually go forward with the original plan: support *only one* ImageJ 1.x instance, and let subsequent instantiations of the LegacyService fail.<br />
+</p>
+<p>
+Of course, should somebody need more than one ImageJ context, each with a working Legacy service, in the same JVM, it is still possible: you just need to make sure that the ImageJ classes are not available from the system class loader, and then have each context in their own class loader.<br />
+</p>
+<p>
+Therefore we still heed the principle to make the simple easy and the complicated possible.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-12-06T11%3A38%3A07-06%3A00&amp;precision=second" title="2012-12-06T11:38:07-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>bdezonia</em> to <em>dscho</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>assigned</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-21T11%3A53%3A22-05%3A00&amp;precision=second" title="2013-03-21T11:53:22-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1400</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                          <span>follow-up:</span>
+      <a href="#comment:8">↓ 8</a>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-18T12%3A20%3A55-05%3A00&amp;precision=second" title="2013-06-18T12:20:55-05:00 in Timeline">6 years</a> ago by leek
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Hi all, I'm running into this in CellProfiler. We have a feature that lets you reload some of your code (to allow users to fix bugs in their plugins without restarting CellProfiler). It reloads RunImageJ which makes a fresh ImageJ context. That makes the LegacyService instantiation fail. I may have my own bug - the first instance may not have been destroyed prior to the second instantiation.<br />
+</p>
+<p>
+I think I'm going to patch CellProfiler so that its ImageJ singleton instance is created in code that's not reloaded, but I'd like to follow the resolution of this issue. IMHO, a single ImageJ 1.x instance seems like the least of all evils. Perhaps multiple contexts can pollute each other's state via ImageJ 1.x, but that is what you would expect, knowing what ImageJ 1.x is.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                        in reply to:
+      <a href="#comment:7">↑ 7</a>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-18T12%3A27%3A42-05%3A00&amp;precision=second" title="2013-06-18T12:27:42-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Replying to <a href="/ticket/1413#comment:7" title="Comment 7 for Ticket #1413">leek</a>:<br />
+</p>
+<blockquote class="citation">
+<p>
+I may have my own bug - the first instance may not have been destroyed prior to the second instantiation.<br />
+</p>
+</blockquote>
+<p>
+That seems likely. We have done some testing, and as long as you call <tt>dispose()</tt> on the old ImageJ context first, you should then be able to create another new one. That may be the easiest way to solve your issue, since you only need one context at a time.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-18T15%3A31%3A24-05%3A00&amp;precision=second" title="2013-06-18T15:31:24-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Another easy fix: just use separate class loaders. As long as those contexts run in different class loaders, the IJ1 class patching won't interfere.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1413?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1413?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1413?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

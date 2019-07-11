@@ -1,0 +1,594 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #688 (Macros that open images do not display them)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/687" title="Ticket #687" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/688?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/688?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/688?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/689" title="Ticket #689" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="62517a18cb0a71d9ff9224ee";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 688, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/687" title="Ticket #687">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/689" title="Ticket #689">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/688">Ticket #688</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2011-07-26T10%3A58%3A59-05%3A00&amp;precision=second" title="2011-07-26T10:58:59-05:00 in Timeline">8 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2011-10-24T15%3A11%3A16-05%3A00&amp;precision=second" title="2011-10-24T15:11:16-05:00 in Timeline">8 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Macros that open images do not display them</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=afraser">afraser</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=critical">critical</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b1-initial">imagej2-b1-initial</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Legacy+Compatibility">Legacy Compatibility</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=minor">minor</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+              <a href="/query?status=!closed&amp;cc=~curtis">curtis</a>
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+      <span class="lastmod" title="2011-09-26 16:39:50+00:00">
+        (last modified by afraser)
+        (<a href="/ticket/688?action=diff&amp;version=2">diff</a>)
+      </span>
+    </h3>
+    <div class="searchable">
+      <p>
+Note: this bug makes it difficult to write macros that easily reproduce a certain behavior, so I marked it as major.<br />
+</p>
+<p>
+Macros that open images run("AuPbSn 40 (56K)"); do not show them in a display. However, if you run "invert" or presumably any other command on the current image, the image appears.<br />
+</p>
+<p>
+to reproduce:<br />
+Plugins &gt; New &gt; Macro<br />
+--paste:  run("AuPbSn 40 (56K)");<br />
+Macros &gt; Run Macro OR Macros &gt; Evaluate Line<br />
+--no display appears but you'll see the status bar indicate that it's loading<br />
+cmd+shift+i<br />
+--display appears (image now inverted)<br />
+</p>
+<p>
+Close the text window and reopen Plugins &gt; New &gt; Macro<br />
+The image pops up.<br />
+</p>
+<p>
+It seems this problem is because the plugin being run through the text menu is not being run though the legacy layer.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-07-26T11%3A04%3A43-05%3A00&amp;precision=second" title="2011-07-26T11:04:43-05:00 in Timeline">8 years</a> ago by afraser
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Priority</strong>
+        changed from <em>minor</em> to <em>major</em>
+    </li><li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/688?action=diff&amp;version=1">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-09-26T11%3A39%3A50-05%3A00&amp;precision=second" title="2011-09-26T11:39:50-05:00 in Timeline">8 years</a> ago by afraser
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/688?action=diff&amp;version=2">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-13T13%3A50%3A49-05%3A00&amp;precision=second" title="2011-10-13T13:50:49-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Component</strong>
+        changed from <em>ij-ext</em> to <em>ij-legacy</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-19T13%3A53%3A15-05%3A00&amp;precision=second" title="2011-10-19T13:53:15-05:00 in Timeline">8 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>curtis</em> to <em>bdezonia</em>
+    </li><li>
+      <strong>Priority</strong>
+        changed from <em>major</em> to <em>critical</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>assigned</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-21T11%3A43%3A10-05%3A00&amp;precision=second" title="2011-10-21T11:43:10-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Cannot get the image to appear via running invert or anything else.<br />
+</p>
+<p>
+Regardless the issue is that the plugin hatches a thread and returns. The thread does the image creation work but LegacyPlugin never knows about it. From LegacyPlugin's view the plugin did nothing.<br />
+</p>
+<p>
+Could monitor threads hatched by a plugin and only gather outputs after threads complete. This would change LegacyOutputTracker's image list to not be ThreadLocal. This is probably okay.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-21T12%3A09%3A51-05%3A00&amp;precision=second" title="2011-10-21T12:09:51-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+This is actually more complicated. The scenario given will not work in that the macros thread does not terminate. So executing one line will still never return and monitoring threads will be ineffective. Monitoring threads seems bug prone also.<br />
+</p>
+<p>
+What needs to happen is that ImagePlus::show() hooking in ImagePlusMethods should not register that an image has changed but rather it should hatch a display if needed.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                          <span>follow-up:</span>
+      <a href="#comment:10">↓ 10</a>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-21T13%3A45%3A50-05%3A00&amp;precision=second" title="2011-10-21T13:45:50-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Cc</strong>
+        <em>curtis</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Further playing with this. Made an uncommitted test change to LegacyService::legacyImageChanged() to always register the imageplus. This will create a display if it oesn't exist.<br />
+</p>
+<p>
+Code solves immediate problem: the example bug is fixed. But fix is incomplete as any update of data from within example macro will not harmonize and thus display will be incorrect. It might also be possible to create zombie ImagePluses that steal memory (via LegacyOutputTracker being told at wrong time to save reference).<br />
+</p>
+<p>
+We have treated legacy plugins as having outputs when in fact they don't. We've captured their drawing methods and just recorded the imageplus as an output.<br />
+</p>
+<p>
+In general our solution cannot handle multithreaded plugins. A better approach: more nearly mirror IJ1. Make LegacyPlugin have NO outputs. Have application own a thread running some new harmonizer that is a combination of LegacyImageMap and Harmonizer. ImagePlusMethods could request harmonization upon detection of draw/show kinds of calls. This new harmonizer would always be translating back and forth as needed. LegacyPlugin::run() could request harmonizations before calling the IJ1 plugin. Thus multithreaded plugins always display data as expected (unless they are highly interactive).<br />
+</p>
+<p>
+This needs further discussion before we make any decisions.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-24T10%3A10%3A55-05%3A00&amp;precision=second" title="2011-10-24T10:10:55-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+See also <a class="closed ticket" href="/ticket/760" title="defect: IJ1 Plugins that hatch threads are problematic (closed: fixed)">#760</a><br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-24T13%3A22%3A05-05%3A00&amp;precision=second" title="2011-10-24T13:22:05-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+After further discussion it was decided that the idea of having a separate thread running harmonization was ideally necessary but pragmatically not the best approach. It is covering what are expected to be edge cases. If we find there are issues with other IJ1 commands then we can revisit this idea.<br />
+</p>
+<p>
+At one time we were doing immediate harmonization and it was slow and bug prone. Thats why we started aggregating results. Now to fix this we'd need to make the spearate thread idea gather info on changed imagepluses and harmonize only after updateAndDraw() (or similar method) activity dropped off. There was some question that due to plugins ability to modify pixels by reference that even this would be an issue (though I can't see the scenario).<br />
+</p>
+<p>
+For now will implement a partial solution that involves joining all threads spawned by a plugin before harmonizing back to IJ2.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                        in reply to:
+      <a href="#comment:7">↑ 7</a>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-24T13%3A23%3A45-05%3A00&amp;precision=second" title="2011-10-24T13:23:45-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Replying to <a href="/ticket/688#comment:7" title="Comment 7 for Ticket #688">bdezonia</a>:<br />
+</p>
+<blockquote class="citation">
+<p>
+Further playing with this. Made an uncommitted test change to LegacyService::legacyImageChanged() to always register the imageplus. This will create a display if it oesn't exist.<br />
+</p>
+<p>
+Code solves immediate problem: the example bug is fixed. But fix is incomplete as any update of data from within example macro will not harmonize and thus display will be incorrect. It might also be possible to create zombie ImagePluses that steal memory (via LegacyOutputTracker being told at wrong time to save reference).<br />
+</p>
+<p>
+We have treated legacy plugins as having outputs when in fact they don't. We've captured their drawing methods and just recorded the imageplus as an output.<br />
+</p>
+<p>
+In general our solution cannot handle multithreaded plugins. A better approach: more nearly mirror IJ1. Make LegacyPlugin have NO outputs. Have application own a thread running some new harmonizer that is a combination of LegacyImageMap and Harmonizer. ImagePlusMethods could request harmonization upon detection of draw/show kinds of calls. This new harmonizer would always be translating back and forth as needed. LegacyPlugin::run() could request harmonizations before calling the IJ1 plugin. Thus multithreaded plugins always display data as expected (unless they are highly interactive).<br />
+</p>
+<p>
+This needs further discussion before we make any decisions.<br />
+</p>
+</blockquote>
+<p>
+Note that harmnonizer thread only needs to update displays from imagepluses. The other direction can be controled by legacyplugin.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-24T13%3A28%3A19-05%3A00&amp;precision=second" title="2011-10-24T13:28:19-05:00 in Timeline">8 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Thanks Barry. The problem with immediate synchronization is that—because pixel values can be modified directly in the array, with no possibility of detecting it—any synchronization must always compare and/or update pixel values, which is slow. In an ideal world, we would always know *how* an image changed, so that we can mirror only those changes in a performant way to the other space. For example, if the image autoscaling min/max values change, we merely update those, and not the pixel values.<br />
+</p>
+<p>
+Unfortunately, the pixel values in an array-backed image can change at any time without warning. So originally we decided it would be safest to aggregate all changes and do a full synchronization at the completion of the plugin execution. If you have an idea for a better way to do it, we should definitely discuss—perhaps after the first though as you note above.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-24T14%3A46%3A40-05%3A00&amp;precision=second" title="2011-10-24T14:46:40-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>assigned</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Updated LegacyPlugin and related classes to create displays as needed and wait for hatched threads to terminate before synchronizing displays with ImagePluses. It works but print statements show it can take significant time for the threads to terminate (try Compile and Run for instance). Nonetheless this works and no zombies get created. Keep an eye on plugin running time to see if it becomes a problem.<br />
+</p>
+<p>
+Relevant changes in b50bfa536f5793433a7a8e7e3763eb1adb1a7bc0, a7109f7ebaf8390aa4faa6992826448b1a7abea0, and 2aefe82e261569be2236549eb47544bb15e2e4ae.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-13">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:13" class="cnum">
+      <a href="#comment:13">comment:13</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-10-24T15%3A11%3A16-05%3A00&amp;precision=second" title="2011-10-24T15:11:16-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+One more relevant change: 55ae6857f6fd31f5199844b4892de05d285e0c84<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/688?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/688?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/688?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

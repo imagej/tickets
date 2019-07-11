@@ -1,0 +1,527 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1621 (Research unit libraries)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1620" title="Ticket #1620" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1621?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1621?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1621?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1622" title="Ticket #1622" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="fd25728de5a0c1ac05401d3c";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1621, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1620" title="Ticket #1620">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1622" title="Ticket #1622">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1621">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1621">Ticket #1621</a>
+          <span class="status">(closed task: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2013-01-10T13%3A35%3A41-06%3A00&amp;precision=second" title="2013-01-10T13:35:41-06:00 in Timeline">7 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-09-16T14%3A51%3A20-05%3A00&amp;precision=second" title="2013-09-16T14:51:20-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Research unit libraries</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=curtis">curtis</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="milestone" href="/milestone/imagej2-b8-analysis">imagej2-b8-analysis</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Data+Model">Data Model</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/1620" title="Units support">#1620</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+      <span class="lastmod" title="2013-01-10 19:43:42.633711+00:00">
+        (last modified by bdezonia)
+        (<a href="/ticket/1621?action=diff&amp;version=2">diff</a>)
+      </span>
+    </h3>
+    <div class="searchable">
+      <p>
+Choose unit libraries to use for imglib2 and imagej2. The library should allow definition of units by string. And support compound units. And conversions so we can calibrate values. Libraries to consider: JScience, uomo, and ucar udunits (and others?).<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-10T13%3A35%3A52-06%3A00&amp;precision=second" title="2013-01-10T13:35:52-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1620</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-10T13%3A43%3A42-06%3A00&amp;precision=second" title="2013-01-10T13:43:42-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/1621?action=diff&amp;version=2">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-10T13%3A56%3A14-06%3A00&amp;precision=second" title="2013-01-10T13:56:14-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Type</strong>
+        changed from <em>defect</em> to <em>task</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-10T14%3A13%3A24-06%3A00&amp;precision=second" title="2013-01-10T14:13:24-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+There is some discussion of units in ticket <a class="closed ticket" href="/ticket/445" title="task: Add unit support to IJ2 as needed (closed: fixed)">#445</a>.<br />
+</p>
+<p>
+I have also done some initial investigation into JScience, ucar udunits, and uomo.<br />
+</p>
+<p>
+JScience 4.3.1 is the current version. It seems lightly used in the developer community. It implements JSR 275 which is a somewhat dead specification. The developers forums are nearly all spam. 4.3 was released in 2007 and had a bugfix release in 2011.<br />
+</p>
+<p>
+JScience 5.0 will be the implementation of the units of measure interface api. It might be what we need. But it was hinted to be ready in Dec 2011 and yet no release 13 months later. Again a pattern of a possibly dead project. Contacting Jean Marie Dautelle (lead developer) might clarify things.<br />
+</p>
+<p>
+uomo is a units library that is less ambitious than JScience. JScience wants to be a large library that supports lots of scientific programming functionality. In contrast uomo just wants to support units. It is actively developed but might be immature. It also shoots for the units of measurement api. Contacting Werner Keil (lead developer) might clarify things.<br />
+</p>
+<p>
+It's possible to develop using either JScience or uomo since they support the units of measurement api. We could choose one and switch to the other if there are issues. Jean Marie and Werner seem to be collaborators on units related projects.<br />
+</p>
+<p>
+TODO - look at ucar udunits more. It is older and old colleagues of Curtis pointed us in the direction of JScience when asked about udunits. It is a C library (though the NetCDF Java team might possibly release a Java implementation). It has had updated releases as late as 2011.<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2013-01-10T14%3A31%3A53-06%3A00&amp;precision=second" title="2013-01-10T14:31:53-06:00 in Timeline">7 years</a> ago
+                      by bdezonia
+                    (<a href="/ticket/1621?cversion=1&amp;cnum_hist=4#comment:4">previous</a>)
+                    (<a href="/ticket/1621?action=comment-diff&amp;cnum=4&amp;version=2">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-01-15T12%3A09%3A25-06%3A00&amp;precision=second" title="2013-01-15T12:09:25-06:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Sent messages to two forums in hopes of determining the status of uomo and JScience 5.0<br />
+</p>
+<p>
+To mailing list unitsofmeasure@… re: JScience 5.0 in hopes Jean Marie will see.<br />
+</p>
+<blockquote>
+<p>
+Resulting thread == <a class="ext-link" href="http://java.net/projects/jscience/lists/unitsofmeasure/archive/2013-01/message/0"><span class="icon"> </span>http://java.net/projects/jscience/lists/unitsofmeasure/archive/2013-01/message/0</a><br />
+</p>
+</blockquote>
+<p>
+To forum <a class="ext-link" href="http://www.eclipse.org/forums/eclipse.uomo"><span class="icon"> </span>http://www.eclipse.org/forums/eclipse.uomo</a> in hopes Werner will reply<br />
+</p>
+<blockquote>
+<p>
+Resulting thread == <a class="ext-link" href="http://www.eclipse.org/forums/index.php/t/448936/"><span class="icon"> </span>http://www.eclipse.org/forums/index.php/t/448936/</a><br />
+</p>
+</blockquote>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2013-01-15T16%3A47%3A03-06%3A00&amp;precision=second" title="2013-01-15T16:47:03-06:00 in Timeline">6 years</a> ago
+                      by bdezonia
+                    (<a href="/ticket/1621?cversion=0&amp;cnum_hist=5#comment:5">previous</a>)
+                    (<a href="/ticket/1621?action=comment-diff&amp;cnum=5&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-02-01T15%3A36%3A16-06%3A00&amp;precision=second" title="2013-02-01T15:36:16-06:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Note I tried to determine the fewest jars required by uomo given the ability to define units in terms of other units and perhaps to parse them from strings. To do just this requires 6 jars (hopefully this is not too many dependencies):<br />
+</p>
+<ul><li>3 from uomo itself: core, ucum, and units
+</li><li>the units of measure api interfaces jar
+</li><li>icu4j: enhanced unicode classes
+</li><li>osgi
+</li></ul><p>
+Here is the test stub program:<br />
+</p>
+<p>
+import org.eclipse.uomo.ucum.Parser;<br />
+import org.eclipse.uomo.units.SI;<br />
+import org.eclipse.uomo.units.impl.system.Imperial;<br />
+import org.unitsofmeasurement.quantity.Length;<br />
+import org.unitsofmeasurement.unit.Unit;<br />
+import org.unitsofmeasurement.unit.UnitConverter;<br />
+</p>
+<p>
+public class Main {<br />
+</p>
+<blockquote>
+<p>
+/* ARG - it looks like uomo core requires osgi */<br />
+</p>
+</blockquote>
+<blockquote>
+<p>
+public static void main(String[] args) {<br />
+</p>
+<blockquote>
+<p>
+<em> SystemOfUnits system = SI.getInstance();<br />
+Unit&lt;Length&gt; km = SI.METRE.multiply(1000);<br />
+Unit&lt;Length&gt; foot = Imperial.INCH.multiply(12);<br />
+UnitConverter converter = km.getConverterTo(foot);<br />
+Parser&lt;String, Unit&lt;?&gt;&gt; p = null;<br />
+Unit&lt;?&gt; userDefinedUnit = (p == null) ? null : p.parse("m/s<sup>2");<br />
+System.out.println("0.1 km in feet = " + converter.convert(0.1));<br />
+</sup></em></p>
+</blockquote>
+<p>
+}<br />
+</p>
+</blockquote>
+<p>
+}<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-04T13%3A01%3A37-05%3A00&amp;precision=second" title="2013-04-04T13:01:37-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>bdezonia</em> to <em>curtis</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>reviewing</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+I asked a question here (<a class="ext-link" href="http://www.eclipse.org/forums/index.php/t/457564/"><span class="icon"> </span>http://www.eclipse.org/forums/index.php/t/457564/</a>) about avoiding osgi in uomo. It seems osgi is a key component of the design. ctrueden had mentioned that there is an acceptable level of osgi integration that IJ2 could support. I am asking him to review whether uomo's needs go beyond that level.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-05-24T17%3A13%3A06-05%3A00&amp;precision=second" title="2013-05-24T17:13:06-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej2-b7-ndim-data</em> to <em>imagej2-b8-analysis</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-09-16T14%3A51%3A20-05%3A00&amp;precision=second" title="2013-09-16T14:51:20-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>reviewing</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Uomo is still in development. Werner was not planning on releasing as maven jar until at least version 1.0. I don't think we want to be tied to a such a moving target. I have instead made a simple UnitService set of classes in the imglib2-meta package that for now uses UCAR UDUNITS. This has been merged to master and could use a little cleanup. For now I will close this ticket. We can revisit uomo support in the future.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1621?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1621?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1621?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

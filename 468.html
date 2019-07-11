@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #468 (Incrementing sliders can cause runtime exceptions)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/467" title="Ticket #467" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/468?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/468?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/468?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/469" title="Ticket #469" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="afd2db0d2968b50428449d53";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 468, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/467" title="Ticket #467">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/469" title="Ticket #469">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/468">Ticket #468</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2011-04-28T17%3A53%3A20-05%3A00&amp;precision=second" title="2011-04-28T17:53:20-05:00 in Timeline">8 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2011-04-29T10%3A41%3A07-05%3A00&amp;precision=second" title="2011-04-29T10:41:07-05:00 in Timeline">8 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Incrementing sliders can cause runtime exceptions</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej-2.0-alpha2">imagej-2.0-alpha2</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Display+API">Display API</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+Load Organ Of Corti sample image. Leave channel slider alone. Increment the Z slider approximatley 4 times. An exception is thrown.<br />
+</p>
+<p>
+Exception in thread "AWT-EventQueue-0" java.lang.IndexOutOfBoundsException: Index: 195, Size: 60<br />
+</p>
+<blockquote>
+<p>
+at java.util.ArrayList.RangeCheck(ArrayList.java:547)<br />
+at java.util.ArrayList.get(ArrayList.java:322)<br />
+at net.imglib2.img.planar.PlanarImg.update(PlanarImg.java:133)<br />
+at net.imglib2.img.planar.PlanarImg.update(PlanarImg.java:1)<br />
+at net.imglib2.type.numeric.integer.GenericShortType.updateContainer(GenericShortType.java:68)<br />
+at net.imglib2.img.planar.PlanarRandomAccess.setPosition(PlanarRandomAccess.java:227)<br />
+at net.imglib2.display.CompositeXYProjector.map(CompositeXYProjector.java:107)<br />
+at imagej.display.DatasetView.setPosition(DatasetView.java:193)<br />
+at imagej.ui.swing.display.SwingDisplayWindow$2.adjustmentValueChanged(SwingDisplayWindow.java:204)<br />
+at javax.swing.JScrollBar.fireAdjustmentValueChanged(JScrollBar.java:675)<br />
+at javax.swing.JScrollBar.access$100(JScrollBar.java:64)<br />
+at javax.swing.JScrollBar$ModelListener.stateChanged(JScrollBar.java:697)<br />
+at javax.swing.DefaultBoundedRangeModel.fireStateChanged(DefaultBoundedRangeModel.java:348)<br />
+at javax.swing.DefaultBoundedRangeModel.setRangeProperties(DefaultBoundedRangeModel.java:285)<br />
+at javax.swing.DefaultBoundedRangeModel.setValue(DefaultBoundedRangeModel.java:151)<br />
+at javax.swing.JScrollBar.setValue(JScrollBar.java:446)<br />
+at com.apple.laf.AquaScrollBarUI.scrollByUnit(AquaScrollBarUI.java:202)<br />
+at com.apple.laf.AquaScrollBarUI$TrackListener.mousePressedInArrows(AquaScrollBarUI.java:342)<br />
+at com.apple.laf.AquaScrollBarUI$TrackListener.mousePressed(AquaScrollBarUI.java:267)<br />
+at java.awt.Component.processMouseEvent(Component.java:6371)<br />
+at javax.swing.JComponent.processMouseEvent(JComponent.java:3267)<br />
+at java.awt.Component.processEvent(Component.java:6139)<br />
+at java.awt.Container.processEvent(Container.java:2085)<br />
+at java.awt.Component.dispatchEventImpl(Component.java:4736)<br />
+at java.awt.Container.dispatchEventImpl(Container.java:2143)<br />
+at java.awt.Component.dispatchEvent(Component.java:4566)<br />
+at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4621)<br />
+at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4279)<br />
+at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4212)<br />
+at java.awt.Container.dispatchEventImpl(Container.java:2129)<br />
+at java.awt.Window.dispatchEventImpl(Window.java:2478)<br />
+at java.awt.Component.dispatchEvent(Component.java:4566)<br />
+at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:680)<br />
+at java.awt.EventQueue.access$000(EventQueue.java:86)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:639)<br />
+at java.awt.EventQueue$1.run(EventQueue.java:637)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:87)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:98)<br />
+at java.awt.EventQueue$2.run(EventQueue.java:653)<br />
+at java.awt.EventQueue$2.run(EventQueue.java:651)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:87)<br />
+at java.awt.EventQueue.dispatchEvent(EventQueue.java:650)<br />
+at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:296)<br />
+at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:211)<br />
+at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:201)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:196)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:188)<br />
+at java.awt.EventDispatchThread.run(EventDispatchThread.java:122)<br />
+</p>
+</blockquote>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-04-29T10%3A41%3A07-05%3A00&amp;precision=second" title="2011-04-29T10:41:07-05:00 in Timeline">8 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Fixed in 8745867e16f606aed5023270eef0330ebeaed795.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/468?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/468?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/468?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

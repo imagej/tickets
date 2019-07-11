@@ -1,0 +1,479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1035 (Switch source code to Git)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1034" title="Ticket #1034" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1035?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1035?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1035?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1036" title="Ticket #1036" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="234a52f7cfc6c6cad4ce4099";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1035, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1034" title="Ticket #1034">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/1036" title="Ticket #1036">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1035">Ticket #1035</a>
+          <span class="status">(closed enhancement: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2012-02-28T13%3A35%3A41-06%3A00&amp;precision=second" title="2012-02-28T13:35:41-06:00 in Timeline">7 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2012-05-31T12%3A59%3A44-05%3A00&amp;precision=second" title="2012-05-31T12:59:44-05:00 in Timeline">7 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Switch source code to Git</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=dscho">dscho</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=dscho">dscho</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=minor">minor</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b3-headless">imagej2-b3-headless</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Server+Admin">Server Admin</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=minor">minor</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+              ctrueden@…
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+Once upon a time, we already had it, and it makes collaborative development much easier for us.<br />
+</p>
+<p>
+The problem with it is that Trac-Git seems to be slow. We need to look into how to speed up things there.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-28T13%3A35%3A47-06%3A00&amp;precision=second" title="2012-02-28T13:35:47-06:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>curtis</em> to <em>dscho</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>accepted</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-28T14%3A42%3A46-06%3A00&amp;precision=second" title="2012-02-28T14:42:46-06:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Cc</strong>
+        <em>ctrueden@…</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Curtis reports that the performance improved with switching the Git plugin's caching *off*.<br />
+</p>
+<p>
+The major problem now seems that we need a way to somehow deal with the many references to Subversion revisions. Either we convert them to hashes (which would be a one-time, clean break) or we hack something like "r&lt;n&gt; -&gt; 79599fe5f~&lt;4992 minus n&gt;".<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-29T11%3A08%3A51-06%3A00&amp;precision=second" title="2012-02-29T11:08:51-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+My vote is for the one-time conversion. Trac now allows editing of both description and individual comments, so it should be doable to write a script that updates all "r\d+" patterns to their corresponding Git hash. Then we don't have to hack the commit hashes themselves, and the Trac links will not be broken.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-04T12%3A58%3A46-05%3A00&amp;precision=second" title="2012-04-04T12:58:46-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+One thing we probably want to do is to activate the Trac plugin on <a class="ext-link" href="https://github.com/imagej/imagej/admin/hooks"><span class="icon"> </span>https://github.com/imagej/imagej/admin/hooks</a> to update the ticket statuses automatically.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-05-31T12%3A00%3A25-05%3A00&amp;precision=second" title="2012-05-31T12:00:25-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>accepted</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+We used the script bin/rewrite-svn-branch.perl to rewrite all of our branches and replaced 'master' with that history in in 2defeef21c2c2dc5c96a79832e01adc94d8466ce. The conversion script was subsequently removed (but it is still part of history).<br />
+</p>
+<p>
+To rewrite the tickets in Trac, we used this script:<br />
+</p>
+<pre class="wiki">#!/bin/sh
+
+PERL=/tmp/trac-svn2git.$$.perl
+TRAC=/var/lib/trac/imagej/db/trac.db
+
+cat &gt; $PERL &lt;&lt; EOF
+our %mapping = (
+EOF
+
+(cd $HOME/ij2 &amp;&amp;
+        git log master |
+        perl -e '
+                my $commit = "";
+                my $sep = "";
+                while (&lt;&gt;) {
+                        if (/^commit ([0-9a-f]{40})/) {
+                                $commit = $1;
+                        }
+                        elsif (/^    This used to be revision (r[1-9][0-9]*)\.$/) {
+                                print $sep . "\"" . $1 . "\" =&gt; \"" . $commit . "\"";
+                                $sep = ",\n";
+                        }
+                }
+                print "\n";
+        ') &gt;&gt; $PERL
+
+cat &gt;&gt; $PERL &lt;&lt; \EOF
+);
+
+sub map_revision ($) {
+        my $text = $_[0];
+        my @list = split(/\b(r[1-9][0-9]*)\b/s, $text);
+        for (my $i = 1; $i &lt;= $#list; $i += 2) {
+                if (exists($mapping{$list[$i]})) {
+                        $list[$i] = $mapping{$list[$i]};
+                }
+        }
+        return join('', @list);
+}
+
+while (&lt;&gt;) {
+        while ((tr/'// % 2) == 1) {
+                $_ .= &lt;&gt;;
+        }
+        if (/^INSERT INTO "ticket" VALUES\((\d+),(NULL|'([^']*)'),(\d+),(\d+),(NULL|'([^']*)'),(NULL|'([^']*)'),(NULL|'([^']*)'),(NULL|'([^']*)'),(NULL|'([^']*)'),(NULL|'([^']*)'),(NULL|'([^']*)'),(NULL|'([^']*)'),(NULL|'([^']*)'),(NULL|'([^']*)'),(NULL|'(([^']|'')*)'),(NULL|'(([^']|'')*)'),(NULL|'([^']*)')\);$/s) {
+                my $id = $1;
+                my $type = $2;
+                my $time = $4;
+                my $changetime = $5;
+                my $component = $6;
+                my $severity = $8;
+                my $priority = $10;
+                my $owner = $12;
+                my $reporter = $14;
+                my $cc = $16;
+                my $version = $18;
+                my $milestone = $20;
+                my $status = $22;
+                my $resolution = $24;
+                my $summary = $26;
+                my $description = $29;
+                my $keywords = $33;
+
+                my $new_summary = map_revision($summary);
+                if ($new_summary ne $summary) {
+                        print "UPDATE ticket SET summary=" . $new_summary . " WHERE id=" . $id . ";\n";
+                }
+                my $new_description = map_revision($description);
+                if ($new_description ne $description) {
+                        print "UPDATE ticket SET description=" . $new_description . " WHERE id=" . $id . ";\n";
+                }
+        }
+        elsif (/^INSERT INTO "ticket_change" VALUES\((\d+),(\d+),(NULL|'([^']*)'),(NULL|'([^']*)'),(NULL|'(([^']|'')*)'),(NULL|'(([^']|'')*)')\);$/s) {
+                my $ticket = $1;
+                my $time = $2;
+                my $author = $3;
+                my $field = $5;
+                my $oldvalue = $7;
+                my $newvalue = $10;
+
+                my $new_oldvalue = map_revision($oldvalue);
+                if ($new_oldvalue ne $oldvalue) {
+                        print "UPDATE ticket_change SET oldvalue=" . $new_oldvalue . " WHERE ticket=" . $ticket . " AND time=" . $time . " AND field=" . $field . ";\n";
+                }
+                my $new_newvalue = map_revision($newvalue);
+                if ($new_newvalue ne $newvalue) {
+                        print "UPDATE ticket_change SET newvalue=" . $new_newvalue . " WHERE ticket=" . $ticket . " AND time=" . $time . " AND field=" . $field . ";\n";
+                }
+        }
+}
+EOF
+
+commands="$(printf  '.dump ticket\n.dump ticket_change\n' |
+sqlite3 "$TRAC" |
+perl $PERL)"
+
+echo "$commands" |
+sqlite3 "$TRAC"
+</pre><p>
+In short, this script looks for the mappings between Subversion and Git revisions (during the rewrite, the git-svn id line would be replaced by something parse-able like "This used to be revision ....") and then scans the <em>summary</em> and <em>description</em> fields in the <em>ticket</em> table and the oldvalue and newvalue fields in the <em>ticket_change</em> table for rewritten Subversion tickets (it leaves those alone for which we do not have Git revisions; this happened e.g. for loci-java commits), writes appropriate UPDATE statements and finally feeds those to SQLite3.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-05-31T12%3A59%3A44-05%3A00&amp;precision=second" title="2012-05-31T12:59:44-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0</em> to <em>imagej-2.0.0-beta3</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1035?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1035?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1035?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

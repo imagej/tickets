@@ -1,0 +1,489 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #52 (Trac ticket #36 update)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/51" title="Ticket #51" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/52?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/52?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/52?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/53" title="Ticket #53" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="432e264cf1b7dad8da727802";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 52, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/51" title="Ticket #51">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/53" title="Ticket #53">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/52">Ticket #52</a>
+          <span class="status">(closed task: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2010-06-01T12%3A10%3A43-05%3A00&amp;precision=second" title="2010-06-01T12:10:43-05:00 in Timeline">9 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2010-06-22T11%3A21%3A44-05%3A00&amp;precision=second" title="2010-06-22T11:21:44-05:00 in Timeline">9 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Trac ticket #36 update</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=rlentz">rlentz</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=rlentz">rlentz</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=minor">minor</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/biweekly-2010%3A%20Jun-14%20to%20Jun-25">biweekly-2010: Jun-14 to Jun-25</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Core">Core</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=minor">minor</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+              <a href="/query?status=!closed&amp;keywords=~cuda">cuda</a>, <a href="/query?status=!closed&amp;keywords=~opencl">opencl</a>, <a href="/query?status=!closed&amp;keywords=~publication">publication</a>, <a href="/query?status=!closed&amp;keywords=~imagej">imagej</a>
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+On June 4, Kevin and Curtis will review the performance data for the OpenCL versions of Sobel filter and for iterative 3D deconvolution.<br />
+</p>
+<p>
+In preparation for 06/04, I will create a dynamic library for iterative 3D deconvolution from the existing [BSD style] plugin implementation implemented by Robert Dougherty.<br />
+</p>
+<p>
+Specifically, this implementation will include mapping the following 31 functions to OpenCL and assembling the required OpenCL glue code to obtain results that match the existing implementation.  A list of the current static functions follow:<br />
+</p>
+<p>
+ApplyScaleFactor.java<br />
+BitRevRArr.java<br />
+BitRevX.java<br />
+BSet.java<br />
+BTST.java<br />
+ConvolveFD.java<br />
+CopyData.java<br />
+CopyDataAverage.java<br />
+CopyDataMask.java<br />
+CopyDataMirror.java<br />
+DeconvolveFD.java<br />
+EnergySum.java<br />
+ExpandedSize.java<br />
+FastHartleyTransform.java<br />
+FastHartleyTransform3D.java<br />
+FindGaussianFilterWeights.java<br />
+FindMagMax.java<br />
+FindSumAbs.java<br />
+GaussianFilter.java<br />
+GaussianFilterScale.java<br />
+HartleyCoeffs.java<br />
+Log2.java<br />
+MakeSinCosTables.java<br />
+MeanDelta.java<br />
+Mirror.java<br />
+PowerOfTwo.java<br />
+RowColumnFastHartleyTransform.java<br />
+SlowHT.java<br />
+SwapQuadrants.java<br />
+TODB2DArray.java<br />
+UNDB2DArray.java<br />
+</p>
+<p>
+The week of 7 June will be used to gather performance data for the publication from the JavaCL and native dynamic library implementations for sobel and iterative 3D deconvolution (pending review from the 4 June meeting).<br />
+</p>
+<p>
+Specifically, the results will be execution times for a single 3D sample dataset and precomputed point spread function  (see attachment 1).  These results will be documented formally and referenced in follow on work that prepares the results for publication.  <br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+    <div id="attachments">
+        <h2 class="foldable">Attachments</h2>
+        <div>
+          <dl class="attachments">
+              <dt>
+    <a href="/attachment/ticket/52/PSF.zip" title="View attachment">PSF.zip</a>
+      <a href="/raw-attachment/ticket/52/PSF.zip" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="38666460 bytes">36.9 MB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-06-01T12%3A15%3A30-05%3A00&amp;precision=second" title="2010-06-01T12:15:30-05:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                Point Spread Function
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/52/Bars-G10-P15.zip" title="View attachment">Bars-G10-P15.zip</a>
+      <a href="/raw-attachment/ticket/52/Bars-G10-P15.zip" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="13234076 bytes">12.6 MB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-06-01T12%3A16%3A00-05%3A00&amp;precision=second" title="2010-06-01T12:16:00-05:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                Sample Data with Synthetic Noise
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/52/Iterative_Deconvolve_3D_old.java" title="View attachment">Iterative_Deconvolve_3D_old.java</a>
+      <a href="/raw-attachment/ticket/52/Iterative_Deconvolve_3D_old.java" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="29316 bytes">28.6 KB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-06-01T16%3A11%3A05-05%3A00&amp;precision=second" title="2010-06-01T16:11:05-05:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                Iterative Deconvolution 3D
+              </dd>
+              <dt>
+    <a href="/attachment/ticket/52/Diffraction_PSF_3D.java" title="View attachment">Diffraction_PSF_3D.java</a>
+      <a href="/raw-attachment/ticket/52/Diffraction_PSF_3D.java" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="10940 bytes">10.7 KB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-06-01T16%3A11%3A39-05%3A00&amp;precision=second" title="2010-06-01T16:11:39-05:00 in Timeline">9 years</a> ago.
+  </dt>
+              <dd>
+                Diffraction PSF 3D
+              </dd>
+          </dl>
+          
+        </div>
+    </div>
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-06-01T12%3A15%3A30-05%3A00&amp;precision=second" title="2010-06-01T12:15:30-05:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/52/PSF.zip"><em>PSF.zip</em></a>
+          <a href="/raw-attachment/ticket/52/PSF.zip" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Point Spread Function<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-06-01T12%3A16%3A00-05%3A00&amp;precision=second" title="2010-06-01T12:16:00-05:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/52/Bars-G10-P15.zip"><em>Bars-G10-P15.zip</em></a>
+          <a href="/raw-attachment/ticket/52/Bars-G10-P15.zip" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Sample Data with Synthetic Noise<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-06-01T12%3A17%3A18-05%3A00&amp;precision=second" title="2010-06-01T12:17:18-05:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>gharris</em> to <em>rlentz</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>accepted</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-06-01T12%3A24%3A50-05%3A00&amp;precision=second" title="2010-06-01T12:24:50-05:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        set to <em>biweekly-2010: Jun-01 to Jun-11</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-06-01T16%3A11%3A05-05%3A00&amp;precision=second" title="2010-06-01T16:11:05-05:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/52/Iterative_Deconvolve_3D_old.java"><em>Iterative_Deconvolve_3D_old.java</em></a>
+          <a href="/raw-attachment/ticket/52/Iterative_Deconvolve_3D_old.java" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Iterative Deconvolution 3D<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-06-01T16%3A11%3A39-05%3A00&amp;precision=second" title="2010-06-01T16:11:39-05:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/52/Diffraction_PSF_3D.java"><em>Diffraction_PSF_3D.java</em></a>
+          <a href="/raw-attachment/ticket/52/Diffraction_PSF_3D.java" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Diffraction PSF 3D<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-06-22T11%3A21%3A44-05%3A00&amp;precision=second" title="2010-06-22T11:21:44-05:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>accepted</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+This effort experienced interruption by ImageJ OSGI Demo work and was resumed on Jun 22, 2010.<br />
+</p>
+<p>
+The status is that all the static methods have been ported as individual test functions in C using OpenCL.  Per task direction, no algorithmic rework or optimization work was performed.  <br />
+</p>
+<p>
+The test functions are supported by 20 kernels... The next steps will be broken out in more detail an reference this one (52).<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/52?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/52?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/52?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,622 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #649 (Implement File Save and File Save As)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/648" title="Ticket #648" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/649?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/649?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/649?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/650" title="Ticket #650" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="05c5ebe6f50599ea04e0f659";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 649, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/648" title="Ticket #648">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/650" title="Ticket #650">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/649">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/649">Ticket #649</a>
+          <span class="status">(closed task: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2011-06-28T17%3A31%3A59-05%3A00&amp;precision=second" title="2011-06-28T17:31:59-05:00 in Timeline">8 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-06-07T15%3A37%3A54-05%3A00&amp;precision=second" title="2013-06-07T15:37:54-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Implement File Save and File Save As</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=hinerm">hinerm</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b1-initial">imagej2-b1-initial</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Core">Core</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+              <a class="closed" href="/ticket/1013" title="ImgSaver for exporting image data">#1013</a>, <a class="closed" href="/ticket/1045" title="Add source string metadata to ImgPlus">#1045</a>
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/9" title="Redesign core I/O infrastructure">#9</a>, <a class="closed" href="/ticket/1171" title="Reimplement some IJ1 plugins [plugins]">#1171</a>, <a class="closed" href="/ticket/1912" title="Redesign core I/O infrastructure [ndim-data]">#1912</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+IJ2 does not yet allow the saving of data. Implement save functionality.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-01-18T16%3A26%3A27-06%3A00&amp;precision=second" title="2012-01-18T16:26:27-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0-beta2</em> to <em>imagej-2.0-beta1</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-26T22%3A55%3A58-06%3A00&amp;precision=second" title="2012-02-26T22:55:58-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>9, 1019</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-27T09%3A05%3A27-06%3A00&amp;precision=second" title="2012-02-27T09:05:27-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1013</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-02-27T11%3A06%3A38-06%3A00&amp;precision=second" title="2012-02-27T11:06:38-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>curtis</em> to <em>hinerm</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>assigned</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+This ticket is about a SaveImage plugin for IJ2. It will use the ImgSaver (ticket <a class="closed ticket" href="/ticket/1013" title="task: ImgSaver for exporting image data (closed: fixed)">#1013</a>).<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-05T10%3A32%3A05-06%3A00&amp;precision=second" title="2012-03-05T10:32:05-06:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocked By</strong>
+        <em>1045</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-07T12%3A47%3A45-06%3A00&amp;precision=second" title="2012-03-07T12:47:45-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Make sure that Save and Save As updates the saved Imgplus' source string (via imgPlus.setSource()). This code has recently been added.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-26T11%3A40%3A07-05%3A00&amp;precision=second" title="2012-03-26T11:40:07-05:00 in Timeline">7 years</a> ago by hinerm
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Changes are currently on this branch of ImageJ:<br />
+<a class="ext-link" href="https://github.com/imagej/imagej/tree/save-image"><span class="icon"> </span>https://github.com/imagej/imagej/tree/save-image</a><br />
+</p>
+<p>
+Implementation is complete and just needs to be reviewed and merged into master.<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2012-03-27T10%3A26%3A56-05%3A00&amp;precision=second" title="2012-03-27T10:26:56-05:00 in Timeline">7 years</a> ago
+                      by curtis
+                    (<a href="/ticket/649?cversion=0&amp;cnum_hist=6#comment:6">previous</a>)
+                    (<a href="/ticket/649?action=comment-diff&amp;cnum=6&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-27T10%3A26%3A47-05%3A00&amp;precision=second" title="2012-03-27T10:26:47-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I made some changes to the branch, merged with master, and did some additional work on it. See 89ecc3fdc25139b5e525273d4d3d7d3384f067ae, 5ff6a4960f50e5495c4d71d23d485f4297edce5e, 4f4cf232031d1e050e428948044480dbdb2bdd33, 708c8fd2440cd0ecf7d607f2674b9922c6edde8f and 63df0f9b660524b02338536aa70352bcd85ac0ba.<br />
+</p>
+<p>
+There are still some problems:<br />
+</p>
+<ol><li>No progress is shown during the save. StatusEvents should be issued, similar to OpenImage.
+</li><li>No dialog box is popped upon error. Both OpenImage and SaveImage should do this.
+</li><li>Saving multi-channel data throws an exception (e.g., try with Clown).
+</li><li>In general, more manual testing is needed across various image types.
+</li><li>There is no facility to attach filters to file chooser widgets. It would be nice to show the supported exportable file types in the chooser's dropdown.
+</li></ol><p>
+Items 1 through 4 must be solved before this ticket can be closed.<br />
+</p>
+<p>
+Item 5 has been filed separately as ticket <a class="closed ticket" href="/ticket/1080" title="enhancement: Provide a mechanism for attaching filters to file chooser widgets (closed: moved)">#1080</a>.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-27T14%3A33%3A42-05%3A00&amp;precision=second" title="2012-03-27T14:33:42-05:00 in Timeline">7 years</a> ago by hinerm
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Opened branch fix-imgsaver:<br />
+<a class="ext-link" href="https://github.com/ctrueden/bioformats/tree/fix-imgsaver"><span class="icon"> </span>https://github.com/ctrueden/bioformats/tree/fix-imgsaver</a><br />
+</p>
+<p>
+and fix-imageio-plugins<br />
+<a class="ext-link" href="https://github.com/imagej/imagej/tree/fix-imageio-plugins"><span class="icon"> </span>https://github.com/imagej/imagej/tree/fix-imageio-plugins</a><br />
+</p>
+<p>
+to address these issues.<br />
+</p>
+<p>
+Currently, 1 has been fixed via commit:<br />
+<a class="ext-link" href="https://github.com/imagej/imagej/commit/68b36daaa983699c6c1c00faab5b2a57036de0f0"><span class="icon"> </span>https://github.com/imagej/imagej/commit/68b36daaa983699c6c1c00faab5b2a57036de0f0</a><br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-27T15%3A19%3A16-05%3A00&amp;precision=second" title="2012-03-27T15:19:16-05:00 in Timeline">7 years</a> ago by hinerm
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Fixed 2:<br />
+<a class="ext-link" href="https://github.com/imagej/imagej/commit/6efccfafeb71b776e75f1943bfecda9ab475f290"><span class="icon"> </span>https://github.com/imagej/imagej/commit/6efccfafeb71b776e75f1943bfecda9ab475f290</a><br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-29T16%3A21%3A19-05%3A00&amp;precision=second" title="2012-03-29T16:21:19-05:00 in Timeline">7 years</a> ago by hinerm
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+The ImgSaver class and ImageJ SaveAsImage plug-in have now been tested and fixed on the following branches, respectively:<br />
+</p>
+<p>
+<a class="ext-link" href="https://github.com/ctrueden/bioformats/tree/fix-imgsaver"><span class="icon"> </span>https://github.com/ctrueden/bioformats/tree/fix-imgsaver</a><br />
+<a class="ext-link" href="https://github.com/imagej/imagej/tree/fix-imageio-plugins"><span class="icon"> </span>https://github.com/imagej/imagej/tree/fix-imageio-plugins</a><br />
+</p>
+<p>
+The multi-channel exception was due to passing compositeChannelCount instead of a samples per pixel of 1 (as each channel is separated out to its own plane in ImgLib, which is what's desired by Bio-Formats).<br />
+</p>
+<p>
+Additional errors were found due to the unsupported pixel types possible in IJ2:<br />
+1-bit, 12-bit and signed 64-bit.<br />
+</p>
+<p>
+If an unsupported pixel type is detected, an exception is now thrown at the ImgSaver level.<br />
+</p>
+<p>
+Additionally, the axis compression logic was updated to only compress to the Channel axis. ImgSaver can now test and warn when an ImgPlus may require compression (which necessitates a change in the ImgPlus axes)<br />
+</p>
+<p>
+This ticket is now complete pending the merging of these branches.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-29T19%3A19%3A28-05%3A00&amp;precision=second" title="2012-03-29T19:19:28-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>assigned</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+The imagej fix-imageio-plugins branch has been merged (see 01844d903371f88df4963fe0e06e8562523c87c2 through 3fb6892817b1d37bf4fc5f90fa4032b283e78c73). The fix-imgsaver branch of Bio-Formats has a <a class="ext-link" href="https://github.com/openmicroscopy/bioformats/pull/49"><span class="icon"> </span>pull request</a> submitted. But in the meantime, we are staging the ImageJ 2.0.0-beta1 release on <a class="ext-link" href="https://github.com/ctrueden/bioformats/tree/imagej2-beta1"><span class="icon"> </span>a special branch</a>.<br />
+</p>
+<p>
+So the work necessary for the beta1 milestone is complete.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-05-14T12%3A04%3A40-05%3A00&amp;precision=second" title="2012-05-14T12:04:40-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1171</em> added; <em>1019</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-13">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:13" class="cnum">
+      <a href="#comment:13">comment:13</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-05T15%3A11%3A35-05%3A00&amp;precision=second" title="2013-06-05T15:11:35-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1912</em> added; <em>9</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-14">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:14" class="cnum">
+      <a href="#comment:14">comment:14</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-07T15%3A37%3A54-05%3A00&amp;precision=second" title="2013-06-07T15:37:54-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>9</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+(In <a class="closed ticket" href="/ticket/9" title="feature: Redesign core I/O infrastructure (closed: fixed)">#9</a>) This ticket is really about improving the <em>infrastructure</em> if I/O for ImageJ2. With SCIFIO, we have now done that. The 2.0.0-beta-7 release is using SCIFIO 0.1.0—File Open and File Save are now extensible—so this ticket is complete.<br />
+</p>
+<p>
+Remaining tickets about improving the existing I/O mechanism have been migrated to ticket <a class="closed ticket" href="/ticket/1920" title="feature: Improve I/O support [analysis] (closed: moved)">#1920</a>.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/649?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/649?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/649?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

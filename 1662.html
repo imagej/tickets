@@ -1,0 +1,587 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1662 (Fiji to include ImageJ2)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1661" title="Ticket #1661" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1662?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1662?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1662?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1663" title="Ticket #1663" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="f9b66aecaf7d70152035e29e";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1662, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count (+1)"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+1</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1661" title="Ticket #1661">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1663" title="Ticket #1663">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1662">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1662">Ticket #1662</a>
+          <span class="status">(closed enhancement: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2013-03-07T10%3A43%3A25-06%3A00&amp;precision=second" title="2013-03-07T10:43:25-06:00 in Timeline">6 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-07-16T13%3A42%3A17-05%3A00&amp;precision=second" title="2013-07-16T13:42:17-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Fiji to include ImageJ2</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=dscho">dscho</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=blocker">blocker</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="milestone" href="/milestone/imagej2-b8-analysis">imagej2-b8-analysis</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Legacy+Compatibility">Legacy Compatibility</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=critical">critical</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/1914" title="More seamless integration of IJ1 &amp; IJ2 [analysis]">#1914</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+We should ship all of ImageJ2 with Fiji. Users would work in IJ1 as usual but the switch to modern mode plugin would be operational in the menu and would switch to IJ2. Of course users can go back to IJ1 with the same legacy mode menu toggle.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-22T15%3A42%3A27-05%3A00&amp;precision=second" title="2013-03-22T15:42:27-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Type</strong>
+        changed from <em>defect</em> to <em>enhancement</em>
+    </li><li>
+      <strong>Component</strong>
+        changed from <em>Analysis Plugins</em> to <em>Legacy Compatibility</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-22T18%3A12%3A57-05%3A00&amp;precision=second" title="2013-03-22T18:12:57-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+The idea is to provide support in Fiji to start up in legacy mode and switch to the modern mode via "Help&gt;Switch to Modern Mode".<br />
+</p>
+<p>
+A couple of things need to be done for that:<br />
+</p>
+<ul><li>fiji-compat's Javassist hacking needs to be aware of, and needs to call, ij-legacy's Javassist hacking. This is required because we want to run ij-legacy basically in legacy mode, i.e. accumulating information such as which files have been opened, to be processed properly when ImageJ2 is turned on.
+</li></ul><ul><li>an ImageJ2 context needs to be constructed upon start-up. This might have to be done in the background if it turns out that ImageJ2's context construction slows down Fiji's start-up too much.
+</li></ul><ul><li>Once switched to modern mode (which might really be a start-up of ImageJ2, rather than making a previously invisible ImageJ2 instance visible), there must not be two Help&gt;Switch to Legacy Mode entries (i.e. Fiji probably needs to remove its Switch to Modern Mode menu item and let ij-legacy add its own version).
+</li></ul>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-26T10%3A36%3A03-05%3A00&amp;precision=second" title="2013-03-26T10:36:03-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Current progress:<br />
+</p>
+<ul><li>on ImageJ's <em>ij-legacy-fiji-compat</em> branch and Fiji's <em>ij-legacy</em> branch, the current state of affairs can be inspected.
+</li><li>Fiji is aware of <em>ij-legacy</em> and gives its LegacyInjector a chance.
+</li><li>It is possible to hide the IJ1 UI and initialize ImageJ2 and show it, then switch back, already.
+</li></ul><p>
+Things still to be done:<br />
+</p>
+<ul><li>ClassLoader problems to address: since <em>fiji-compat</em> now depends on <em>ij-app</em>, we cannot hope to update ImageJ2 stuff via <em>Help&gt;Refresh Menus</em>. To be able to update without a full restart of the JVM, we introduced the <em>imagej.ClassLoaderPlus</em> class, but for the moment this has a subtle bug: in its endeavor to try to avoid an overbounding <em>ClassLoader</em> proliferation, it tries to reuse <em>URLClassLoader</em>s. But the default <em>AppClassLoader</em> *is* a <em>URLClassLoader</em>, and therefore the <em>ClassLoaderPlus</em> adds the new URLs to its own <em>ClassLoader</em>, effectively preventing any reloading via <em>ClassLauncher#restart()</em>. This issue probably needs to be split out into its own ticket, as it is not critical to add <em>Switch To Modern Mode</em> to Fiji.
+</li><li>At the time of writing, there is a problem in that definition of the <em>CompositeImage</em> class is attempted twice. This is due to the non-transitivity of <em>ClassPool#toClass()</em> (it only marks modified <em>CtClass</em> instances as frozen when they are defined directly via <em>toClass()</em> or when they are direct dependencies of other modified <em>CtClass</em> instances that have been defined via <em>toClass()</em>, but not if they are dependencies of *unmodified* dependencies of other modified <em>CtClass</em> instances).
+</li><li>The <em>CompositeImage</em> problem points out that it is *required* to merge <em>IJ1Patcher</em> online patching into the <em>LegacyInjector</em>.
+</li><li>As ImageJ2 is not yet tuned for speed, initializing the Context can take quite a bit of time, at least more than this developer wants to suffer upon clicking <em>Switch To Modern Mode</em>. We should therefore initialize the ImageJ2 Context earlier (and make it a singleton). This will also help running ImageJ2 plugins in Fiji.
+</li><li>replace Fiji's <em>Switch To Modern Mode</em> with ImageJ2's as soon as Fiji initialized ImageJ2.
+</li></ul>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-03-26T16%3A55%3A25-05%3A00&amp;precision=second" title="2013-03-26T16:55:25-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Better than replacing Fiji's Switch To Modern Mode would be to simply add <em>SwitchToModernMode</em> as plugin. This requires <em>SwitchToModernMode</em> to know about the ImageJ Context singleton and reuse it if it is available, initialize if it is not.<br />
+</p>
+<p>
+The best way to accomplish this would be to add another field to the <em>ij.IJ</em> class (in addition to the <em>_legacyService</em>) that holds the context, creating one if none is yet available.<br />
+</p>
+<p>
+Unfortunately, there is no elegant way to do it via an interface that would be Javassist'ed onto <em>ij.IJ</em> because interfaces cannot define static methods. So it seems we have to use reflection.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-15T00%3A33%3A07-05%3A00&amp;precision=second" title="2013-04-15T00:33:07-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Priority</strong>
+        changed from <em>major</em> to <em>blocker</em>
+    </li><li>
+      <strong>Severity</strong>
+        changed from <em>serious</em> to <em>critical</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Bumping up the priority.<br />
+</p>
+<p>
+As to the problem how to access the LegacyService: we could add special-handling for IJ.runPlugIn("imagej.legacy.LegacyService", null) to return _legacyService.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-26T01%3A35%3A39-05%3A00&amp;precision=second" title="2013-04-26T01:35:39-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Progress. Pretty good progress, even. You can now obtain the legacy service using<br />
+</p>
+<pre class="wiki">LegacyService legacyService = (LegacyService)
+    IJ.runPlugIn(LegacyService.class.getName(), null);
+</pre><p>
+and the Context using<br />
+</p>
+<pre class="wiki">Context context = (Context)IJ.runPlugIn(Context.class.getName(), null);
+</pre><p>
+This is a slight abuse of the API, but I think a quite okay one, given that neither LegacyService nor Context will ever be ImageJ 1.x plugins.<br />
+</p>
+<p>
+On ImageJ2's <em>ij-legacy-fiji-compat</em> and Fiji's <em>ij-legacy</em> branch, the current state already uses ij-legacy's SwitchToModernMode to activate said mode.<br />
+</p>
+<p>
+Things to be done still:<br />
+</p>
+<ul><li><tt>ij.Composite</tt> does not get initialized properly because Fiji's <tt>IJ1Patcher</tt> patches it but ImageJ2's <tt>LegacyInjector</tt> does not. We probably should move most of Fiji's patching over to ij-legacy (with the notable exception of Fiji's Script Editor grafting; we'll leave that in fiji-compat until ImageJ2's Script Editor is used by Fiji).
+</li><li>Images that have been opened before the LegacyService was initialized are not picked
+</li><li>Probably the same holds true for ROI Manager and the Results Table
+</li><li>The same windows, plus  Brightness/Contrast, Color Picker, Command Launcher, etc, need to be toggled by <tt>toggleLegacyMode</tt>, too. In general, every window that was registered with <tt>ij.WindowManager</tt>.
+</li></ul>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-26T17%3A31%3A06-05%3A00&amp;precision=second" title="2013-04-26T17:31:06-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I got rid of the clunky branch name <em>ij-legacy-fiji-compat</em> in favor of <em>fiji-compat</em>. An early part is already merged to <em>master</em> (triggering my fixing a long-standing bug that was only apparent on Windows: thanks, Jenkins!).<br />
+</p>
+<p>
+Current state:<br />
+</p>
+<ul><li><tt>ij.Composite</tt> gets initialized properly because that handling moved to <em>ij-legacy</em>.
+</li><li>Images that have been opened before the LegacyService was initialized are properly picked up by the modern mode.
+</li><li>The ROI Manager has been fixed both by Curtis and me (independently; I was working on a branch).
+</li><li>Most of the <em>fiji-compat</em> stuff still needs to move to <em>ij-legacy</em>.
+</li><li>Results Table, B/C, Color Picker, Command Launcher (and what else?) still need to be fixed.
+</li></ul><p>
+Having said that, we could already merge these branches to their respective <em>master</em> and give people a preview today. Let's polish things a bit before that, though.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-06-05T15%3A40%3A22-05%3A00&amp;precision=second" title="2013-06-05T15:40:22-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1914</em> added; <em>1661</em> removed
+    </li><li>
+      <strong>Milestone</strong>
+        changed from <em>imagej2-b7-ndim-data</em> to <em>imagej2-b8-analysis</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-07-11T15%3A03%3A34-05%3A00&amp;precision=second" title="2013-07-11T15:03:34-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I worked really hard on this issue and finally am very, very close to merging it all.<br />
+</p>
+<p>
+The <em>fiji-compat</em> branch of imagej.git has now all the legacy patches <em>fiji-compat</em> had, but in a much better form: the <em>LegacyExtensions</em> class has a function using the <em>CodeHacker</em> to insert extension points that call back into <em>LegacyExtensions</em> to obtain settings the application can change easily by calling yet other functions of the same class (e.g. <tt>LegacyExtensions.setIcon(File)</tt> to change the icon of all the windows registered with ImageJ 1.x' <em>WindowManager</em> class).<br />
+</p>
+<p>
+The <em>ij-legacy</em> branch of fiji.git has the changes required to make use of the changes in the <em>fiji-compat</em> branch.<br />
+</p>
+<p>
+All that is needed now is a review of the <em>fiji-compat</em> branch, and then we need to decide how to go forward with Fiji. There are a couple of options:<br />
+</p>
+<ul><li>release a new beta of ImageJ2 just for that purpose.
+</li></ul><ul><li>upload a temporary ImageJ2 onto the Fiji update site.
+</li></ul><ul><li>merge into ImageJ2's master, bu wait until the next beta of ImageJ2 is released until merging into Fiji's master.
+</li></ul><p>
+In any case, we will need to make a beautiful announcement because there might be disruptions with regard to the patches, i.e. some bugs introduced by that separation.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-07-13T14%3A29%3A35-05%3A00&amp;precision=second" title="2013-07-13T14:29:35-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+So after discussing this with Curtis Rueden, the roadmap is clear:<br />
+</p>
+<ol><li>we will release an intermediate beta called "7.1" probably this coming Monday.
+</li><li>we'll upload that to the ImageJ update site.
+</li><li>we'll edit fiji.git's <em>ij-legacy</em> branch to have that version as dependency (rather than -SNAPSHOT) and merge to master.
+</li><li>we'll send an announcement about the upcoming changes (and that users relying on a stable system should hold off from updating for a while)
+</li><li>we'll upload a new <em>fiji-compat.jar</em> to the Fiji update site.
+</li></ol>
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-07-16T13%3A01%3A22-05%3A00&amp;precision=second" title="2013-07-16T13:01:22-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Steps 1 through 4 have been accomplished (although I postponed step 2 -- the upload to the update site -- to Tuesday to leave users time after reading the mail sent on Monday -- which was step 4).<br />
+</p>
+<p>
+Step 5 will be performed now.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-07-16T13%3A30%3A13-05%3A00&amp;precision=second" title="2013-07-16T13:30:13-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Bah. I forgot to make sure that the new ImageJ launcher was uploaded to the update site. So for a couple of minutes, everybody who updated got a non-functional Fiji because of class path issues. But now everything should be cozy again.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-13">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:13" class="cnum">
+      <a href="#comment:13">comment:13</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-07-16T13%3A42%3A17-05%3A00&amp;precision=second" title="2013-07-16T13:42:17-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Looks like it.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1662?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1662?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1662?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

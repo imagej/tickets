@@ -1,0 +1,531 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1478 (Overlay harmonization might cause issues)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1477" title="Ticket #1477" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1478?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1478?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1478?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1479" title="Ticket #1479" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="91651f1bf134bfa50c5da3ad";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1478, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1477" title="Ticket #1477">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1479" title="Ticket #1479">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1478">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1478">Ticket #1478</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2012-09-12T10%3A17%3A55-05%3A00&amp;precision=second" title="2012-09-12T10:17:55-05:00 in Timeline">7 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-05-31T16%3A39%3A12-05%3A00&amp;precision=second" title="2013-05-31T16:39:12-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Overlay harmonization might cause issues</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b7-ndim-data">imagej2-b7-ndim-data</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Legacy+Compatibility">Legacy Compatibility</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version=2.0.0-beta4">2.0.0-beta4</a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="assigned" href="/ticket/285" title="Improve support for ROIs, segmentation and labeling [rois]">#285</a>, <a class="new" href="/ticket/1484" title="Update legacy layer to fix some plugin incompatibilities [rois]">#1484</a>, <a class="closed" href="/ticket/1563" title="Fix obviously failing commands [ndim-data]">#1563</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+Open Boats. Run Salt and Pepper. Despeckle. Salt/pepper pixels go away.<br />
+</p>
+<p>
+Open Boats. Find Maxima (takes a long time). Run Salt and Pepper. Despeckle. Salt/pepper pixels don't go away. It may be running and not finishing before I give up. Or not.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-13T11%3A11%3A09-05%3A00&amp;precision=second" title="2012-09-13T11:11:09-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1459</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-14T15%3A20%3A15-05%3A00&amp;precision=second" title="2012-09-14T15:20:15-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I've spent a lot of effort debugging this. I've verified that the despeckle command is changing pixels in both cases but if the Find Maxima command was run before then the difference in pixels is quite small. I can't exactly determine why yet.<br />
+</p>
+<p>
+I did verify that no commands are hung up. All of them complete.<br />
+</p>
+<p>
+Note that commenting out the OverlayHarmonizer calls in Harmonizer "fixes" the problem. So that part of harmonization is key.<br />
+</p>
+<p>
+Moving the order of overlay harmonization in the Harmonizer code to before pixel harmonization doesn't make any difference.<br />
+</p>
+<p>
+Note however that overlay harmonization, when it happens, tries to display the overlays through the DefaultOverlayService which calls ImageDisplay::display(overlay). This does a rebuild() every time an OverlayView is added. In this case, with Boats, that is over 1400 times. This presents a problem by itself (there is a ticket to create 1 multipoint overlay rather than 1400 of them) but the excessive display()'ing might lead to an event storm that messes up display/imageplus synchronization.<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2012-09-14T16%3A13%3A13-05%3A00&amp;precision=second" title="2012-09-14T16:13:13-05:00 in Timeline">7 years</a> ago
+                      by bdezonia
+                    (<a href="/ticket/1478?cversion=1&amp;cnum_hist=2#comment:2">previous</a>)
+                    (<a href="/ticket/1478?action=comment-diff&amp;cnum=2&amp;version=2">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-14T15%3A30%3A22-05%3A00&amp;precision=second" title="2012-09-14T15:30:22-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>285, 1484</em> added; <em>1459</em> removed
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-14T15%3A31%3A03-05%3A00&amp;precision=second" title="2012-09-14T15:31:03-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Moved to beta 6 as this involves ROIs and we may be changing the overlay harmonization scheme then anyways<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-09-14T15%3A31%3A24-05%3A00&amp;precision=second" title="2012-09-14T15:31:24-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0.0-beta5</em> to <em>imagej-2.0.0-beta6</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-12-11T16%3A19%3A20-06%3A00&amp;precision=second" title="2012-12-11T16:19:20-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Note that the issue seems fixed pre beta 6. But there is another issue: comodification errors. Doing the same set of steps (open boats, find maxima and wait, run S&amp;P, despeckle) looks correct. But exceptions can be thrown during process:<br />
+</p>
+<p>
+Uncaught exception in thread Thread[AWT-EventQueue-0,6,main]<br />
+java.util.ConcurrentModificationException<br />
+</p>
+<blockquote>
+<p>
+at java.util.AbstractList$Itr.checkForComodification(AbstractList.java:372)<br />
+at java.util.AbstractList$Itr.next(AbstractList.java:343)<br />
+at imagej.display.AbstractDisplay.toString(AbstractDisplay.java:93)<br />
+at java.lang.String.valueOf(String.java:2826)<br />
+at java.lang.StringBuilder.append(StringBuilder.java:115)<br />
+at imagej.display.event.DisplayEvent.toString(DisplayEvent.java:62)<br />
+at imagej.display.event.input.InputEvent.toString(InputEvent.java:78)<br />
+at java.lang.String.valueOf(String.java:2826)<br />
+at java.lang.StringBuilder.append(StringBuilder.java:115)<br />
+at imagej.event.DefaultEventBus$1.run(DefaultEventBus.java:199)<br />
+at imagej.thread.DefaultThreadService.invoke(DefaultThreadService.java:86)<br />
+at imagej.event.DefaultEventBus.publishNow(DefaultEventBus.java:195)<br />
+at imagej.event.DefaultEventBus.publishNow(DefaultEventBus.java:87)<br />
+at imagej.event.DefaultEventService.publish(DefaultEventService.java:79)<br />
+at imagej.ui.common.awt.AWTInputEventDispatcher.mouseMoved(AWTInputEventDispatcher.java:261)<br />
+at java.awt.AWTEventMulticaster.mouseMoved(AWTEventMulticaster.java:313)<br />
+at java.awt.AWTEventMulticaster.mouseMoved(AWTEventMulticaster.java:312)<br />
+at java.awt.Component.processMouseMotionEvent(Component.java:6427)<br />
+at javax.swing.JComponent.processMouseMotionEvent(JComponent.java:3293)<br />
+at java.awt.Component.processEvent(Component.java:6151)<br />
+at java.awt.Container.processEvent(Container.java:2083)<br />
+at java.awt.Component.dispatchEventImpl(Component.java:4744)<br />
+at java.awt.Container.dispatchEventImpl(Container.java:2141)<br />
+at java.awt.Component.dispatchEvent(Component.java:4572)<br />
+at java.awt.LightweightDispatcher.retargetMouseEvent(Container.java:4619)<br />
+at java.awt.LightweightDispatcher.processMouseEvent(Container.java:4293)<br />
+at java.awt.LightweightDispatcher.dispatchEvent(Container.java:4210)<br />
+at java.awt.Container.dispatchEventImpl(Container.java:2127)<br />
+at java.awt.Window.dispatchEventImpl(Window.java:2489)<br />
+at java.awt.Component.dispatchEvent(Component.java:4572)<br />
+at java.awt.EventQueue.dispatchEventImpl(EventQueue.java:704)<br />
+at java.awt.EventQueue.access$400(EventQueue.java:82)<br />
+at java.awt.EventQueue$2.run(EventQueue.java:663)<br />
+at java.awt.EventQueue$2.run(EventQueue.java:661)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:87)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:98)<br />
+at java.awt.EventQueue$3.run(EventQueue.java:677)<br />
+at java.awt.EventQueue$3.run(EventQueue.java:675)<br />
+at java.security.AccessController.doPrivileged(Native Method)<br />
+at java.security.AccessControlContext$1.doIntersectionPrivilege(AccessControlContext.java:87)<br />
+at java.awt.EventQueue.dispatchEvent(EventQueue.java:674)<br />
+at java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:296)<br />
+at java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:211)<br />
+at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:201)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:196)<br />
+at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:188)<br />
+at java.awt.EventDispatchThread.run(EventDispatchThread.java:122)<br />
+</p>
+</blockquote>
+<p>
+ImageJ 1.x plugin threw exception<br />
+java.util.ConcurrentModificationException<br />
+</p>
+<blockquote>
+<p>
+at java.util.AbstractList$Itr.checkForComodification(AbstractList.java:372)<br />
+at java.util.AbstractList$Itr.next(AbstractList.java:343)<br />
+at imagej.data.display.DefaultImageDisplay.update(DefaultImageDisplay.java:259)<br />
+at imagej.data.display.DefaultOverlayService.removeOverlay(DefaultOverlayService.java:172)<br />
+at imagej.legacy.translate.OverlayHarmonizer.updateDisplay(OverlayHarmonizer.java:120)<br />
+at imagej.legacy.translate.Harmonizer.updateDisplay(Harmonizer.java:195)<br />
+at imagej.legacy.plugin.LegacyCommand$LegacyCommandThread.updateDisplaysFromImagePluses(LegacyCommand.java:375)<br />
+at imagej.legacy.plugin.LegacyCommand$LegacyCommandThread.run(LegacyCommand.java:213)<br />
+</p>
+</blockquote>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-12-17T16%3A43%3A15-06%3A00&amp;precision=second" title="2012-12-17T16:43:15-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li><li>
+      <strong>Milestone</strong>
+        changed from <em>imagej2-b9-rois</em> to <em>imagej2-b6-legacy-undo</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+The comodification errors are being handled by ticket <a class="closed ticket" href="/ticket/1606" title="defect: Access ObjectService in a thread safe manner (closed: fixed)">#1606</a>.<br />
+</p>
+<p>
+Note that the issue here is that the maintenance of the point overlays is very time consuming (which is detailed in ticket <a class="closed ticket" href="/ticket/1103" title="defect: Point Rois do not display (closed: fixed)">#1103</a>). So each harmonization back from IJ1 deletes all the overlays and adds them again (totaling hundreds or more display rebuild events). So the code might be in the harmonizing state when Despeckle is run and pixel harmonization has not yet correctly happened. However locking of ImagesPluses and Displays would fix this somewhat too (this part of the issue is documented in ticket <a class="new ticket" href="/ticket/1192" title="defect: Lock images when running legacy plugins (new)">#1192</a>).<br />
+</p>
+<p>
+There is nothing specific to this ticket that is not handled elsewhere. Closing.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-12-17T16%3A43%3A56-06%3A00&amp;precision=second" title="2012-12-17T16:43:56-06:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej2-b6-legacy-undo</em> to <em>imagej2-b9-rois</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-05-31T16%3A39%3A12-05%3A00&amp;precision=second" title="2013-05-31T16:39:12-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1563</em> added
+    </li><li>
+      <strong>Milestone</strong>
+        changed from <em>imagej2-b9-rois</em> to <em>imagej2-b7-ndim-data</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1478?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1478?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1478?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

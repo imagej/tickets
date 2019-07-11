@@ -1,0 +1,514 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1823 (Reinstate the contrib branches of fiji.sc)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1822" title="Ticket #1822" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1823?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1823?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1823?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1824" title="Ticket #1824" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="9eb5eaae5b85d78417300fc7";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1823, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1822" title="Ticket #1822">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/1824" title="Ticket #1824">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/1823">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1823">Ticket #1823</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2013-04-17T13%3A24%3A04-05%3A00&amp;precision=second" title="2013-04-17T13:24:04-05:00 in Timeline">6 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-05-15T15%3A31%3A42-05%3A00&amp;precision=second" title="2013-05-15T15:31:42-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Reinstate the contrib branches of fiji.sc</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=dscho">dscho</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=dscho">dscho</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b7-ndim-data">imagej2-b7-ndim-data</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Server+Admin">Server Admin</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+              <a href="/query?status=!closed&amp;cc=~curtis">curtis</a>
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="closed" href="/ticket/1729" title="Clean up after fiji.sc move to Madison [ndim-data]">#1729</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+We can no longer do it with SSH, of course, but we can allow people to push to <a class="ext-link" href="http://fiji.sc/fiji.git's"><span class="icon"> </span>http://fiji.sc/fiji.git's</a> contrib branch without authentication. This will require some serious httpd.conf trickery, but it is doable.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-17T13%3A27%3A29-05%3A00&amp;precision=second" title="2013-04-17T13:27:29-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Is it too nasty to require people to fork on GitHub and file PRs? It would save us a lot of time, and create a written public record of contributions. The downside is that it is slightly less easy than just pushing to contrib was...<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-17T13%3A28%3A23-05%3A00&amp;precision=second" title="2013-04-17T13:28:23-05:00 in Timeline">6 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+And to be clear, by "people" I mean only "untrusted outsiders" and not core Fiji developers, same as before.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-04-19T18%3A15%3A36-05%3A00&amp;precision=second" title="2013-04-19T18:15:36-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+As you know, I am a big fan of requiring competent maintainers to go that extra step when it makes contributing substantially easier.<br />
+</p>
+<p>
+IMHO this is such a case, and I am a competent maintainer.<br />
+</p>
+<p>
+Just for the record: IIRC we got roughly 20 patches through the contrib branches, in addition to all of Gabriel's stuff...<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-05-15T15%3A31%3A42-05%3A00&amp;precision=second" title="2013-05-15T15:31:42-05:00 in Timeline">6 years</a> ago by dscho
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+I just fixed this, compiling a custom intermediary between Apache and <tt>git-http-backend</tt>, running it with the <em>jenkins-node</em> account as effective user. It takes all of its configuration from the environment variable <tt>GIT_PRE_RECEIVE_HOOK</tt> which has to be executable and owned by <em>root</em> (for security reasons). All it does is perform a couple of sanity checks before ensuring that the <tt>pre-receive</tt> hook is linked symbolically before handing off to Git.<br />
+</p>
+<p>
+The new Apache configuration has this additional line:<br />
+</p>
+<pre class="wiki">SetEnv GIT_PRE_RECEIVE_HOOK /var/www/vhosts/fiji.sc/bin/pre-receive-hook
+</pre><p>
+and it now hands all smart HTTP backend stuff to <tt>/var/www/vhosts/fiji.sc/bin/contrib-http-backend/$1</tt> instead of <tt>/usr/libexec/git-core/git-http-backend/$1</tt>.<br />
+</p>
+<p>
+The <tt>pre-receive</tt> hook reads like this:<br />
+</p>
+<pre class="wiki">#!/bin/sh
+
+die () {
+	echo "FATAL: $*" &gt;&amp;2
+	exit 1
+}
+
+# This pre-receive hook should only limit contrib pushing via http://
+test -n "$REQUEST_URI" ||
+exit 0
+
+while read oldsha1 newsha1 ref
+do
+	case "$ref" in
+	refs/heads/contrib*)
+		;; # okay
+	*)
+		die "Only contrib branches can be pushed ($ref)!"
+		;;
+	esac
+
+	test 0000000000000000000000000000000000000000 != "$oldsha1" || continue
+
+	basesha1="$(git merge-base "$oldsha1" "$newsha1")" &amp;&amp;
+	test "$basesha1" = "$oldsha1" ||
+	die "Only fast-forwards are allowed: $ref ($(echo $oldsha1 | cut -c 1-8)...$(echo $newsha1 | cut -c 1-8))"
+done
+</pre><p>
+The source code of the intermediary is written in C (because bash does not run with an effective UID, for security reasons):<br />
+</p>
+<pre class="wiki">#include &lt;errno.h&gt;
+#include &lt;limits.h&gt;
+#include &lt;stdarg.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;unistd.h&gt;
+
+#include &lt;sys/types.h&gt;
+#include &lt;sys/stat.h&gt;
+
+/**
+ * This program acts as a simple filter to git-http-backend to allow for
+ * contrib branches.
+ *
+ * The basic idea is to have this program running under the effective UID of
+ * the owner of the Git repositories served by Git via smart HTTP. That way, we
+ * can not only write to the repository, but also ensure that a pre-receive
+ * hook is installed (symlinked) to prevent bad things from happening.
+ *
+ * To enable this, use chown and chmod with u+s to set the effective UID, then
+ * replace git-http-backend with contrib-http-backend (i.e. this program) in
+ * your Apache configuration and add a couple of environment variables:
+ *
+ * SetEnv GIT_EXECUTABLE /path/to/git
+ * SetEnv GIT_PRE_RECEIVE_HOOK /path/to/pre-receive-hook
+ *
+ * The script reuses the environment variable GIT_PROJECT_ROOT to ensure
+ * that the specified pre-receive hook is active by adding a symbolic link.
+ *
+ * @author Johannes Schindelin
+ */
+
+static void __attribute__((noreturn)) die(const char *message, ...)
+{
+	va_list parameters;
+
+	va_start(parameters, message);
+	vfprintf(stderr, message, parameters);
+	va_end(parameters);
+	fputc('\n', stderr);
+
+	exit(1);
+}
+
+static void ensure_hook(const char *repository_path)
+{
+	const char *hook_path = "/hooks/pre-receive";
+	int hook_path_len = strlen(hook_path);
+
+	const char *git_pre_receive_hook = getenv("GIT_PRE_RECEIVE_HOOK");
+	int len;
+	char *p;
+	struct stat st;
+
+	if (!git_pre_receive_hook) {
+		die("GIT_PRE_RECEIVE_HOOK not set");
+	}
+	if (access(git_pre_receive_hook, X_OK)) {
+		die("Not executable: %s", git_pre_receive_hook);
+	}
+	if (stat(git_pre_receive_hook, &amp;st) || st.st_uid) {
+		die("The pre-receive hook must be owned by root");
+	}
+
+	len = strlen(repository_path);
+	p = malloc(len + hook_path_len + 1);
+	memcpy(p, repository_path, len);
+	memcpy(p + len, hook_path, hook_path_len);
+	p[len + hook_path_len] = '\0';
+
+	if (!access(p, X_OK)) {
+		char buffer[PATH_MAX];
+
+		strcpy(buffer, "(not a symlink)");
+		if (!readlink(p, buffer, sizeof(buffer)) ||
+				strcmp(buffer, git_pre_receive_hook)) {
+			die("Invalid hook %s: %s\n", p, buffer);
+		}
+	} else {
+		char *slash = strchr(p + len + 1, '/');
+
+		while (slash) {
+			*slash = '\0';
+			if (access(p, R_OK)) {
+				if (mkdir(p, 02775)) {
+					die("Could not make directory %s", p);
+				}
+			}
+			*slash = '/';
+			slash = strchr(slash + 1, '/');
+		}
+
+		if (symlink(git_pre_receive_hook, p)) {
+			die("Could not make symlink %s -&gt; %s: %s",
+				git_pre_receive_hook, p, strerror(errno));
+		}
+	}
+	free(p);
+}
+
+int main(int argc, char **argv)
+{
+	const char *suffix = "/git-receive-pack";
+	int suffix_len = strlen(suffix);
+
+	const char *path_info = getenv("PATH_INFO");
+	const char *git_root = getenv("GIT_PROJECT_ROOT");
+	const char *git_executable = "/usr/bin/git";
+	int len;
+
+	/* Sanity checks */
+	if (!path_info || !git_root) {
+		die("Invalid environment: %s, %s", path_info, git_root);
+	}
+
+	if (!git_executable || access(git_executable, X_OK)) {
+		die("Not executable: %s", git_executable);
+	}
+
+	/* Sanity checks specific to git-receive-pack */
+	len = strlen(path_info);
+	if (len &gt; suffix_len &amp;&amp; !strcmp(path_info + len - suffix_len, suffix)) {
+		int git_root_len = strlen(git_root);
+		char *p;
+		struct stat st;
+
+		len = git_root_len + len - suffix_len;
+
+		p = malloc(len + 1);
+		memcpy(p, git_root, git_root_len);
+		memcpy(p + git_root_len, path_info, len - git_root_len);
+		p[len] = '\0';
+		if (stat(p, &amp;st)) {
+			die("Cannot stat %s", p);
+		}
+		if (geteuid() != st.st_uid &amp;&amp; (getegid() != st.st_gid ||
+				!(st.st_mode &amp; S_IWGRP))) {
+			die("Invalid ownership: %s (%d:%d)", p, geteuid(), getegid());
+		}
+		ensure_hook(p);
+		free(p);
+	}
+
+	/* Hand off to Git's http backend */
+	execl(git_executable, git_executable, "-c", "http.receivepack=true", "http-backend", NULL);
+	die("Could not execute %s", git_executable);
+}
+</pre><p>
+An earlier version of <tt>contrib-http-backend</tt> allowed to specify the Git executable path via environment variables, too, but I became convinced that this would open a security hole: to be able to write to the repositories owned by the Jenkins user, the program must be owned by that user and run with the SUID flag set. It is only a minor concern, though, that somebody with access to the server would run this executable to modify contrib branches in Jenkins-owned repositories owned outside of the public GitWeb space.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1823?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1823?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1823?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

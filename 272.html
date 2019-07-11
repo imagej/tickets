@@ -1,0 +1,733 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #272 (JOCL as Maven Dependency)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/271" title="Ticket #271" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/272?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/272?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/272?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/273" title="Ticket #273" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="8e2ff7eee123487323af6dd6";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 272, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/271" title="Ticket #271">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/273" title="Ticket #273">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/272">Ticket #272</a>
+          <span class="status">(closed task: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2010-11-08T12%3A22%3A37-06%3A00&amp;precision=second" title="2010-11-08T12:22:37-06:00 in Timeline">9 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2010-11-29T13%3A16%3A57-06%3A00&amp;precision=second" title="2010-11-29T13:16:57-06:00 in Timeline">9 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">JOCL as Maven Dependency</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=rlentz">rlentz</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=rlentz">rlentz</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=minor">minor</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/biweekly-2010%3A%20Nov-29%20to%20Dec-10">biweekly-2010: Nov-29 to Dec-10</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Other">Other</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+      <span class="lastmod" title="2010-11-08 18:24:47+00:00">
+        (last modified by rlentz)
+        (<a href="/ticket/272?action=diff&amp;version=1">diff</a>)
+      </span>
+    </h3>
+    <div class="searchable">
+      <p>
+Several libraries are used in ImageJ that rely on additional native libs.  JOCL is an example of a software connector that allows use of OpenCL from within Java.  This work will allow other native libs to become maven dependencies.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+    <div id="attachments">
+        <h2 class="foldable">Attachments</h2>
+        <div>
+          <dl class="attachments">
+              <dt>
+    <a href="/attachment/ticket/272/pom.xml" title="View attachment">pom.xml</a>
+      <a href="/raw-attachment/ticket/272/pom.xml" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="17260 bytes">16.9 KB</span>) -
+      added by <em>rlentz</em> <a class="timeline" href="/timeline?from=2010-11-09T17%3A48%3A24-06%3A00&amp;precision=second" title="2010-11-09T17:48:24-06:00 in Timeline">9 years</a> ago.
+  </dt>
+          </dl>
+          
+        </div>
+    </div>
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-11-08T12%3A24%3A47-06%3A00&amp;precision=second" title="2010-11-08T12:24:47-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/272?action=diff&amp;version=1">diff</a>)
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-11-09T15%3A36%3A06-06%3A00&amp;precision=second" title="2010-11-09T15:36:06-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>accepted</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+A quick Google search revealed the following earlier work:<br />
+</p>
+<p>
+On 06/01/2010 02:36 PM, Kraft [via jogamp] wrote:<br />
+Hi ! <br />
+</p>
+<p>
+Maybe this will help other user of jogl to use current JARs into their maven projects. <br />
+After some days trying many solutions, here is what i found : <br />
+</p>
+<p>
+My goal :<br />
+My goal was to make use of <br />
+</p>
+<ul><li>gluegen-rt.jar 
+</li><li>gluegen-rt-natives-linux-i586.jar 
+</li><li>jogl.all.jar 
+</li><li>jogl.all-natives-linux-i586.jar 
+</li><li>nativewindow.all.jar 
+</li><li>nativewindow-natives-linux-i586.jar 
+</li></ul><p>
+in Ubuntu+Eclipse+Maven+Nexus. <br />
+</p>
+<p>
+I wanted to configure all stuff about dependencies to jogl into the pom.xml of my project. <br />
+Then other members of my dev team just have to checkout the project (including the pom.xml) from the svn repository to have a complete configured project. <br />
+</p>
+<p>
+My solution :<br />
+</p>
+<ul><li>in Nexus, i uploaded the artifact listed above in the 3rd party repository. 
+</li></ul><p>
+I set the groupid to "jogamp" and the articatid to the name of the jar (without .jar) <br />
+</p>
+<ul><li>In Eclipse, in the pom.xml of the project, 
+</li></ul><p>
+i declared the repository like this (you can utilize my nexus repository if you want but at your own risks <sup></sup>) <br />
+</p>
+<blockquote>
+<p>
+&lt;repository&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;id&gt;blackpad-nexus&lt;/id&gt;<br />
+&lt;name&gt;Blackpad Nexus&lt;/name&gt;<br />
+&lt;layout&gt;default&lt;/layout&gt;<br />
+&lt;url&gt;<a class="ext-link" href="http://www.blackpad.fr/nexus/content/groups/public"><span class="icon"> </span>http://www.blackpad.fr/nexus/content/groups/public</a>&lt;/url&gt;<br />
+&lt;snapshots&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;enabled&gt;true&lt;/enabled&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/snapshots&gt;<br />
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>
+&lt;/repository&gt;<br />
+</p>
+</blockquote>
+<p>
+  <br />
+</p>
+<p>
+I declared the dependencies to jogl like this : <br />
+</p>
+<blockquote>
+<p>
+&lt;dependency&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;groupId&gt;jogamp&lt;/groupId&gt;<br />
+&lt;artifactId&gt;gluegen-rt&lt;/artifactId&gt;<br />
+&lt;version&gt;0.0.1&lt;/version&gt;<br />
+</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>
+&lt;/dependency&gt;<br />
+&lt;dependency&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;groupId&gt;jogamp&lt;/groupId&gt;<br />
+&lt;artifactId&gt;gluegen-rt-natives-linux-i586&lt;/artifactId&gt;<br />
+&lt;version&gt;0.0.1&lt;/version&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/dependency&gt;<br />
+&lt;dependency&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;groupId&gt;jogamp&lt;/groupId&gt;<br />
+&lt;artifactId&gt;nativewindow.all&lt;/artifactId&gt;<br />
+&lt;version&gt;0.0.1&lt;/version&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/dependency&gt;<br />
+&lt;dependency&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;groupId&gt;jogamp&lt;/groupId&gt;<br />
+&lt;artifactId&gt;nativewindow-natives-linux-i586&lt;/artifactId&gt;<br />
+&lt;version&gt;0.0.1&lt;/version&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/dependency&gt;<br />
+&lt;dependency&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;groupId&gt;jogamp&lt;/groupId&gt;<br />
+&lt;artifactId&gt;jogl.all&lt;/artifactId&gt;<br />
+&lt;version&gt;0.0.1&lt;/version&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/dependency&gt;<br />
+&lt;dependency&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;groupId&gt;jogamp&lt;/groupId&gt;<br />
+&lt;artifactId&gt;jogl-natives-linux-i586&lt;/artifactId&gt;<br />
+&lt;version&gt;0.0.1&lt;/version&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/dependency&gt;<br />
+</p>
+</blockquote>
+<p>
+  <br />
+</p>
+<p>
+Then 2 steps to make maven add the .so (for linux but you can adapt to windows or macos) into the java.library.path. <br />
+</p>
+<ul><li>First, i configured the maven-dependency-plugin to unpack the natives jars into /target/lib after downloading them 
+</li></ul><blockquote>
+<p>
+&lt;build&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;plugins&gt;<br />
+</p>
+</blockquote>
+</blockquote>
+<p>
+                        <br />
+</p>
+<blockquote>
+<p>
+&lt;plugin&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;<br />
+&lt;artifactId&gt;maven-dependency-plugin&lt;/artifactId&gt;<br />
+&lt;executions&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;execution&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;id&gt;unpack&lt;/id&gt;<br />
+&lt;phase&gt;compile&lt;/phase&gt;<br />
+&lt;goals&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;goal&gt;unpack&lt;/goal&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/goals&gt;<br />
+&lt;configuration&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;artifactItems&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;artifactItem&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;groupId&gt;jogamp&lt;/groupId&gt;<br />
+&lt;artifactId&gt;gluegen-rt-natives-linux-i586&lt;/artifactId&gt;<br />
+&lt;version&gt;0.0.1&lt;/version&gt;<br />
+&lt;type&gt;jar&lt;/type&gt;<br />
+&lt;overWrite&gt;true&lt;/overWrite&gt;<br />
+&lt;outputDirectory&gt;${project.build.directory}/lib&lt;/outputDirectory&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/artifactItem&gt;<br />
+&lt;artifactItem&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;groupId&gt;jogamp&lt;/groupId&gt;<br />
+&lt;artifactId&gt;jogl-natives-linux-i586&lt;/artifactId&gt;<br />
+&lt;version&gt;0.0.1&lt;/version&gt;<br />
+&lt;type&gt;jar&lt;/type&gt;<br />
+&lt;overWrite&gt;true&lt;/overWrite&gt;<br />
+&lt;outputDirectory&gt;${project.build.directory}/lib&lt;/outputDirectory&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/artifactItem&gt;<br />
+&lt;artifactItem&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;groupId&gt;jogamp&lt;/groupId&gt;<br />
+&lt;artifactId&gt;nativewindow-natives-linux-i586&lt;/artifactId&gt;<br />
+&lt;version&gt;0.0.1&lt;/version&gt;<br />
+&lt;type&gt;jar&lt;/type&gt;<br />
+&lt;overWrite&gt;true&lt;/overWrite&gt;<br />
+&lt;outputDirectory&gt;${project.build.directory}/lib&lt;/outputDirectory&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/artifactItem&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/artifactItems&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/configuration&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/execution&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/executions&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/plugin&gt;<br />
+</p>
+</blockquote>
+<p>
+      <br />
+</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>
+&lt;/plugins&gt;<br />
+</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>
+&lt;/build&gt;<br />
+</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>
+  <br />
+</p>
+<ul><li>Second, to let java found the natives libs, when i run the project using the "Run As" menu, i made a new Run Configuration and added -Djava.library.path=/target/lib as argument. 
+</li></ul><p>
+That's it ! <br />
+</p>
+<p>
+With some adjustments , this solution let you use jogl in a maven project on any platform. <br />
+Hope i'm understandable, anyway i'm open to questions :) <br />
+</p>
+<p>
+posted at:<br />
+<a class="ext-link" href="http://jogamp.762907.n3.nabble.com/What-about-Maven-td844816.html"><span class="icon"> </span>http://jogamp.762907.n3.nabble.com/What-about-Maven-td844816.html</a><br />
+</p>
+<p>
+This is a great start... and with the additional platform jars at:<br />
+<a class="ext-link" href="http://jogamp.org/deployment/jogamp-next/"><span class="icon"> </span>http://jogamp.org/deployment/jogamp-next/</a><br />
+</p>
+<p>
+Additionally, our repository information was added to the pom.xml<br />
+</p>
+<blockquote>
+<p>
+&lt;repositories&gt;<br />
+&lt;!-- NB: for loci-base-pom --&gt;<br />
+&lt;repository&gt;<br />
+</p>
+<blockquote>
+<p>
+&lt;id&gt;loci.releases&lt;/id&gt;<br />
+&lt;url&gt;<a class="ext-link" href="http://dev.loci.wisc.edu:8081/content/repositories/releases"><span class="icon"> </span>http://dev.loci.wisc.edu:8081/content/repositories/releases</a>&lt;/url&gt;<br />
+</p>
+</blockquote>
+<p>
+&lt;/repository&gt;<br />
+</p>
+</blockquote>
+<blockquote>
+<p>
+&lt;/repositories&gt;<br />
+</p>
+</blockquote>
+<p>
+These maven dependencies will need to be added to the Java version.<br />
+</p>
+<p>
+<a class="ext-link" href="http://jogamp.org/deployment/jogamp-next/"><span class="icon"> </span>http://jogamp.org/deployment/jogamp-next/</a><br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-11-09T16%3A44%3A03-06%3A00&amp;precision=second" title="2010-11-09T16:44:03-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+add deps to <a class="ext-link" href="http://dev.loci.wisc.edu:8081/index.html#view-repositories;thirdparty"><span class="icon"> </span>http://dev.loci.wisc.edu:8081/index.html#view-repositories;thirdparty</a><br />
+for nativewindow, jogl, jocl, and gluegen for win64,win32,osx,linux32,linux64<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-11-09T17%3A47%3A47-06%3A00&amp;precision=second" title="2010-11-09T17:47:47-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Several NAR application examples can be found at:<br />
+<a class="ext-link" href="https://github.com/duns/maven-nar-plugin/tree/master/src/it"><span class="icon"> </span>https://github.com/duns/maven-nar-plugin/tree/master/src/it</a><br />
+</p>
+<p>
+It turned out that the the maven-nar plugin was not needed for this example.  Others can extend on the attached pom.xml file to ease use of JOGAMP gluegen-rt, jocl, jogl, and nativewindow dependencies.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2010-11-09T17%3A48%3A24-06%3A00&amp;precision=second" title="2010-11-09T17:48:24-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/272/pom.xml"><em>pom.xml</em></a>
+          <a href="/raw-attachment/ticket/272/pom.xml" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-11-11T15%3A42%3A34-06%3A00&amp;precision=second" title="2010-11-11T15:42:34-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+<a class="ext-link" href="http://www.buildanddeploy.com/node/17"><span class="icon"> </span>http://www.buildanddeploy.com/node/17</a><br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2010-11-29T13%3A16%3A57-06%3A00&amp;precision=second" title="2010-11-29T13:16:57-06:00 in Timeline">9 years</a> ago by rlentz
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>accepted</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/272?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/272?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/272?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

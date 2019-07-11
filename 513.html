@@ -1,0 +1,636 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #513 (Image::Type::HSB Stack plugin results display poorly)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/512" title="Ticket #512" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/513?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/513?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/513?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/514" title="Ticket #514" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="b3f50c333a49e96eb72925d4";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 513, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/512" title="Ticket #512">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/514" title="Ticket #514">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/513">Ticket #513</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2011-05-11T15%3A21%3A37-05%3A00&amp;precision=second" title="2011-05-11T15:21:37-05:00 in Timeline">8 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2011-05-19T13%3A26%3A34-05%3A00&amp;precision=second" title="2011-05-19T13:26:34-05:00 in Timeline">8 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Image::Type::HSB Stack plugin results display poorly</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/biweekly-2011%3A%20May-09%20to%20May-20">biweekly-2011: May-09 to May-20</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Display+API">Display API</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+If you load clown and run the Image::Type:HSB Stack plugin the results are displayed strangely. IJ2 still thinks it has a color image and it colors the three channels R, G, and B.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-11T15%3A57%3A49-05%3A00&amp;precision=second" title="2011-05-11T15:57:49-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+While running in the debugger I can see that LegacyImageMap::reconcileDifferences() is getting called 3 times. After the first two calls the data has a Z slider and is greyscale. After the 3rd call the slider is labeled Channel and the data is displayed as color.<br />
+</p>
+<p>
+I'm not exactly whether it should treat it as color or not here but trying to have it both ways is a problem. Investigate why image map prodded numerous times for same Dataset/ImagePlus pair.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-11T16%3A57%3A09-05%3A00&amp;precision=second" title="2011-05-11T16:57:09-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>bdezonia</em> to <em>curtis</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>assigned</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+After debugging I'm left with the opinion that even though channels == 3 the Dataset is not composite and yet a CompositeXYProjector is being used to display the data. This might point to code that has yet to be written. Passing ticket onto someone who can clarify.<br />
+</p>
+<p>
+Note that the reconcileDifferences() code is getting called many times because ij1 repeatedly calls show() / updateAndDraw() / repaint() while its processing. So we repeatedly get called. The sequence of steps to convert clown to an HSB stack is a good test that can bear out how the legacy layer can be improved. Maybe the legacy layer should know whether its in the middle of running an IJ1 plugin and avoid processing all the updateAndDraw() calls.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-12T12%3A57%3A03-05%3A00&amp;precision=second" title="2011-05-12T12:57:03-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Note that if you remove repaintWindow() from the LegacyManager the behavior is different. It still calls reconcileDifferences() a few times but results are a greyscale Z stack. However, removing it causes Delete Slice to not work. Doing further investigation.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-12T13%3A26%3A08-05%3A00&amp;precision=second" title="2011-05-12T13:26:08-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+This issue points out a basic problem with the legacy layer. What we really need to do is not override the drawing methods of ImagePlus but rather the data changing methods.<br />
+</p>
+<p>
+If we were notified of ImagePlus::setStack() calls and had the legacy layer make very targeted changes to parallel Datasets then perhaps the performance hits would be avoided. And Delete Slice would work.<br />
+</p>
+<p>
+As a complication of overriding setStack() it is called within the constructors of ImagePlus. So our legacy layer would be called with an ImagePlus that was not completely constructed. We either are very careful with what we do with it and defer computations until later. Or we avoid this issue by getting Wayne's help to modify IJ1 classes as needed to call internal helpers rather than public methods within their constructors. This is good practice but not sure we can get those changes.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-13T13%3A24%3A15-05%3A00&amp;precision=second" title="2011-05-13T13:24:15-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>curtis</em> to <em>bdezonia</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+After more thorough IJ1 code review I think all we need to track is updateAndDraw() and repaintWindow() in ImagePlus. repaintWindow() is used in a couple places where no changes are being made (*listed below) but otherwise is used to indicate that a change to an ImagePlus has taken place.<br />
+</p>
+<p>
+After discussion with Curtis it is apparent that reconcileDifferences() should get moved outside LegacyImageMap to where we can detect a plugin has completed. LegacyImageMap should just record which Datasets need reconciliation and then called only once.<br />
+</p>
+<ul><li>list of repaintWindow() calls where reconciliation would not be necessary
+<ul><li>magnification on an ImageCanvas
+</li><li>magnification while running the Orthogonal Views plugin
+</li><li>magnification via the Zoom plugin
+</li><li>setting the canvas color or border via an Options dialog
+</li></ul></li></ul><p>
+These calls could be hooked and measures taken to avoid reconciliation. But also they seem to be things that we are replacing in IJ2 and so maybe they'll never be called.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-13T16%3A08%3A32-05%3A00&amp;precision=second" title="2011-05-13T16:08:32-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Changed design of plugin calling mechanism to call create and/or reconcile of Datasets as little as possible. The bug is still apparent.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-13T17%3A01%3A35-05%3A00&amp;precision=second" title="2011-05-13T17:01:35-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I am writing this up as I can't likely fix this before a 4 day weekend.<br />
+</p>
+<p>
+I'm pretty sure I've found the problem. The original DatasetView is color for clown (rgbmerged true and channel == 3). Running the HSB Stack plugin turns the Dataset into a greyscale Z stack (channel == 1). But nobody tells SwingImageDisplay to rebuild the view. So the old view with the old color projector is fed the new gray Dataset. It displays in color.<br />
+</p>
+<p>
+We need to probably create a new kind of event (DatasetTypeChangedEvent?). Have certain plugins generate these (such as from the Image :: Type submenu). Then SwingImageDisplay can catch them and rebuild a view if its dataset has changed type.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-13T17%3A01%3A49-05%3A00&amp;precision=second" title="2011-05-13T17:01:49-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>assigned</em> to <em>accepted</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-13T17%3A02%3A11-05%3A00&amp;precision=second" title="2011-05-13T17:02:11-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Summary</strong>
+        changed from <em>Image::Type::HSB STack plugin results display poorly</em> to <em>Image::Type::HSB Stack plugin results display poorly</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-17T13%3A29%3A52-05%3A00&amp;precision=second" title="2011-05-17T13:29:52-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Made a couple new events (DatasetRGBChangedEvent and DatasetTypeCHangedEvent). Made Datset throw these at appropriate times. Changed DatasetView to listen for these two events and when detected to call rebuild().<br />
+</p>
+<p>
+These changes took place after the JHotDraw code was merged in. Due to bugs in that code I am unable to test this fix. Keeping open for now.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-11">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:11" class="cnum">
+      <a href="#comment:11">comment:11</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-18T10%3A37%3A45-05%3A00&amp;precision=second" title="2011-05-18T10:37:45-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I am able to do some testing. Converting from isRgbMerged() == true images to an HSB stack via the Type :: HSB Stack plugin resulted in an image that displays as red no matter which of the channels is selected and only shows the first channel's data values. I've verified all three channels of data are present and different but only the first is getting selected for display since none of the channels are set to composite.<br />
+</p>
+<p>
+It is not clear to me if we have a multichannel image as to whether it should always be composited with colors. Or if you could view each channel in grayscale somehow. Or if you could view each channel as a separate color. So not sure of the status of this bug.<br />
+</p>
+<p>
+As a workaround I have changed DatasetHarmonizer to setCompositeChannelCount() to the number of channels present in the Dataset. Now things display as composited in color and channel slider makes no difference.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-12">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:12" class="cnum">
+      <a href="#comment:12">comment:12</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-18T14%3A44%3A23-05%3A00&amp;precision=second" title="2011-05-18T14:44:23-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Made DatasetHarmonizer::harmonize() correctly set composite channel count. When this is done this rendering bug still exists.<br />
+</p>
+<p>
+Have debugged code and can't see what the problem is. Have confirmed that CompositeXYProjector::map() is creating correct ARGB pixel values and that LUTs are separately red, green, and blue for the 1st three channels.<br />
+</p>
+<p>
+Can't see where but somewhere there must be an assumption that only the first channel should be drawn. That is how its behaving but still does not make logical sense knowing data is correctly generated.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-13">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:13" class="cnum">
+      <a href="#comment:13">comment:13</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-18T14%3A49%3A05-05%3A00&amp;precision=second" title="2011-05-18T14:49:05-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Or its like the data gets drawn the first time. Then changing sliders fires a drawing event and work is done but the screen is not refreshed. Like someone is forgetting to invalidate something.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-14">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:14" class="cnum">
+      <a href="#comment:14">comment:14</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-19T11%3A25%3A48-05%3A00&amp;precision=second" title="2011-05-19T11:25:48-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Verified that the display's ARGBScreenImage reference is getting correctly changed upon a rebuild(). Thought maybe the ARGBScreenImage reference was not changing and that we were drawing into one that was not tied to a display. Not the case.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-15">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:15" class="cnum">
+      <a href="#comment:15">comment:15</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-19T12%3A05%3A39-05%3A00&amp;precision=second" title="2011-05-19T12:05:39-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+BTW, now simply loading T1 Head sample and trying to scroll through it's slices exhibits the issue. Graphics are never updated and you have only the first slice displayed. This was working a couple(?) days ago.<br />
+</p>
+<p>
+I will update my code to latest repository contents and try again. Cannot at the moment as the build is broken.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-16">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:16" class="cnum">
+      <a href="#comment:16">comment:16</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-19T13%3A10%3A33-05%3A00&amp;precision=second" title="2011-05-19T13:10:33-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>accepted</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Curtis found sliders not updating issue by 6a3b5a8d65250312f33d3b948c63604acea1308f.<br />
+</p>
+<p>
+The converted HSB stack now draws in 3 separate colors (r,g,b), one for each channel. Ideally this should draw in grayscale.<br />
+</p>
+<p>
+I will now close this bug and create a separate ticket for getting the color correct.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-17">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:17" class="cnum">
+      <a href="#comment:17">comment:17</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2011-05-19T13%3A26%3A34-05%3A00&amp;precision=second" title="2011-05-19T13:26:34-05:00 in Timeline">8 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Curtis fix was to make sure SwingDisplayWindow::update() was updating all its views. Before it was only updating the label.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/513?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/513?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/513?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

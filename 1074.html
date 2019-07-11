@@ -1,0 +1,506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #1074 (Using prebuilt IJ2 jar the About ImageJ fails to load images)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/1073" title="Ticket #1073" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/1074?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/1074?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/1074?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/1075" title="Ticket #1075" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="54f83b20889475be1264af5c";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 1074, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/1073" title="Ticket #1073">Previous Ticket</a></span></li><li class="last"><span><a class="next" href="/ticket/1075" title="Ticket #1075">Next Ticket</a> &rarr;</span></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/1074">Ticket #1074</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2012-03-19T15%3A47%3A00-05%3A00&amp;precision=second" title="2012-03-19T15:47:00-05:00 in Timeline">7 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2012-04-02T21%3A47%3A47-05%3A00&amp;precision=second" title="2012-04-02T21:47:47-05:00 in Timeline">7 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Using prebuilt IJ2 jar the About ImageJ fails to load images</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=bdezonia">bdezonia</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=curtis">curtis</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="closed milestone" href="/milestone/imagej2-b1-initial">imagej2-b1-initial</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=Plugins">Plugins</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version"></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=serious">serious</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+      <span class="lastmod" title="2012-03-28 19:49:05.037507+00:00">
+        (last modified by bdezonia)
+        (<a href="/ticket/1074?action=diff&amp;version=4">diff</a>)
+      </span>
+    </h3>
+    <div class="searchable">
+      <p>
+(original description)<br />
+Running IJ2 on Ubuntu 11. When you run About ImageJ it cannot load the default image and rather uses the stock 400x400 black image with yellow text. Determine why it can't load image.<br />
+</p>
+<p>
+(modification)<br />
+If you run IJ from within Eclipse and run ABout ImageJ background images are loaded and drawn over. If you run the jar downloaded from the website then the background images cannot be loaded and the about always shows a black image. Its as if the jar build differs between eclipse and our jenkins build scripts.<br />
+</p>
+
+    </div>
+  </div>
+</div>
+          
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-19T15%3A48%3A46-05%3A00&amp;precision=second" title="2012-03-19T15:48:46-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Note also that the 400x400 image displays with white space on right. Not sure this is a scrollbar issue also. Noting here so that we make sure it is fixed. (Later edit - the image white space arises because the window is wide enough to show whole toolbar which is wider than the 400 x 400 default image in AboutImageJ).<br />
+</p>
+<p>
+I have tried to debug into code but could not get eclipse and the tool chain setup correctly. Will need to look at this later.<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2012-03-27T11%3A09%3A46-05%3A00&amp;precision=second" title="2012-03-27T11:09:46-05:00 in Timeline">7 years</a> ago
+                      by bdezonia
+                    (<a href="/ticket/1074?cversion=0&amp;cnum_hist=1#comment:1">previous</a>)
+                    (<a href="/ticket/1074?action=comment-diff&amp;cnum=1&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-28T12%3A56%3A50-05%3A00&amp;precision=second" title="2012-03-28T12:56:50-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Recently made stock image 500x500. This should eliminate the whitespace issue.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-28T13%3A02%3A49-05%3A00&amp;precision=second" title="2012-03-28T13:02:49-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Note memory summary does not match status bar double click summary. Top end memory way off. (Later note: found issue and addressed)<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2012-03-28T14%3A45%3A03-05%3A00&amp;precision=second" title="2012-03-28T14:45:03-05:00 in Timeline">7 years</a> ago
+                      by bdezonia
+                    (<a href="/ticket/1074?cversion=0&amp;cnum_hist=3#comment:3">previous</a>)
+                    (<a href="/ticket/1074?action=comment-diff&amp;cnum=3&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-28T14%3A49%3A05-05%3A00&amp;precision=second" title="2012-03-28T14:49:05-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Description</strong>
+        modified (<a href="/ticket/1074?action=diff&amp;version=4">diff</a>)
+    </li><li>
+      <strong>Summary</strong>
+        changed from <em>About ImageJ fails on Linux</em> to <em>Using prebuilt IJ2 jar the About ImageJ fails to load images</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-28T14%3A50%3A20-05%3A00&amp;precision=second" title="2012-03-28T14:50:20-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Owner</strong>
+        changed from <em>bdezonia</em> to <em>curtis</em>
+    </li><li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>assigned</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-28T14%3A50%3A33-05%3A00&amp;precision=second" title="2012-03-28T14:50:33-05:00 in Timeline">7 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej-2.0-beta2</em> to <em>imagej-2.0-beta1</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                          <span>follow-up:</span>
+      <a href="#comment:8">↓ 8</a>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-31T01%3A32%3A14-05%3A00&amp;precision=second" title="2012-03-31T01:32:14-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I implemented an idea in the ticket-1074 branch: moving the about/ folder to ui/app/src/main/assembly/application/ so that it will automatically be copied to the imagej2/ root in the application.zip. For debugging purposes, the About plugin looks first in &lt;IJ&gt;/about/ and falls back to the path mentioned above.<br />
+</p>
+<p>
+For good measure, that branch also contains a BSD-licensed random generator and uses it instead of java.util.Random.<br />
+</p>
+<p>
+Feel free to pick what you want, and to leave what you do not want :-)<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                        in reply to:
+      <a href="#comment:7">↑ 7</a>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-31T16%3A40%3A43-05%3A00&amp;precision=second" title="2012-03-31T16:40:43-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Replying to <a href="/ticket/1074#comment:7" title="Comment 7 for Ticket #1074">dscho</a>:<br />
+</p>
+<blockquote class="citation">
+<p>
+I implemented an idea in the ticket-1074 branch: moving the about/ folder to ui/app/src/main/assembly/application/ so that it will automatically be copied to the imagej2/ root in the application.zip. For debugging purposes, the About plugin looks first in &lt;IJ&gt;/about/ and falls back to the path mentioned above.<br />
+</p>
+</blockquote>
+<p>
+Barry and I discussed your approach, but settled on instead updating the application.xml assembly descriptor to include the about/ folder off the root. In this way, no further changes beyond 8779c2142ffe12eb2b0b1d5d944aa3a4a54af73f are necessary to AboutImageJ.<br />
+</p>
+<p>
+I thought I had committed the changed application.xml already, but I guess not. It must be waiting to be pushed from my work machine. I will do so on Monday and close this ticket, once I verify that everything works in all cases.<br />
+</p>
+<blockquote class="citation">
+<p>
+For good measure, that branch also contains a BSD-licensed random generator and uses it instead of java.util.Random.<br />
+</p>
+</blockquote>
+<p>
+Are you convinced it is better than java.util.Random? If so, should we publish it as a standalone JAR in our Maven repository? I looked at the ticket-1074 branch, but did not see any use of a random number generator other than java.util.Random.<br />
+</p>
+
+    </div>
+
+                <div class="trac-lastedit ">
+                  Last edited <a class="timeline" href="/timeline?from=2012-03-31T16%3A41%3A13-05%3A00&amp;precision=second" title="2012-03-31T16:41:13-05:00 in Timeline">7 years</a> ago
+                      by curtis
+                    (<a href="/ticket/1074?cversion=0&amp;cnum_hist=8#comment:8">previous</a>)
+                    (<a href="/ticket/1074?action=comment-diff&amp;cnum=8&amp;version=1">diff</a>)
+                </div>
+              </div>
+              <div class="change" id="trac-change-9">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:9" class="cnum">
+      <a href="#comment:9">comment:9</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-03-31T17%3A59%3A44-05%3A00&amp;precision=second" title="2012-03-31T17:59:44-05:00 in Timeline">7 years</a> ago by dscho
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+Oh, sorry, my mistake. I forgot to push (but since I set up my machine to be able to connect from home, I was able to push a minute ago).<br />
+</p>
+<p>
+Fair enough for the assembly approach, sorry that I just jumped in ;-)<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-10">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:10" class="cnum">
+      <a href="#comment:10">comment:10</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2012-04-02T21%3A47%3A47-05%3A00&amp;precision=second" title="2012-04-02T21:47:47-05:00 in Timeline">7 years</a> ago by curtis
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>assigned</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+Commits 6a0e000a66883b6dbef9cb34c67cdea04e6ffb56, 8779c2142ffe12eb2b0b1d5d944aa3a4a54af73f and f3323a6109fa82d07abf0086cdb94eab87c5c2b3 address this issue.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/1074?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/1074?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/1074?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>

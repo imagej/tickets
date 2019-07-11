@@ -1,0 +1,494 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  
+
+  
+  <!-- See: http://trac.edgewall.org/wiki/TracInterfaceCustomization -->
+
+
+  <head>
+    <title>
+      #2008 (Brightness / contrast broken for float types)
+     – ImageJ
+    </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="search" href="/search" />
+        <link rel="prev" href="/ticket/2007" title="Ticket #2007" />
+        <link rel="last" href="/ticket/2043" title="Ticket #2043" />
+        <link rel="help" href="/wiki/TracGuide" />
+        <link rel="alternate" href="/ticket/2008?format=csv" type="text/csv" class="csv" title="Comma-delimited Text" /><link rel="alternate" href="/ticket/2008?format=tab" type="text/tab-separated-values" class="tab" title="Tab-delimited Text" /><link rel="alternate" href="/ticket/2008?format=rss" type="application/rss+xml" class="rss" title="RSS Feed" />
+        <link rel="next" href="/ticket/2009" title="Ticket #2009" />
+        <link rel="start" href="/wiki" />
+        <link rel="stylesheet" href="/chrome/common/css/trac.css" type="text/css" /><link rel="stylesheet" href="/chrome/common/css/ticket.css" type="text/css" /><link rel="stylesheet" href="/chrome/vote/css/tracvote.css" type="text/css" />
+        <link rel="first" href="/ticket/1" title="Ticket #1" />
+        <link rel="shortcut icon" href="/chrome/site/imagej-16.png" type="image/png" />
+        <link rel="icon" href="/chrome/site/imagej-16.png" type="image/png" />
+      <link type="application/opensearchdescription+xml" rel="search" href="/search/opensearch" title="Search ImageJ" />
+    <script type="text/javascript">
+      var auto_preview_timeout=2.0;
+      var form_token="4c8823725de8131eda0be036";
+    </script>
+    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
+    <!--[if lt IE 7]>
+    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
+        $(".foldable").enableFolding(false, true);
+        var args = {realm: "ticket", id: 2008, escape_newlines: 1}
+        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
+            $("#ticketchange div.comment").html(rendered);
+            if (rendered)
+              $("#ticketchange").show();
+            else if ($("#ticketchange ul.changes").length == 0)
+              $("#ticketchange").hide();
+        });
+        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
+                                                       function(textarea, text, rendered) {
+          var comment = $("#trac-comment-editor").next("div.comment");
+          comment.html(rendered);
+          if (rendered)
+            comment.show();
+          else
+            comment.hide();
+        });
+        $("#modify").parent().toggleClass("collapsed");
+        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
+        /* only enable control elements for the currently selected action */
+        var actions = $("#action input[name='action']");
+        function updateActionFields() {
+          actions.each(function () {
+            $(this).siblings().find("*[id]").enable($(this).checked());
+            $(this).siblings().filter("*[id]").enable($(this).checked());
+          });
+        }
+        actions.click(updateActionFields);
+        updateActionFields();
+      });
+    </script>
+    <link rel="stylesheet" type="text/css" href="/chrome/site/style.css" />
+  </head>
+  <body>
+    <div id="banner">
+      <div id="header">
+        <a id="logo" href="http://developer.imagej.net/"><img src="http://developer.imagej.net/files/imagej/logo.png" alt="ImageJ Trac" /></a>
+      </div>
+      <form id="search" action="/search" method="get">
+        <div>
+          <label for="proj-search">Search:</label>
+          <input type="text" id="proj-search" name="q" size="18" value="" />
+          <input type="submit" value="Search" />
+        </div>
+      </form>
+      <div id="metanav" class="nav">
+    <ul>
+      <li class="first"><a href="/login">Login</a></li><li><a href="/prefs">Preferences</a></li><li><a href="/wiki/TracGuide">Help/Guide</a></li><li><a href="/about">About Trac</a></li><li class="last"><a href="/reset_password">Forgot your password?</a></li>
+    </ul>
+  </div>
+    </div>
+    <div id="mainnav" class="nav">
+    <ul>
+      <li class="first"><a href="/wiki">Wiki</a></li><li><a href="/timeline">Timeline</a></li><li><a href="/roadmap">Roadmap</a></li><li class="active"><a href="/report">View Tickets</a></li><li class="last"><a href="/search">Search</a></li>
+    </ul>
+  </div>
+    <div id="main">
+      <div id="ctxtnav" class="nav">
+        <h2>Context Navigation</h2>
+          <ul>
+              <li class="first"><span id="vote" title="Vote count"><img src="/chrome/vote/aupgray.png" alt="Up-vote" /><span id="votes">+0</span><img src="/chrome/vote/adowngray.png" alt="Down-vote" /></span></li><li><span>&larr; <a class="prev" href="/ticket/2007" title="Ticket #2007">Previous Ticket</a></span></li><li><span><a class="next" href="/ticket/2009" title="Ticket #2009">Next Ticket</a> &rarr;</span></li><li class="last"><a href="/depgraph/2008">Depgraph</a></li>
+          </ul>
+        <hr />
+      </div>
+    <div id="content" class="ticket">
+      <h1 id="trac-ticket-title">
+          <a href="/ticket/2008">Ticket #2008</a>
+          <span class="status">(closed defect: fixed)</span>
+      </h1>
+      <div id="ticket">
+  <div class="date">
+    <p>Opened <a class="timeline" href="/timeline?from=2013-10-02T13%3A23%3A29-05%3A00&amp;precision=second" title="2013-10-02T13:23:29-05:00 in Timeline">6 years</a> ago</p>
+    <p>Last modified <a class="timeline" href="/timeline?from=2013-10-10T16%3A21%3A24-05%3A00&amp;precision=second" title="2013-10-10T16:21:24-05:00 in Timeline">6 years</a> ago</p>
+  </div>
+  <h2 class="summary searchable">Brightness / contrast broken for float types</h2>
+  <table class="properties">
+    <tr>
+      <th id="h_reporter">Reported by:</th>
+      <td headers="h_reporter" class="searchable">
+        <a href="/query?status=!closed&amp;reporter=hinerm">hinerm</a>
+      </td>
+      <th id="h_owner">Owned by:</th>
+      <td headers="h_owner">
+        <a href="/query?status=!closed&amp;owner=bdezonia">bdezonia</a>
+      </td>
+    </tr>
+    <tr>
+        <th id="h_priority">
+          Priority:
+        </th>
+        <td headers="h_priority">
+              <a href="/query?status=!closed&amp;priority=major">major</a>
+        </td>
+        <th id="h_milestone">
+          Milestone:
+        </th>
+        <td headers="h_milestone">
+              <a class="milestone" href="/milestone/imagej2-b8-analysis">imagej2-b8-analysis</a>
+        </td>
+    </tr><tr>
+        <th id="h_component">
+          Component:
+        </th>
+        <td headers="h_component">
+              <a href="/query?status=!closed&amp;component=ImgLib2">ImgLib2</a>
+        </td>
+        <th id="h_version">
+          Version:
+        </th>
+        <td headers="h_version">
+              <a href="/query?status=!closed&amp;version="></a>
+        </td>
+    </tr><tr>
+        <th id="h_severity">
+          Severity:
+        </th>
+        <td headers="h_severity">
+              <a href="/query?status=!closed&amp;severity=fatal">fatal</a>
+        </td>
+        <th id="h_keywords">
+          Keywords:
+        </th>
+        <td headers="h_keywords" class="searchable">
+        </td>
+    </tr><tr>
+        <th id="h_cc">
+          Cc:
+        </th>
+        <td headers="h_cc" class="searchable">
+              <a href="/query?status=!closed&amp;cc=~bdezonia">bdezonia</a>
+        </td>
+        <th id="h_blockedby">
+          Blocked By:
+        </th>
+        <td headers="h_blockedby">
+        </td>
+    </tr><tr>
+        <th id="h_blocking">
+          Blocking:
+        </th>
+        <td headers="h_blocking">
+              <a class="new" href="/ticket/1457" title="Fix obviously failing commands [analysis]">#1457</a>
+        </td>
+        <th>
+        </th>
+        <td>
+        </td>
+    </tr>
+  </table>
+  <div class="description">
+    <h3 id="comment:description">
+      Description
+    </h3>
+    <div class="searchable">
+      <p>
+When running Brightness/Contrast is run on float images it seems to fail with an exception<a class="missing changeset" title="No default repository defined">[1]</a> in the imglib2 layer.<br />
+</p>
+<p>
+To reproduce:<br />
+File -&gt; New Image<br />
+Type -&gt; 32-bit signed float<br />
+Run Brightness/Contrast<br />
+</p>
+<p>
+I used actual float data as well (attached .fits image) and B/C failed again in the histogram creation when attempting to access bin 256 of 255, I believe.<br />
+</p>
+<p>
+<a class="missing changeset" title="No default repository defined">[1]</a><br />
+imagej.module.MethodCallException: Error executing method: imagej.core.commands.display.interactive.BrightnessContrast#initValues<br />
+</p>
+<blockquote>
+<p>
+at imagej.module.MethodRef.execute(MethodRef.java:77)<br />
+at imagej.module.AbstractModule.initialize(AbstractModule.java:86)<br />
+at imagej.plugin.InitPreprocessor.process(InitPreprocessor.java:65)<br />
+at imagej.module.ModuleRunner.preProcess(ModuleRunner.java:107)<br />
+at imagej.module.ModuleRunner.run(ModuleRunner.java:159)<br />
+at imagej.module.ModuleRunner.call(ModuleRunner.java:129)<br />
+at imagej.module.ModuleRunner.call(ModuleRunner.java:1)<br />
+at java.util.concurrent.FutureTask$Sync.innerRun(FutureTask.java:303)<br />
+at java.util.concurrent.FutureTask.run(FutureTask.java:138)<br />
+at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(ThreadPoolExecutor.java:895)<br />
+at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:918)<br />
+at java.lang.Thread.run(Thread.java:680)<br />
+</p>
+</blockquote>
+<p>
+Caused by: java.lang.reflect.InvocationTargetException<br />
+</p>
+<blockquote>
+<p>
+at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br />
+at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)<br />
+at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)<br />
+at java.lang.reflect.Method.invoke(Method.java:597)<br />
+at imagej.module.MethodRef.execute(MethodRef.java:73)<br />
+... 11 more<br />
+</p>
+</blockquote>
+<p>
+Caused by: java.lang.IllegalArgumentException: invalid Real1dBinMapper: nonpositive data range specified<br />
+</p>
+<blockquote>
+<p>
+at net.imglib2.histogram.Real1dBinMapper.&lt;init&gt;(Real1dBinMapper.java:87)<br />
+at imagej.core.commands.display.interactive.BrightnessContrast.computeDataMinMax(BrightnessContrast.java:282)<br />
+at imagej.core.commands.display.interactive.BrightnessContrast.viewChanged(BrightnessContrast.java:212)<br />
+at imagej.core.commands.display.interactive.BrightnessContrast.initValues(BrightnessContrast.java:200)<br />
+</p>
+</blockquote>
+
+    </div>
+  </div>
+</div>
+          
+    <div id="attachments">
+        <h2 class="foldable">Attachments</h2>
+        <div>
+          <dl class="attachments">
+              <dt>
+    <a href="/attachment/ticket/2008/vogtstar.fits" title="View attachment">vogtstar.fits</a>
+      <a href="/raw-attachment/ticket/2008/vogtstar.fits" class="trac-rawlink" title="Download"><img src="/chrome/common/download.png" alt="Download" /></a>
+       (<span title="1805760 bytes">1.7 MB</span>) -
+      added by <em>hinerm</em> <a class="timeline" href="/timeline?from=2013-10-02T13%3A23%3A42-05%3A00&amp;precision=second" title="2013-10-02T13:23:42-05:00 in Timeline">6 years</a> ago.
+  </dt>
+          </dl>
+          
+        </div>
+    </div>
+
+        <div>
+          <h2 class="foldable">Change History</h2>
+          <div id="changelog">
+              <div class="change">
+                <h3 class="change">
+                  Changed <a class="timeline" href="/timeline?from=2013-10-02T13%3A23%3A42-05%3A00&amp;precision=second" title="2013-10-02T13:23:42-05:00 in Timeline">6 years</a> ago by hinerm
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>attachment</strong>
+        <a href="/attachment/ticket/2008/vogtstar.fits"><em>vogtstar.fits</em></a>
+          <a href="/raw-attachment/ticket/2008/vogtstar.fits" title="Download" class="trac-rawlink"><img src="/chrome/common/download.png" alt="Download" /></a>
+          added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-1">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:1" class="cnum">
+      <a href="#comment:1">comment:1</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-03T11%3A02%3A19-05%3A00&amp;precision=second" title="2013-10-03T11:02:19-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+This is actually two separate bugs.<br />
+</p>
+<p>
+The bug that happens with the provided file is due to a roundoff error. That has been fixed with imglib commit b196c1acc86b1b00e36fd497631685dc076b98c4.<br />
+</p>
+<p>
+After fixing that bug the new float image bug can happen if the Fill With parameter of the New Image dialog is set to Min or Max. Ramp and Zero work fine. In the failure cases its because you're defining a bin mapper on an interval extent of zero. We need some logic to catch this. Not sure why Fill With Zero works.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-2">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:2" class="cnum">
+      <a href="#comment:2">comment:2</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-03T11%3A02%3A45-05%3A00&amp;precision=second" title="2013-10-03T11:02:45-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Blocking</strong>
+        <em>1457</em> added
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-3">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:3" class="cnum">
+      <a href="#comment:3">comment:3</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-03T11%3A03%3A04-05%3A00&amp;precision=second" title="2013-10-03T11:03:04-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Milestone</strong>
+        changed from <em>imagej2-unscheduled</em> to <em>imagej2-b8-analysis</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-4">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:4" class="cnum">
+      <a href="#comment:4">comment:4</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-03T13%3A16%3A27-05%3A00&amp;precision=second" title="2013-10-03T13:16:27-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I have made a change to imglib with commit f4cbd1e147d323bdfedcb0155feb28b11fc7ec7e that allows 0 width bin range in Real1dBinMappers. This is part of a fix for the new float image issue. I can't test it in IJ2 yet because imglib and ij2 are at different stages of merging their nonlinear-goodies branches. Once IJ2 is up to date I will need to test this fix.<br />
+</p>
+<p>
+The additional piece to fixing this might be to make the DefaultAutoscaleMethod safely return a nonzero width data range when an image is all one pixel value. The code that is present only works for Zero and not Min or Max. Min and Max are special because slightly bumping range fails due to precision loss. The bumped min/max values of data range are the same afterwards. But all this might not be necessary if the imglib commit above works. Note that autoscale method bumping was added to fix various display range calc bugs.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-5">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:5" class="cnum">
+      <a href="#comment:5">comment:5</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-07T11%3A03%3A55-05%3A00&amp;precision=second" title="2013-10-07T11:03:55-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+I think we need to allow AutoscaleMethods to return 0 as a possible display range extent. It will be the job of consumers to test that situation. This will reopen <a class="closed ticket" href="/ticket/1431" title="defect: Display range should never be 0 (closed: fixed)">#1431</a> and <a class="closed ticket" href="/ticket/1880" title="defect: Incorrect display range propagation (closed: fixed)">#1880</a> (while <a class="closed ticket" href="/ticket/1948" title="defect: Brightness/Contrast (closed: fixed)">#1948</a> will stay fixed). We will need to capture the display range of zero issue elsewhere. (The mentioned commands are the ones that required some hackery in DefaultAutoscaleMethod that I'm proposing to go away)<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-6">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:6" class="cnum">
+      <a href="#comment:6">comment:6</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-07T14%3A24%3A31-05%3A00&amp;precision=second" title="2013-10-07T14:24:31-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+After discussion with ctrueden we've decided that the default autoscale method should detect when min == max and return an interval that is [typeMin, typeMax].<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-7">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:7" class="cnum">
+      <a href="#comment:7">comment:7</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-07T14%3A55%3A08-05%3A00&amp;precision=second" title="2013-10-07T14:55:08-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+    <div class="comment searchable">
+      
+      <p>
+With commit 2c5e74e754d4788a4ae385df0a4452282221d485 the typeMin,typeMax code is in place. Still waiting for IJ2 nonlinear-goodies to be merged before I can fully test that this ticket is fully addressed.<br />
+</p>
+
+    </div>
+
+              </div>
+              <div class="change" id="trac-change-8">
+                <h3 class="change">
+                  <span class="threading">
+                    <span id="comment:8" class="cnum">
+      <a href="#comment:8">comment:8</a>
+    </span>
+                  </span>
+                  Changed <a class="timeline" href="/timeline?from=2013-10-10T16%3A21%3A24-05%3A00&amp;precision=second" title="2013-10-10T16:21:24-05:00 in Timeline">6 years</a> ago by bdezonia
+                </h3>
+                
+  <ul class="changes">
+    <li>
+      <strong>Status</strong>
+        changed from <em>new</em> to <em>closed</em>
+    </li><li>
+      <strong>Resolution</strong>
+        set to <em>fixed</em>
+    </li>
+  </ul>
+    <div class="comment searchable">
+      
+      <p>
+With commit 7540a6f5bd26512e9f5018d2ceb0bef7110e2952 the last of the hangups with B&amp;C working with float images has been handled. Closing.<br />
+</p>
+
+    </div>
+
+              </div>
+          </div>
+        </div>
+      <div id="help"><strong>Note:</strong> See
+        <a href="/wiki/TracTickets">TracTickets</a> for help on using
+        tickets.</div>
+    </div>
+    <div id="altlinks">
+      <h3>Download in other formats:</h3>
+      <ul>
+        <li class="first">
+          <a rel="nofollow" href="/ticket/2008?format=csv" class="csv">Comma-delimited Text</a>
+        </li><li>
+          <a rel="nofollow" href="/ticket/2008?format=tab" class="tab">Tab-delimited Text</a>
+        </li><li class="last">
+          <a rel="nofollow" href="/ticket/2008?format=rss" class="rss">RSS Feed</a>
+        </li>
+      </ul>
+    </div>
+    </div>
+    <div id="footer" lang="en" xml:lang="en"><hr />
+      <a id="tracpowered" href="http://trac.edgewall.org/"><img src="/chrome/common/trac_logo_mini.png" height="30" width="107" alt="Trac Powered" /></a>
+      <p class="left">Powered by <a href="/about"><strong>Trac 0.12.2</strong></a><br />
+        By <a href="http://www.edgewall.org/">Edgewall Software</a>.</p>
+      <p class="right">Visit the ImageJ project at<br /><a href="http://developer.imagej.net/">http://developer.imagej.net/</a></p>
+    </div>
+  </body>
+</html>
