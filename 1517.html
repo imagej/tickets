@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1517">Ticket #1517</a>
+          <a href="1517.html">Ticket #1517</a>
           <span class="status">(closed defect: fixed)</span>
       </h1>
       <div id="ticket">
@@ -94,7 +94,7 @@
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="new" href="/ticket/1519" title="Recommended architecture changes [analysis]">#1519</a>
+              <a class="new" href="1519.html" title="Recommended architecture changes [analysis]">#1519</a>
         </td>
         <th>
         </th>
@@ -154,7 +154,7 @@ OPS has a class called PrimitiveDoubleArray for computation speed by avoiding Ob
     <div class="comment searchable">
       
       <p>
-Note that <a class="closed ticket" href="/ticket/1562" title="defect: Math plugins fail on big images (closed: fixed)">#1562</a> showed a problem with relying on PrimitiveDoubleArray. And that problem should still exist for grabbing stats from StatCalculator on large images (for those stats that use PrimitiveDoubleArray: Adaptive Median, Trimmed Mean). So the need for this fix is immediately useful.<br />
+Note that <a class="closed ticket" href="1562.html" title="defect: Math plugins fail on big images (closed: fixed)">#1562</a> showed a problem with relying on PrimitiveDoubleArray. And that problem should still exist for grabbing stats from StatCalculator on large images (for those stats that use PrimitiveDoubleArray: Adaptive Median, Trimmed Mean). So the need for this fix is immediately useful.<br />
 </p>
 <p>
 We need to make an Img that can be backed by DoubleType, that uses a fixed memory footprint, can act like a virtual buffer so that it can hold a lot of values, can be cleared without freeing up resources if desired, and can sort the values within it (not necessarily all allocated values but all values of interest). (This last statement means I may allocate 80 ints but populate 10 of them and I want to sort the first 10 only). This last bit of functionality is necessary for median and trimmed mean code.<br />

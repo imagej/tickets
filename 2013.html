@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/2013">Ticket #2013</a>
+          <a href="2013.html">Ticket #2013</a>
           <span class="status">(closed defect: invalid)</span>
       </h1>
       <div id="ticket">
@@ -94,7 +94,7 @@
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="new" href="/ticket/1519" title="Recommended architecture changes [analysis]">#1519</a>
+              <a class="new" href="1519.html" title="Recommended architecture changes [analysis]">#1519</a>
         </td>
         <th>
         </th>
@@ -197,7 +197,7 @@ And a little more background here:<br />
 It is not necessary to change <tt>QuitProgram</tt> in order to avoid exceptions with <tt>ThreadService</tt>. I have <a class="ext-link" href="https://github.com/scijava/scijava-common/commit/e24e62480525a8c0fc30f0f1b0b2983563733a34"><span class="icon"> </span>fixed the DefaultThreadService</a> so that the problem no longer occurs.<br />
 </p>
 <p>
-However, I do think there is some merit to making quits vetoable. We should consider how the API for that should work. I filed a new ticket <a class="new ticket" href="/ticket/2016" title="feature: Make quitting vetoable (new)">#2016</a> for this feature.<br />
+However, I do think there is some merit to making quits vetoable. We should consider how the API for that should work. I filed a new ticket <a class="new ticket" href="2016.html" title="feature: Make quitting vetoable (new)">#2016</a> for this feature.<br />
 </p>
 
     </div>
@@ -220,7 +220,7 @@ However, I do think there is some merit to making quits vetoable. We should cons
     <div class="comment searchable">
       
       <p>
-I think this fix is okay but might not be necessary if <a class="closed ticket" href="/ticket/2014" title="defect: Verify that services dispose in similar order to initialization (closed: moved)">#2014</a> is addressed correctly. Without fixing <a class="closed ticket" href="/ticket/2014" title="defect: Verify that services dispose in similar order to initialization (closed: moved)">#2014</a> behavior can be unpredictable for any services with dependencies. In general when the ThreadService is disposing all services that could actually use the ThreadService should already be gone. I guess a running plugin can try to launch a thread after the context is disposed but that seems like an invalid action to protect against.<br />
+I think this fix is okay but might not be necessary if <a class="closed ticket" href="2014.html" title="defect: Verify that services dispose in similar order to initialization (closed: moved)">#2014</a> is addressed correctly. Without fixing <a class="closed ticket" href="2014.html" title="defect: Verify that services dispose in similar order to initialization (closed: moved)">#2014</a> behavior can be unpredictable for any services with dependencies. In general when the ThreadService is disposing all services that could actually use the ThreadService should already be gone. I guess a running plugin can try to launch a thread after the context is disposed but that seems like an invalid action to protect against.<br />
 </p>
 
     </div>
@@ -239,7 +239,7 @@ I think this fix is okay but might not be necessary if <a class="closed ticket" 
     <div class="comment searchable">
       
       <p>
-I agree that <a class="closed ticket" href="/ticket/2014" title="defect: Verify that services dispose in similar order to initialization (closed: moved)">#2014</a> also should get fixed. However, regardless of whether the disposal order is fixed, it is still possible for something to retain a handle on a <tt>ThreadService</tt> and then try to <tt>run</tt> something after context disposal has occurred. So I think the change to <tt>DefaultThreadService</tt> was required anyway too.<br />
+I agree that <a class="closed ticket" href="2014.html" title="defect: Verify that services dispose in similar order to initialization (closed: moved)">#2014</a> also should get fixed. However, regardless of whether the disposal order is fixed, it is still possible for something to retain a handle on a <tt>ThreadService</tt> and then try to <tt>run</tt> something after context disposal has occurred. So I think the change to <tt>DefaultThreadService</tt> was required anyway too.<br />
 </p>
 
     </div>

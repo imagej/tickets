@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1594">Ticket #1594</a>
+          <a href="1594.html">Ticket #1594</a>
           <span class="status">(closed feature: wontfix)</span>
       </h1>
       <div id="ticket">
@@ -88,7 +88,7 @@
           Blocked By:
         </th>
         <td headers="h_blockedby">
-              <a class="closed" href="/ticket/1615" title="Default collision naming strategy is not great">#1615</a>, <a class="closed" href="/ticket/1946" title="Color table information can get lost">#1946</a>, <a class="closed" href="/ticket/1954" title="About ImageJ text can render incorrectly">#1954</a>
+              <a class="closed" href="1615.html" title="Default collision naming strategy is not great">#1615</a>, <a class="closed" href="1946.html" title="Color table information can get lost">#1946</a>, <a class="closed" href="1954.html" title="About ImageJ text can render incorrectly">#1954</a>
         </td>
     </tr><tr>
         <th id="h_blocking">
@@ -248,7 +248,7 @@ Some commands in IJ2 fail in a very apparent fashion. They should be addressed p
     <div class="comment searchable">
       
       <p>
-(In <a class="closed ticket" href="/ticket/1946" title="defect: Color table information can get lost (closed: wontfix)">#1946</a>) This seems like a situation where the synchronizer needs to be smart about the limitations of IJ1. If the IJ2 version of the image has multiple distinct color tables, then it should certainly not overwrite all of them with the ImageJ1 color table. It would be ideal if the ImageJ1 color table could somehow be tied to the "correct" color table in ImageJ2, and then only <em>that</em> one would get synchronized in case of changes in ImageJ1-land. The simplest approach would be to always use the first color table of the IJ2 image for this.<br />
+(In <a class="closed ticket" href="1946.html" title="defect: Color table information can get lost (closed: wontfix)">#1946</a>) This seems like a situation where the synchronizer needs to be smart about the limitations of IJ1. If the IJ2 version of the image has multiple distinct color tables, then it should certainly not overwrite all of them with the ImageJ1 color table. It would be ideal if the ImageJ1 color table could somehow be tied to the "correct" color table in ImageJ2, and then only <em>that</em> one would get synchronized in case of changes in ImageJ1-land. The simplest approach would be to always use the first color table of the IJ2 image for this.<br />
 </p>
 <p>
 In the case of the image being restructured, it becomes less clear how to maintain this mapping. But for the workflow above, no restructuring takes place—pixel values are merely zeroed out. So it might work.<br />

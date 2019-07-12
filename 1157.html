@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1157">Ticket #1157</a>
+          <a href="1157.html">Ticket #1157</a>
           <span class="status">(closed task: fixed)</span>
       </h1>
       <div id="ticket">
@@ -94,7 +94,7 @@
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="closed" href="/ticket/1020" title="Use ItemIO.BOTH where relevant in plugins">#1020</a>
+              <a class="closed" href="1020.html" title="Use ItemIO.BOTH where relevant in plugins">#1020</a>
         </td>
         <th>
         </th>
@@ -111,7 +111,7 @@
 At the moment, if you have a Data object "data" and an ImageDisplay "imageDisplay" and you call "imageDisplay.contains(data)" it will always return false. The reason is that ImageDisplay is a Display&lt;DataView&gt;, not a Display&lt;Data&gt;, and the contains(Object) method is very literal in its evaluation. To work around this, we provide an ImageDisplay.containsData(Data) method. However, the DefaultDisplayService.getDisplaysContaining(Object) method has no knowledge of this exception, and instead naively uses Display.contains(Object) to check.<br />
 </p>
 <p>
-This can result in problems; e.g., DisplayPostprocessor never detects when an ImageDisplay already exists that contains a particular Dataset output. We have not noticed the problem because our plugins that work with Dataset objects essentially always call Dataset.update() to signal that the Dataset has changed, which triggers the Display to update in any case. But for the purpose of ticket <a class="closed ticket" href="/ticket/1020" title="task: Use ItemIO.BOTH where relevant in plugins (closed: fixed)">#1020</a> this architectural oddity may be a problem.<br />
+This can result in problems; e.g., DisplayPostprocessor never detects when an ImageDisplay already exists that contains a particular Dataset output. We have not noticed the problem because our plugins that work with Dataset objects essentially always call Dataset.update() to signal that the Dataset has changed, which triggers the Display to update in any case. But for the purpose of ticket <a class="closed ticket" href="1020.html" title="task: Use ItemIO.BOTH where relevant in plugins (closed: fixed)">#1020</a> this architectural oddity may be a problem.<br />
 </p>
 
     </div>
@@ -160,7 +160,7 @@ outputs of type Data are currently being displayed; previously, a new<br />
 display would always be created.<br />
 </p>
 <p>
-Fixes <a class="closed ticket" href="/ticket/1157" title="task: Decide how to handle ImageDisplay.contains with Data object argument (closed: fixed)">#1157</a>.<br />
+Fixes <a class="closed ticket" href="1157.html" title="task: Decide how to handle ImageDisplay.contains with Data object argument (closed: fixed)">#1157</a>.<br />
 </p>
 
     </div>

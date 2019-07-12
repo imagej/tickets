@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1606">Ticket #1606</a>
+          <a href="1606.html">Ticket #1606</a>
           <span class="status">(closed defect: fixed)</span>
       </h1>
       <div id="ticket">
@@ -94,7 +94,7 @@
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="closed" href="/ticket/1398" title="Recommended architecture changes [ndim-data]">#1398</a>
+              <a class="closed" href="1398.html" title="Recommended architecture changes [ndim-data]">#1398</a>
         </td>
         <th>
         </th>
@@ -173,7 +173,7 @@ at imagej.legacy.plugin.LegacyCommand$LegacyCommandThread.run(LegacyCommand.java
     <div class="comment searchable">
       
       <p>
-Note this issue is different from <a class="closed ticket" href="/ticket/1605" title="defect: Exception thrown when many images opened simultaneously (closed: wontfix)">#1605</a><br />
+Note this issue is different from <a class="closed ticket" href="1605.html" title="defect: Exception thrown when many images opened simultaneously (closed: wontfix)">#1605</a><br />
 </p>
 
     </div>
@@ -195,7 +195,7 @@ Note this issue is different from <a class="closed ticket" href="/ticket/1605" t
 Tried two approaches pushed as branches object-index-broken and object-index-working. The broken version relies on synchronized methods in DefaultObjectService and also the get() method in there makes data copies. The working version simply makes copies in ObjectIndex itself.<br />
 </p>
 <p>
-To test behavior open IJ2 and hold Shift Cmd B down to make many many Blobs images. In the broken version you can get two exceptions: one in ByteProcessor which is a different issue (<a class="closed ticket" href="/ticket/1605" title="defect: Exception thrown when many images opened simultaneously (closed: wontfix)">#1605</a>) and the bad one which is a concurrent modification exception. In the working version you only get the ByteProcessor issue. In both versions the display titles can be wrong. Note that the working version opens the images more quickly than the broken version.<br />
+To test behavior open IJ2 and hold Shift Cmd B down to make many many Blobs images. In the broken version you can get two exceptions: one in ByteProcessor which is a different issue (<a class="closed ticket" href="1605.html" title="defect: Exception thrown when many images opened simultaneously (closed: wontfix)">#1605</a>) and the bad one which is a concurrent modification exception. In the working version you only get the ByteProcessor issue. In both versions the display titles can be wrong. Note that the working version opens the images more quickly than the broken version.<br />
 </p>
 
     </div>
@@ -214,7 +214,7 @@ To test behavior open IJ2 and hold Shift Cmd B down to make many many Blobs imag
     <div class="comment searchable">
       
       <p>
-Note BTW that the legacy-tracker branch was merged to master on 1-7-13. Holding down Shift Command B until many Blobs opened should generate exceptions as described here and in <a class="closed ticket" href="/ticket/1605" title="defect: Exception thrown when many images opened simultaneously (closed: wontfix)">#1605</a>.<br />
+Note BTW that the legacy-tracker branch was merged to master on 1-7-13. Holding down Shift Command B until many Blobs opened should generate exceptions as described here and in <a class="closed ticket" href="1605.html" title="defect: Exception thrown when many images opened simultaneously (closed: wontfix)">#1605</a>.<br />
 </p>
 
     </div>

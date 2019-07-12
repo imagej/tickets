@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1478">Ticket #1478</a>
+          <a href="1478.html">Ticket #1478</a>
           <span class="status">(closed defect: fixed)</span>
       </h1>
       <div id="ticket">
@@ -94,7 +94,7 @@
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="assigned" href="/ticket/285" title="Improve support for ROIs, segmentation and labeling [rois]">#285</a>, <a class="new" href="/ticket/1484" title="Update legacy layer to fix some plugin incompatibilities [rois]">#1484</a>, <a class="closed" href="/ticket/1563" title="Fix obviously failing commands [ndim-data]">#1563</a>
+              <a class="assigned" href="285.html" title="Improve support for ROIs, segmentation and labeling [rois]">#285</a>, <a class="new" href="1484.html" title="Update legacy layer to fix some plugin incompatibilities [rois]">#1484</a>, <a class="closed" href="1563.html" title="Fix obviously failing commands [ndim-data]">#1563</a>
         </td>
         <th>
         </th>
@@ -358,10 +358,10 @@ at imagej.legacy.plugin.LegacyCommand$LegacyCommandThread.run(LegacyCommand.java
     <div class="comment searchable">
       
       <p>
-The comodification errors are being handled by ticket <a class="closed ticket" href="/ticket/1606" title="defect: Access ObjectService in a thread safe manner (closed: fixed)">#1606</a>.<br />
+The comodification errors are being handled by ticket <a class="closed ticket" href="1606.html" title="defect: Access ObjectService in a thread safe manner (closed: fixed)">#1606</a>.<br />
 </p>
 <p>
-Note that the issue here is that the maintenance of the point overlays is very time consuming (which is detailed in ticket <a class="closed ticket" href="/ticket/1103" title="defect: Point Rois do not display (closed: fixed)">#1103</a>). So each harmonization back from IJ1 deletes all the overlays and adds them again (totaling hundreds or more display rebuild events). So the code might be in the harmonizing state when Despeckle is run and pixel harmonization has not yet correctly happened. However locking of ImagesPluses and Displays would fix this somewhat too (this part of the issue is documented in ticket <a class="new ticket" href="/ticket/1192" title="defect: Lock images when running legacy plugins (new)">#1192</a>).<br />
+Note that the issue here is that the maintenance of the point overlays is very time consuming (which is detailed in ticket <a class="closed ticket" href="1103.html" title="defect: Point Rois do not display (closed: fixed)">#1103</a>). So each harmonization back from IJ1 deletes all the overlays and adds them again (totaling hundreds or more display rebuild events). So the code might be in the harmonizing state when Despeckle is run and pixel harmonization has not yet correctly happened. However locking of ImagesPluses and Displays would fix this somewhat too (this part of the issue is documented in ticket <a class="new ticket" href="1192.html" title="defect: Lock images when running legacy plugins (new)">#1192</a>).<br />
 </p>
 <p>
 There is nothing specific to this ticket that is not handled elsewhere. Closing.<br />

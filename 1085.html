@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1085">Ticket #1085</a>
+          <a href="1085.html">Ticket #1085</a>
           <span class="status">(closed defect: fixed)</span>
       </h1>
       <div id="ticket">
@@ -88,14 +88,14 @@
           Blocked By:
         </th>
         <td headers="h_blockedby">
-              <a class="closed" href="/ticket/832" title="Integrate the Fiji launcher as new ImageJ2 launcher">#832</a>, <a class="closed" href="/ticket/1722" title="Fix misc. build system issues">#1722</a>
+              <a class="closed" href="832.html" title="Integrate the Fiji launcher as new ImageJ2 launcher">#832</a>, <a class="closed" href="1722.html" title="Fix misc. build system issues">#1722</a>
         </td>
     </tr><tr>
         <th id="h_blocking">
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="closed" href="/ticket/1723" title="Fix misc. build system issues">#1723</a>
+              <a class="closed" href="1723.html" title="Fix misc. build system issues">#1723</a>
         </td>
         <th>
         </th>
@@ -212,7 +212,7 @@ uptodate || mvn clean deploy
 We could even put this into our <em>scripts/</em> directory for easier re-use.<br />
 </p>
 <p>
-The same script could be enhanced a little for ticket <a class="closed ticket" href="/ticket/1086" title="enhancement: Deploy snapshot versions of ImageJ2 artifacts only if their corresponding ... (closed: fixed)">#1086</a> so it traverses the directories with pom.xml files that do not have a <em>&lt;packaging&gt;pom&lt;/packaging&gt;</em> line. It is a great pity that Maven does not have an easy way to just output that list (topologically sorted by dependency), but we could easily hack something on top of MiniMaven.<br />
+The same script could be enhanced a little for ticket <a class="closed ticket" href="1086.html" title="enhancement: Deploy snapshot versions of ImageJ2 artifacts only if their corresponding ... (closed: fixed)">#1086</a> so it traverses the directories with pom.xml files that do not have a <em>&lt;packaging&gt;pom&lt;/packaging&gt;</em> line. It is a great pity that Maven does not have an easy way to just output that list (topologically sorted by dependency), but we could easily hack something on top of MiniMaven.<br />
 </p>
 <p>
 If nothing else works, we can always put some trivial parsing of the output of "mvn help:effective-pom" into place. Something like<br />

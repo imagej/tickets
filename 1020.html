@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1020">Ticket #1020</a>
+          <a href="1020.html">Ticket #1020</a>
           <span class="status">(closed task: fixed)</span>
       </h1>
       <div id="ticket">
@@ -89,7 +89,7 @@
           Blocked By:
         </th>
         <td headers="h_blockedby">
-              <a class="closed" href="/ticket/1157" title="Decide how to handle ImageDisplay.contains with Data object argument">#1157</a>
+              <a class="closed" href="1157.html" title="Decide how to handle ImageDisplay.contains with Data object argument">#1157</a>
         </td>
     </tr><tr>
         <th id="h_blocking">
@@ -225,7 +225,7 @@ I can think of a couple different solutions, but none of them seems obviously an
 <ol><li>All concrete implementations of Display become smart enough that calling update() twice in a row does nothing on the second call, because there is nothing left to do. This would entail more careful tracking of what has changed. It also makes doing a "forced refresh" of the display potentially less intuitive, as we would then need a separate method or toggle for doing that.
 </li></ol><ol start="2"><li>The DisplayPostprocessor somehow becomes smart enough to avoid calling Display::update() on Displays that were already updated during plugin execution, either directly or as part of an event chain, such as when calling Dataset::update(). I am not entirely sure how we would track that though.
 </li></ol><p>
-There is also another problem: see ticket <a class="closed ticket" href="/ticket/1157" title="task: Decide how to handle ImageDisplay.contains with Data object argument (closed: fixed)">#1157</a> for details.<br />
+There is also another problem: see ticket <a class="closed ticket" href="1157.html" title="task: Decide how to handle ImageDisplay.contains with Data object argument (closed: fixed)">#1157</a> for details.<br />
 </p>
 
     </div>
@@ -300,7 +300,7 @@ With 853690ad1f0cdb7308982e915444c942630f39c0 all plugins with read/write @Param
     <div class="comment searchable">
       
       <p>
-The remaining portions of this ticket have been hatched as new ticket <a class="closed ticket" href="/ticket/1180" title="defect: Eliminate redundant update events (closed: moved)">#1180</a>. Closing.<br />
+The remaining portions of this ticket have been hatched as new ticket <a class="closed ticket" href="1180.html" title="defect: Eliminate redundant update events (closed: moved)">#1180</a>. Closing.<br />
 </p>
 
     </div>

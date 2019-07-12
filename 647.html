@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/647">Ticket #647</a>
+          <a href="647.html">Ticket #647</a>
           <span class="status">(closed defect: wontfix)</span>
       </h1>
       <div id="ticket">
@@ -94,7 +94,7 @@
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="closed" href="/ticket/1011" title="Robust ImageJ1 legacy layer">#1011</a>
+              <a class="closed" href="1011.html" title="Robust ImageJ1 legacy layer">#1011</a>
         </td>
         <th>
         </th>
@@ -156,7 +156,7 @@ Curtis, please review this ticket, we can discuss as appropriate,  and the ticke
 The current legacy layer design is somewhat limited in the case of Shadows Demo and other interactive plugins. The issue, as Barry says, is that right now updateAndDraw is captured by IJ2 and interpreted to mean that the corresponding ImageJ2 display should be updated when the plugin finishes executing. But in the case of Shadows Demo and potentially other interactive plugins, the execution does not complete until the user presses a key.<br />
 </p>
 <p>
-Barry and I discussed, and we like the current legacy layer design (flagging updateAndDraw events for later processing) because it is simple and efficient, and is working well for most non-interactive cases. To fix IJ1 Shadows Demo to run as expected in IJ2 would require a substantial reworking of the legacy layer to tie updateAndDraw method calls more directly to IJ2 redraw events. We are already in the middle of a fundamental restructuring (linking IJ1 ImagePlus objects to IJ2 Displays rather than IJ2 Datasets; see ticket <a class="closed ticket" href="/ticket/542" title="task: Change legacy layer so that it maintains Display&lt;--&gt;ImagePlus mappings (closed: fixed)">#542</a>), would do not want to further alter the nature of the legacy layer until things are working well again.<br />
+Barry and I discussed, and we like the current legacy layer design (flagging updateAndDraw events for later processing) because it is simple and efficient, and is working well for most non-interactive cases. To fix IJ1 Shadows Demo to run as expected in IJ2 would require a substantial reworking of the legacy layer to tie updateAndDraw method calls more directly to IJ2 redraw events. We are already in the middle of a fundamental restructuring (linking IJ1 ImagePlus objects to IJ2 Displays rather than IJ2 Datasets; see ticket <a class="closed ticket" href="542.html" title="task: Change legacy layer so that it maintains Display&lt;--&gt;ImagePlus mappings (closed: fixed)">#542</a>), would do not want to further alter the nature of the legacy layer until things are working well again.<br />
 </p>
 <p>
 As such, we will refrain from acting on this ticket until we receive some feedback from the community upon release of the first ImageJ2 beta. If users have many interactive use cases that require a restructuring of the legacy layer, we can do so. But if Shadows Demo is more of an edge case, we can live with the fact that IJ1 Shadows Demo will not run as expected in IJ2. We already have a preliminary IJ2 implementation of Shadows Demo, which should fulfill its main purpose, which is to be invoked interactively from the UI. Conversely, the main purpose of the legacy layer is to enable IJ1 plugins, scripts and macros to continue working particularly in a programmatic context.<br />

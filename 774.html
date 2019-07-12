@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/774">Ticket #774</a>
+          <a href="774.html">Ticket #774</a>
           <span class="status">(closed defect: fixed)</span>
       </h1>
       <div id="ticket">
@@ -120,7 +120,7 @@ Image &gt; type &gt; 8-bit Color<br />
 2) The resultant image looks completely mangled, but it MAY just be that the LUT isn't getting set since it still shows a gray ramp. <br />
 </p>
 <p>
-(see also <a class="closed ticket" href="/ticket/765" title="defect: Import LUT does nothing (closed: fixed)">#765</a>, <a class="closed ticket" href="/ticket/768" title="defect: Built in LUTs don't work (closed: fixed)">#768</a> for LUT issues)<br />
+(see also <a class="closed ticket" href="765.html" title="defect: Import LUT does nothing (closed: fixed)">#765</a>, <a class="closed ticket" href="768.html" title="defect: Built in LUTs don't work (closed: fixed)">#768</a> for LUT issues)<br />
 </p>
 <p>
 tested with ff78f1f00c5069b267bd05ed9c5350c3100536f2<br />
@@ -222,7 +222,7 @@ tested with ff78f1f00c5069b267bd05ed9c5350c3100536f2<br />
     <div class="comment searchable">
       
       <p>
-This does appear to be two separate issues. The latter issue will probably go away when the LUT syncing is fixed (see <a class="closed ticket" href="/ticket/765" title="defect: Import LUT does nothing (closed: fixed)">#765</a>, <a class="closed ticket" href="/ticket/768" title="defect: Built in LUTs don't work (closed: fixed)">#768</a>). The former issue, the window duplication, may have another root cause (see also <a class="closed ticket" href="/ticket/775" title="defect: Convert to 8-bit broken (closed: fixed)">#775</a> for a related bug there).<br />
+This does appear to be two separate issues. The latter issue will probably go away when the LUT syncing is fixed (see <a class="closed ticket" href="765.html" title="defect: Import LUT does nothing (closed: fixed)">#765</a>, <a class="closed ticket" href="768.html" title="defect: Built in LUTs don't work (closed: fixed)">#768</a>). The former issue, the window duplication, may have another root cause (see also <a class="closed ticket" href="775.html" title="defect: Convert to 8-bit broken (closed: fixed)">#775</a> for a related bug there).<br />
 </p>
 
     </div>
@@ -241,7 +241,7 @@ This does appear to be two separate issues. The latter issue will probably go aw
     <div class="comment searchable">
       
       <p>
-Ticket <a class="closed ticket" href="/ticket/550" title="defect: Convert RGB to 8-bit color displays as grey (closed: duplicate)">#550</a> was closed as a duplicate of this bug, but there is some useful observation there.<br />
+Ticket <a class="closed ticket" href="550.html" title="defect: Convert RGB to 8-bit color displays as grey (closed: duplicate)">#550</a> was closed as a duplicate of this bug, but there is some useful observation there.<br />
 </p>
 <p>
 Note that in IJ1, converting from a 3-channel 8-bit composite image to an 8-bit color image is not supported. However, under the hood, our 3-channel 8-bit composite images are stored in IJ1 as RGB color (i.e., 24-bit packed ints) when the Dataset#isRGBMerged() flag is set. In that case, the translation to 8-bit color via the legacy layer *should* work, preserving the LUT. To do otherwise is a bug.<br />

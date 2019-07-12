@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1866">Ticket #1866</a>
+          <a href="1866.html">Ticket #1866</a>
           <span class="status">(reviewing defect)</span>
       </h1>
       <div id="ticket">
@@ -94,7 +94,7 @@
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="new" href="/ticket/1244" title="Fix rendering issues">#1244</a>
+              <a class="new" href="1244.html" title="Fix rendering issues">#1244</a>
         </td>
         <th>
         </th>
@@ -243,7 +243,7 @@ So the bigger issue is to have a way to distinguish true color vs false color an
 </p>
 </blockquote>
 <p>
-Fortunately SCIFIO &amp; Bio-Formats <a class="ext-link" href="https://github.com/scifio/scifio/blob/2d55a69477fe75c6805c87ed561d2cd17b02faba/components/scifio-devel/src/ome/scifio/ImageMetadata.java#L197"><span class="icon"> </span>support such a distinction</a>. The metadata does not propagate anywhere into <a class="ext-link" href="https://github.com/imagej/imglib/blob/08055cfc71f376a004823c51c96d0c07efe52de6/core/src/main/java/net/imglib2/meta/ImageMetadata.java#L51"><span class="icon"> </span>ImgLib2's metadata</a> yet, but doing so will be straightforward. Though actually, we probably want to store such things independent from the <tt>Img</tt> itself, for extensibility; see ticket <a class="closed ticket" href="/ticket/1890" title="task: Add StashService to SciJava Common (closed: moved)">#1890</a> for details.<br />
+Fortunately SCIFIO &amp; Bio-Formats <a class="ext-link" href="https://github.com/scifio/scifio/blob/2d55a69477fe75c6805c87ed561d2cd17b02faba/components/scifio-devel/src/ome/scifio/ImageMetadata.java#L197"><span class="icon"> </span>support such a distinction</a>. The metadata does not propagate anywhere into <a class="ext-link" href="https://github.com/imagej/imglib/blob/08055cfc71f376a004823c51c96d0c07efe52de6/core/src/main/java/net/imglib2/meta/ImageMetadata.java#L51"><span class="icon"> </span>ImgLib2's metadata</a> yet, but doing so will be straightforward. Though actually, we probably want to store such things independent from the <tt>Img</tt> itself, for extensibility; see ticket <a class="closed ticket" href="1890.html" title="task: Add StashService to SciJava Common (closed: moved)">#1890</a> for details.<br />
 </p>
 
     </div>

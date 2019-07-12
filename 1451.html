@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1451">Ticket #1451</a>
+          <a href="1451.html">Ticket #1451</a>
           <span class="status">(closed task: moved)</span>
       </h1>
       <div id="ticket">
@@ -88,14 +88,14 @@
           Blocked By:
         </th>
         <td headers="h_blockedby">
-              <a class="closed" href="/ticket/1706" title="Preferences for Multiple Instances, Applications, and Versions">#1706</a>
+              <a class="closed" href="1706.html" title="Preferences for Multiple Instances, Applications, and Versions">#1706</a>
         </td>
     </tr><tr>
         <th id="h_blocking">
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="new" href="/ticket/1400" title="Recommended architecture changes (2.0.0-final)">#1400</a>
+              <a class="new" href="1400.html" title="Recommended architecture changes (2.0.0-final)">#1400</a>
         </td>
         <th>
         </th>
@@ -648,7 +648,7 @@ We should strongly consider consolidation of all these, eliminating any redundan
     <div class="comment searchable">
       
       <p>
-(In <a class="closed ticket" href="/ticket/1706" title="enhancement: Preferences for Multiple Instances, Applications, and Versions (closed: moved)">#1706</a>) Firstly, note that the preferences are loaded and saved as part of the preprocessing chain during command execution. The relevant preprocessors are:<br />
+(In <a class="closed ticket" href="1706.html" title="enhancement: Preferences for Multiple Instances, Applications, and Versions (closed: moved)">#1706</a>) Firstly, note that the preferences are loaded and saved as part of the preprocessing chain during command execution. The relevant preprocessors are:<br />
 </p>
 <ul><li><a class="ext-link" href="https://github.com/imagej/imagej/blob/v2.0.0-beta6/core/core/src/main/java/imagej/plugin/LoadInputsPreprocessor.java"><span class="icon"> </span>LoadInputsPreprocessor</a>
 </li><li><a class="ext-link" href="https://github.com/imagej/imagej/blob/v2.0.0-beta6/core/core/src/main/java/imagej/plugin/SaveInputsPreprocessor.java"><span class="icon"> </span>SaveInputsPreprocessor</a>
@@ -656,7 +656,7 @@ We should strongly consider consolidation of all these, eliminating any redundan
 And the actual saving and loading code for module items is unfortunately <a class="ext-link" href="https://github.com/imagej/imagej/blob/v2.0.0-beta6/core/core/src/main/java/imagej/module/AbstractModuleItem.java#L132"><span class="icon"> </span>hardcoded</a> right now.<br />
 </p>
 <p>
-From my perspective, it is clear from your comments that this logic should be refactored into its own service class as part of the ticket <a class="closed ticket" href="/ticket/1451" title="task: Consolidate options, prefs and config logic (closed: moved)">#1451</a> work. That way, any future deficiencies in the persistence mechanism could be fixed downstream by using an alternate service implementation.<br />
+From my perspective, it is clear from your comments that this logic should be refactored into its own service class as part of the ticket <a class="closed ticket" href="1451.html" title="task: Consolidate options, prefs and config logic (closed: moved)">#1451</a> work. That way, any future deficiencies in the persistence mechanism could be fixed downstream by using an alternate service implementation.<br />
 </p>
 <blockquote class="citation">
 <p>

@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/613">Ticket #613</a>
+          <a href="613.html">Ticket #613</a>
           <span class="status">(closed defect: fixed)</span>
       </h1>
       <div id="ticket">
@@ -306,7 +306,7 @@ My last note is correct. I am platying with LegacyManager and code hacking of Im
 The fix is to have LegacyManager track ImageWindow::close(). If it is called from an IJ1 plugin we should close the associated IJ2 Display. This will generate a DatasetDeleted (or soon a DisplayDeleted) event that will be caught by LegacyImageMap. The Datset will get unregistered and the associated ImagePlus removed and freed too.<br />
 </p>
 <p>
-I have built skeleton code in ImageWindowMethods::close() to do whats necessary. I have hatched ticket <a class="closed ticket" href="/ticket/624" title="task: Close IJ2 Display when an IJ1 plugin closes IJ1 ImagePlus/ImageWIndow (closed: fixed)">#624</a> associated with fixing that method when appropriate. Closing this ticket.<br />
+I have built skeleton code in ImageWindowMethods::close() to do whats necessary. I have hatched ticket <a class="closed ticket" href="624.html" title="task: Close IJ2 Display when an IJ1 plugin closes IJ1 ImagePlus/ImageWIndow (closed: fixed)">#624</a> associated with fixing that method when appropriate. Closing this ticket.<br />
 </p>
 
     </div>

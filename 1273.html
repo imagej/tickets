@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1273">Ticket #1273</a>
+          <a href="1273.html">Ticket #1273</a>
           <span class="status">(closed feature: fixed)</span>
       </h1>
       <div id="ticket">
@@ -88,7 +88,7 @@
           Blocked By:
         </th>
         <td headers="h_blockedby">
-              <a class="closed" href="/ticket/756" title="Threshold broken">#756</a>, <a class="closed" href="/ticket/964" title="Make Binary broken">#964</a>, <a class="closed" href="/ticket/977" title="Process&gt;Math&gt;NaN Background is unfinished">#977</a>, <a class="closed" href="/ticket/1122" title="Adjust Threshold not working">#1122</a>
+              <a class="closed" href="756.html" title="Threshold broken">#756</a>, <a class="closed" href="964.html" title="Make Binary broken">#964</a>, <a class="closed" href="977.html" title="Process&gt;Math&gt;NaN Background is unfinished">#977</a>, <a class="closed" href="1122.html" title="Adjust Threshold not working">#1122</a>
         </td>
     </tr><tr>
         <th id="h_blocking">
@@ -226,13 +226,13 @@ I chatted with bdezonia about the details of how to implement thresholding.<br /
 There are several layers we need:<br />
 </p>
 <ol><li>A ThresholdRegionOfInterest in ImgLib2. Tentatively, it would store a min and max values (of type T) defining the thresholded range, as well as a reference to the actually thresholded interval (a RealRandomAccessibleInterval&lt;T extends Comparable&lt;? super T&gt;&gt;).
-</li><li>A ThresholdOverlay in ImageJ2. It would of course wrap a ThresholdRegionOfInterest. Unlike other Overlays though, it would need to exist in the entire N-space of its linked data object (the ImgPlus of a particular Dataset? Or the Display itself? Needs further thought; this is very relevant to handling of multiple datasets in a single display: ticket <a class="closed ticket" href="/ticket/579" title="feature: Support for multiple datasets in the same display (closed: moved)">#579</a>).
+</li><li>A ThresholdOverlay in ImageJ2. It would of course wrap a ThresholdRegionOfInterest. Unlike other Overlays though, it would need to exist in the entire N-space of its linked data object (the ImgPlus of a particular Dataset? Or the Display itself? Needs further thought; this is very relevant to handling of multiple datasets in a single display: ticket <a class="closed ticket" href="579.html" title="feature: Support for multiple datasets in the same display (closed: moved)">#579</a>).
 </li><li>A ThresholdAdapter (JHotDrawAdapter implementation) that knows how to generate a JHotDraw Figure from the threshold. Every time the dimensional position changes, the figure needs to be updated. Probably this thresholding should take place on the fly, to avoid a large upfront threshold computation cost. Hopefully the logic for actually constructing a Figure consisting of arbitrary pixels can be reused from other bit-mask-style ROI code (not sure how that currently works though).
 </li></ol><p>
 We should probably have a ThresholdService to help manage some of this. In particular, it makes sense to maintain only a single ThresholdOverlay at any given time. The Image &gt; Adjust &gt; Threshold command would create/update/delete it as necessary. In this way, the Overlay Manager would display a single entry for the threshold, which would be pretty ideal for manipulating an N-dimensional dataset's threshold easily.<br />
 </p>
 <p>
-See also tickets <a class="new ticket" href="/ticket/1495" title="enhancement: Generalize JHotDrawAdapters to link any DataView to a Figure (new)">#1495</a> and <a class="closed ticket" href="/ticket/1496" title="defect: Deconflate JHotDrawAdapter from Tool (closed: fixed)">#1496</a>.<br />
+See also tickets <a class="new ticket" href="1495.html" title="enhancement: Generalize JHotDrawAdapters to link any DataView to a Figure (new)">#1495</a> and <a class="closed ticket" href="1496.html" title="defect: Deconflate JHotDrawAdapter from Tool (closed: fixed)">#1496</a>.<br />
 </p>
 
     </div>

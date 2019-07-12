@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/16">Ticket #16</a>
+          <a href="16.html">Ticket #16</a>
           <span class="status">(closed task: wontfix)</span>
       </h1>
       <div id="ticket">
@@ -107,13 +107,13 @@
     </h3>
     <div class="searchable">
       <p>
-As part of our goal to maintain <a class="ext-link" href="http://n2.nabble.com/Backwards-compatibility-td4211240.html"><span class="icon"> </span>backwards compatibility</a> with the current version of ImageJ, we plan to keep the existing ImageJ API intact (ij.*) but begin delegating logic to a <a class="closed ticket" href="/ticket/6" title="feature: Flesh out ImageJ 2.0 class hierarchy (closed: fixed)">new API</a> (imagej.*). The first step in such delegation is to link up the current ImageJ data model, the ij.process.ImageProcessor and subclasses thereof, with the <a class="closed ticket" href="/ticket/7" title="feature: Evaluate imglib for core ImageJ work (closed: fixed)">proposed future ImageJ data model</a>, the imglib library. This will serve as a proof of concept, demonstrating that imglib is as functional as the existing implementation. It will also provide several advantages:<br />
+As part of our goal to maintain <a class="ext-link" href="http://n2.nabble.com/Backwards-compatibility-td4211240.html"><span class="icon"> </span>backwards compatibility</a> with the current version of ImageJ, we plan to keep the existing ImageJ API intact (ij.*) but begin delegating logic to a <a class="closed ticket" href="6.html" title="feature: Flesh out ImageJ 2.0 class hierarchy (closed: fixed)">new API</a> (imagej.*). The first step in such delegation is to link up the current ImageJ data model, the ij.process.ImageProcessor and subclasses thereof, with the <a class="closed ticket" href="7.html" title="feature: Evaluate imglib for core ImageJ work (closed: fixed)">proposed future ImageJ data model</a>, the imglib library. This will serve as a proof of concept, demonstrating that imglib is as functional as the existing implementation. It will also provide several advantages:<br />
 </p>
 <ul><li>Access to new data types available within imglib (long, complex float, etc.).
 </li><li>More easily work with data from sources other than disk.
 </li><li>Implement each analysis algorithm once, rather than per data type.
 </li></ul><p>
-One likely disadvantage is speed, though we plan to explore various ways to <a class="closed ticket" href="/ticket/36" title="feature: Explore OpenCL option for plugins (closed: fixed)">boost performance</a> as well.<br />
+One likely disadvantage is speed, though we plan to explore various ways to <a class="closed ticket" href="36.html" title="feature: Explore OpenCL option for plugins (closed: fixed)">boost performance</a> as well.<br />
 </p>
 
     </div>

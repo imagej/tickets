@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1706">Ticket #1706</a>
+          <a href="1706.html">Ticket #1706</a>
           <span class="status">(closed enhancement: moved)</span>
       </h1>
       <div id="ticket">
@@ -94,7 +94,7 @@
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="closed" href="/ticket/1451" title="Consolidate options, prefs and config logic">#1451</a>
+              <a class="closed" href="1451.html" title="Consolidate options, prefs and config logic">#1451</a>
         </td>
         <th>
         </th>
@@ -246,7 +246,7 @@ Perhaps Prefs could be Contextual, and then use getTitle(), getVersion().<br />
 There may be some related issues, e.g. in ConfigFileParameters, this is hardcoded: CONFIG_FILE = "ImageJ.cfg";<br />
 </p>
 <p>
-Related Tickets <a class="closed ticket" href="/ticket/1451" title="task: Consolidate options, prefs and config logic (closed: moved)">#1451</a> and <a class="closed ticket" href="/ticket/1093" title="enhancement: Store ImageJ user config in user space (closed: moved)">#1093</a><br />
+Related Tickets <a class="closed ticket" href="1451.html" title="task: Consolidate options, prefs and config logic (closed: moved)">#1451</a> and <a class="closed ticket" href="1093.html" title="enhancement: Store ImageJ user config in user space (closed: moved)">#1093</a><br />
 </p>
 
     </div>
@@ -284,7 +284,7 @@ Firstly, note that the preferences are loaded and saved as part of the preproces
 And the actual saving and loading code for module items is unfortunately <a class="ext-link" href="https://github.com/imagej/imagej/blob/v2.0.0-beta6/core/core/src/main/java/imagej/module/AbstractModuleItem.java#L132"><span class="icon"> </span>hardcoded</a> right now.<br />
 </p>
 <p>
-From my perspective, it is clear from your comments that this logic should be refactored into its own service class as part of the ticket <a class="closed ticket" href="/ticket/1451" title="task: Consolidate options, prefs and config logic (closed: moved)">#1451</a> work. That way, any future deficiencies in the persistence mechanism could be fixed downstream by using an alternate service implementation.<br />
+From my perspective, it is clear from your comments that this logic should be refactored into its own service class as part of the ticket <a class="closed ticket" href="1451.html" title="task: Consolidate options, prefs and config logic (closed: moved)">#1451</a> work. That way, any future deficiencies in the persistence mechanism could be fixed downstream by using an alternate service implementation.<br />
 </p>
 <blockquote class="citation">
 <p>

@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/482">Ticket #482</a>
+          <a href="482.html">Ticket #482</a>
           <span class="status">(closed defect: duplicate)</span>
       </h1>
       <div id="ticket">
@@ -234,7 +234,7 @@ Realized that if legacy needs to know about deletions it can just subscribe to t
     <div class="comment searchable">
       
       <p>
-Duplicate of <a class="closed ticket" href="/ticket/413" title="defect: Delete Datasets when appropriate (closed: fixed)">#413</a>, already fixed.<br />
+Duplicate of <a class="closed ticket" href="413.html" title="defect: Delete Datasets when appropriate (closed: fixed)">#413</a>, already fixed.<br />
 </p>
 <p>
 When a view goes away, Dataset.decrementReferences() is called, which calls delete() when it hits zero (i.e., no active display views for that Dataset remain). The delete() call fires a DatasetDeletedEvent that is picked up by ObjectManager, which removes the Dataset from the hoard. Hence, plugins that require Dataset inputs (e.g., Image Calculator) no longer list that Dataset as a viable option.<br />

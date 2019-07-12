@@ -20,7 +20,7 @@
     <div id="main">
     <div id="content" class="ticket">
       <h1 id="trac-ticket-title">
-          <a href="/ticket/1486">Ticket #1486</a>
+          <a href="1486.html">Ticket #1486</a>
           <span class="status">(closed task: fixed)</span>
       </h1>
       <div id="ticket">
@@ -94,7 +94,7 @@
           Blocking:
         </th>
         <td headers="h_blocking">
-              <a class="closed" href="/ticket/1508" title="Add new functionality to showcase IJ2 [scripting]">#1508</a>
+              <a class="closed" href="1508.html" title="Add new functionality to showcase IJ2 [scripting]">#1508</a>
         </td>
         <th>
         </th>
@@ -117,7 +117,7 @@ In the NoiseReduction example plugin there was an adaptive median option. When t
 This was because when the menu was organized the radial neighborhood code was added. This code relies on a SerialImageAssignment because WithinRadiusOfPointCondition can only work with a single neighborhood. The adaptive median code worked with multiple neighborhoods.<br />
 </p>
 <p>
-We could make adaptive median available again by avoiding the radial neighborhood implementation. This is not ideal. Otherwise we need to make setAnchor() for all the PointSet code more consistent. There is a separate ticket for that (<a class="closed ticket" href="/ticket/1482" title="defect: PointSet anchors are inconsistent in OPS (closed: fixed)">#1482</a>).<br />
+We could make adaptive median available again by avoiding the radial neighborhood implementation. This is not ideal. Otherwise we need to make setAnchor() for all the PointSet code more consistent. There is a separate ticket for that (<a class="closed ticket" href="1482.html" title="defect: PointSet anchors are inconsistent in OPS (closed: fixed)">#1482</a>).<br />
 </p>
 <p>
 Note that the adaptive median code did not seem to give good results on something like boats. You can still test it by using Cmd L to find the old Noise Reduction plugin and use the adaptive median option. So maybe we don't want to port at all anyhow.<br />
