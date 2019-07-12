@@ -14,49 +14,6 @@
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="trac.css" type="text/css" /><link rel="stylesheet" href="ticket.css" type="text/css" /><link rel="stylesheet" href="tracvote.css" type="text/css" />
-    <script type="text/javascript">
-      var auto_preview_timeout=2.0;
-      var form_token="9e3fcaa4535d443cf402384b";
-    </script>
-    <script type="text/javascript" src="/chrome/common/js/jquery.js"></script><script type="text/javascript" src="/chrome/common/js/babel.js"></script><script type="text/javascript" src="/chrome/common/js/trac.js"></script><script type="text/javascript" src="/chrome/common/js/search.js"></script><script type="text/javascript" src="/chrome/common/js/folding.js"></script><script type="text/javascript" src="/chrome/common/js/wikitoolbar.js"></script><script type="text/javascript" src="/chrome/common/js/resizer.js"></script><script type="text/javascript" src="/chrome/common/js/auto_preview.js"></script>
-    <!--[if lt IE 7]>
-    <script type="text/javascript" src="/chrome/common/js/ie_pre7_hacks.js"></script>
-    <![endif]-->
-    <script type="text/javascript">
-      jQuery(document).ready(function($) {
-        $("div.description").find("h1,h2,h3,h4,h5,h6").addAnchor(_("Link to this section"));
-        $(".foldable").enableFolding(false, true);
-        var args = {realm: "ticket", id: 299, escape_newlines: 1}
-        $("#comment").autoPreview("/wiki_render", args, function(textarea, text, rendered) {
-            $("#ticketchange div.comment").html(rendered);
-            if (rendered)
-              $("#ticketchange").show();
-            else if ($("#ticketchange ul.changes").length == 0)
-              $("#ticketchange").hide();
-        });
-        $("#trac-comment-editor textarea").autoPreview("/wiki_render", args,
-                                                       function(textarea, text, rendered) {
-          var comment = $("#trac-comment-editor").next("div.comment");
-          comment.html(rendered);
-          if (rendered)
-            comment.show();
-          else
-            comment.hide();
-        });
-        $("#modify").parent().toggleClass("collapsed");
-        $(".trac-topnav a").click(function() { $("#modify").parent().removeClass("collapsed"); });
-        /* only enable control elements for the currently selected action */
-        var actions = $("#action input[name='action']");
-        function updateActionFields() {
-          actions.each(function () {
-            $(this).siblings().find("*[id]").enable($(this).checked());
-            $(this).siblings().filter("*[id]").enable($(this).checked());
-          });
-        }
-        actions.click(updateActionFields);
-        updateActionFields();
-      });
-    </script>
     <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
   <body>
