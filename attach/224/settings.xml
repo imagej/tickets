@@ -1,0 +1,71 @@
+<settings>
+
+  <!--
+  Credentials for artifact deployment to LOCI Nexus; see:
+  http://www.sonatype.com/books/mvnref-book/reference/appendix-settings-sect-encrypting-passwords.html
+  -->
+  <servers>
+    <server>
+      <id>loci.releases</id>
+      <username>YOUR USERNAME HERE</username>
+      <password>YOUR ENCRYPTED PASSWORD HERE</password>
+    </server>
+    <server>
+      <id>loci.snapshots</id>
+      <username>YOUR USERNAME HERE</username>
+      <password>YOUR ENCRYPTED PASSWORD HERE</password>
+    </server>
+    <server>
+      <id>imagej.releases</id>
+      <username>YOUR USERNAME HERE</username>
+      <password>YOUR ENCRYPTED PASSWORD HERE</password>
+    </server>
+    <server>
+      <id>imagej.snapshots</id>
+      <username>YOUR USERNAME HERE</username>
+      <password>YOUR ENCRYPTED PASSWORD HERE</password>
+    </server>
+  </servers>
+
+  <!--
+  LOCI Nexus central mirror configuration; see:
+  http://www.sonatype.com/books/nexus-book/reference/maven-sect-single-group.html
+  -->
+
+  <mirrors>
+    <mirror>
+      <!--This sends everything else to /public -->
+      <id>nexus</id>
+      <mirrorOf>*</mirrorOf>
+      <url>http://dev.loci.wisc.edu:8081/content/groups/public</url>
+    </mirror>
+  </mirrors>
+  <profiles>
+    <profile>
+      <id>nexus</id>
+      <!--Enable snapshots for the built in central repo to direct -->
+      <!--all requests to nexus via the mirror -->
+      <repositories>
+        <repository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </repository>
+      </repositories>
+     <pluginRepositories>
+        <pluginRepository>
+          <id>central</id>
+          <url>http://central</url>
+          <releases><enabled>true</enabled></releases>
+          <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+  </profiles>
+  <activeProfiles>
+    <!--make the profile active all the time -->
+    <activeProfile>nexus</activeProfile>
+  </activeProfiles>
+
+</settings>
