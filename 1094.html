@@ -135,11 +135,11 @@
 When a plugin depends on other libraries in the jars folder, the dependent classes cannot be loaded.<br />
 </p>
 <p>
-For example, add the LOCI update site (<a class="ext-link" href="http://dev.loci.wisc.edu/fiji/"><span class="icon"> </span>http://dev.loci.wisc.edu/fiji/</a>), install the plugins, then run the Spectral Lifetime Analysis plugin. An error is emitted:<br />
+For example, add the LOCI update site (<a class="ext-link" href="https://sites.imagej.net/LOCI/"><span class="icon"> </span>https://sites.imagej.net/LOCI/</a>), install the plugins, then run the Spectral Lifetime Analysis plugin. An error is emitted:<br />
 </p>
 <pre class="wiki">Plugin or class not found: "slim.SLIM_PlugIn"
 </pre><p>
-This happens because a class in jars/curve-fitter-1.0-SNAPSHOT-with-libs.jar cannot be found, and then <a class="ext-link" href="https://github.com/fiji/ImageJA/blob/master/src/main/java/ij/IJ.java#L191"><span class="icon"> </span>ImageJ1 decides to get creative</a>.<br />
+This happens because a class in jars/curve-fitter-1.0-SNAPSHOT-with-libs.jar cannot be found, and then <a class="ext-link" href="https://github.com/imagej/ImageJA/blob/master/src/main/java/ij/IJ.java#L191"><span class="icon"> </span>ImageJ1 decides to get creative</a>.<br />
 </p>
 <p>
 But really, the root problem is the handling of the jars and plugins folders by the ImageJ2 class loader.<br />
